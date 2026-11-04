@@ -67,6 +67,18 @@ Paired bootstrap intervals condition on frozen predictions, are unadjusted for t
 
 A public clone can inspect methods, verify the supplied file checksums and exercise synthetic numerical kernels. It **cannot reproduce participant-level results without separately authorized data and the exact private source, cohort, split and integrity bindings**. Selected source preprocessing code is included; the complete historical data-acquisition and audit workspace is not. Some historical readiness files say training was not yet authorized: these describe their creation stage and do not override later study execution records, which are not distributed.
 
+## PPMI data source and acknowledgement
+
+Data used in the preparation of this article were obtained on 2026-10-20 (clinical and RNA data), with a MoCA update obtained on 2026-10-28 for the temporal evaluation, from the Parkinson’s Progression Markers Initiative (PPMI) database (https://www.ppmi-info.org/access-data-specimens/download-data), RRID:SCR_006431. For up-to-date information on the study, visit https://www.ppmi-info.org. Data were accessed under approved PPMI data-access permissions; the investigator holds Tier 2 approval.
+
+PPMI – a public-private partnership – is funded by the Michael J. Fox Foundation for Parkinson’s Research and funding partners, including AbbVie, Alamar Biosciences, Aligning Science Across Parkinson’s (ASAP), Arrowhead Pharma, Arvinas, AskBio, BIAL, BioArctic, Biohaven, BlueRock Therapeutics, Bristol Myers Squibb, Calico Labs, Capsida Biotherapeutics, Critical Path Institute, DaCapo Brainscience, Denali, Edmond J. Safra Foundation, Eli Lilly, Gain Therapeutics, GE Healthcare, Genentech, GSK, Insitro, Johnson & Johnson Innovative Medicine, Lundbeck, Merck, Neumora, Neuron23, Novartis, Olink, Regeneron, Roche, Sanofi, Tenvie, UCB, Vanqua Bio, Voyager Therapeutics, The Weston Family Foundation.
+
+The RNA download date was confirmed by the corresponding investigator. Clinical export provenance identifies 20 October 2026; the later-calendar evaluation uses the MoCA refresh dated 28 October 2026. These are download/export dates, not participant visit dates. The preserved scripts were created during October–November 2026; versioned package names and the code manifest identify their provenance. The evolving PPMI database may require code adaptation for a different export vintage.
+
+PPMI study reference: K. Marek, D. Jennings, S. Lasch, A. Siderowf, C. Tanner, T. Simuni, et al., *The Parkinson Progression Marker Initiative (PPMI)*, Progress in Neurobiology 95 (2011) 629–635. [doi:10.1016/j.pneurobio.2011.09.005](https://doi.org/10.1016/j.pneurobio.2011.09.005).
+
+Attribution was checked on 4 November 2026 against the [PPMI Publication Policy (September 2024)](https://www.ppmi-info.org/sites/default/files/docs/ppmi-publication-policy.pdf) and the [current funding-partner list (May 2026)](https://www.ppmi-info.org/sites/default/files/docs/PPMI%20Funding%20Partners.pdf). Data-access approval does not imply PPMI consortium authorship or institutional ethics approval. No participant-level source data are redistributed here.
+
 ## Attribution and contact
 
 Study/repository maintainer: **Saif Khan**, University of Ha'il. Contact: **sf.khan@uoh.edu.sa**.
