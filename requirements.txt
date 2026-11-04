@@ -1,0 +1,5 @@
+# Versions observed in the original WSL agpu_env.
+# Optional historical GPU search dependency: torch 2.8.0+cu128 (not required for smoke checks).
+numpy==1.26.4
+pandas==2.3.1
+scipy==1.13.1

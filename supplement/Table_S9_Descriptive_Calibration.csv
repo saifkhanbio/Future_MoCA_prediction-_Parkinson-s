@@ -1,0 +1,7 @@
+panel,months,slope,intercept,mean_error
+Four cognitive scores,12,1.028,-0.736,0.007
+Four cognitive scores,24,1.032,-0.836,-0.003
+Four cognitive scores,36,1.033,-0.873,-0.011
+Expanded 28 predictors,12,1.250,-6.588,0.005
+Expanded 28 predictors,24,1.251,-6.588,-0.011
+Expanded 28 predictors,36,1.233,-6.150,-0.004

@@ -1,0 +1,231 @@
+{
+  "study_id": "Clinical_hallmark",
+  "substudy_id": "Clinical_hallmark_clinical_temporal_validation_v1_1_moca_refresh",
+  "version": "1.1.0",
+  "date": "2026-10-28",
+  "stage": "LOCKED_MOCA_REFRESH_READY_NO_TARGET_SCORING",
+  "objective": "Evaluate whether the enhanced baseline clinical comparator transports better than the core comparator for future education-adjusted MoCA in a later, participant-disjoint PPMI cohort.",
+  "design": "Supplementary retrospective temporal validation within PPMI. Data availability and baseline field QC informed this contract; no target model predictions or performance were examined. Prior motor-model use is disclosed. This is not independent external validation, globally untouched data, or validation of RNA added value.",
+  "relationship_to_parent": "Creates a separate validation contract; does not overwrite the frozen Clinical_hallmark 36-month primary RNA comparison, its model/split contracts, or any existing manuscript result.",
+  "primary": {
+    "horizon_months": 12,
+    "population_view": "main_12",
+    "contrast": "enhanced-minus-core",
+    "metric": "mean(abs(y-p_enhanced))-mean(abs(y-p_core)); negative favours enhanced",
+    "n": 213,
+    "claim_status": "One primary contrast for this supplementary validation. Discovery-informed retrospective context; not a newly preregistered confirmatory trial."
+  },
+  "secondary_horizons": {
+    "24": "supportive temporal validation",
+    "36": "small-sample exploratory; n39"
+  },
+  "population": {
+    "fixed_prior_audit": "<PRIVATE_STUDY_ROOT>/additional_ppmi_eligibility_prior_use_2026-10-28",
+    "candidate_frame": 570,
+    "unique_validation_participants": 227,
+    "main_by_horizon": {
+      "12": 213,
+      "24": 175,
+      "36": 39
+    },
+    "complete_core_by_horizon": {
+      "12": 204,
+      "24": 171,
+      "36": 38
+    },
+    "source_development_baseline": 351,
+    "source_model_pool_by_horizon": {
+      "12": 333,
+      "24": 321,
+      "36": 307
+    },
+    "source_index_years": [
+      2010,
+      2016
+    ],
+    "validation_index_years": [
+      2023,
+      2025
+    ],
+    "identity": "Disjoint by existing PPMI/AMP identity components, no overlap with the original351 or any bound clinical model training/outer-test IDs. No participant reassignment, target split search, new target CV, or outcome-dependent exclusion.",
+    "prior_use": "224/227 prior motor-model use; 0 cognitive-model/RNA discovery hits in reviewed sources; 3 with no reviewed model/discovery/legacy match. Not globally untouched.",
+    "cohort_rules": "Retain all frozen eligibility, static field resolution and 570-person candidate-frame rules. Refresh only MoCA records to 28Oct2026, with identical endpoint selection/QC; no baseline changes. Both comparators retain identical enhanced-test-complete membership."
+  },
+  "landmark": {
+    "source": "Original saved models use the audited RNA month-end landmark.",
+    "target": "Clinical BL MoCA month-end landmark; baseline reference within one month. Monthly resolution cannot establish within-month ordering.",
+    "transport_adaptation": "Clinical-only use without an RNA requirement; both landmarks represent the audited baseline period but are not silently treated as identical sampling events.",
+    "dynamic_predictors": "Prior SC/BL three-month window and deterministic selection-before-QC unchanged.",
+    "static_amendment": "Exact Field_Resolution_Rules.json is binding. Historical diagnosis fallback only for absent timed records; age fallback uses corroborated, unique preindex birth month. Existing valid values retained. Original strict inputs are a prespecified sensitivity."
+  },
+  "predictors": {
+    "core": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ]
+      }
+    },
+    "enhanced": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication",
+        "baseline_sdmt",
+        "baseline_hvlt_immediate",
+        "baseline_hvlt_delayed"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ],
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    }
+  },
+  "outcome": {
+    "variable": "education_adjusted_MoCA",
+    "bounds": [
+      0,
+      30
+    ],
+    "windows_months": {
+      "12": [
+        9,
+        15
+      ],
+      "24": [
+        21,
+        27
+      ],
+      "36": [
+        33,
+        39
+      ]
+    },
+    "source_binding": "28Oct2026 MoCA source SHA bound; stable REC_ID plus updated source-row provenance. Original 645 locked baseline/endpoint payloads unchanged; new valid follow-up records add seven pairs. Separate sealed outcome files.",
+    "selection": "Closest actual month; earlier month on equal distance; event label and source row tie. No favourable QC fallback or outcome imputation.",
+    "separation": "Features contain baseline MoCA only; future MoCA is held in separate immutable files. Sealing is operational separation, not a claim that these outcomes were never reviewed for eligibility/QC."
+  },
+  "prediction": {
+    "method": "Fixed equal-weight average of five previously fitted outer-training clinical-only ridge models for each comparator and horizon.",
+    "artifacts": "config/Frozen_Model_Binding.json:30 exact SHA256-bound production model JSONs, source folds0..4, weight0.2 each.",
+    "preprocessing": "Each member uses its own saved medians, means, population SDs, numeric order, fixed missing indicators and fixed one-hot dictionaries. No preprocessing fit on the new cohort. Missing optional values use only saved source medians; missing indicators remain as trained, including zero-information indicators.",
+    "formula": "For member f: z=concat((x_or_saved_median-saved_mean)/saved_sd, fixed missing flags, fixed categorical indicators) in exact saved column order; p_f=saved_intercept+z dot saved_coef. Ensemble prediction=(p_0+p_1+p_2+p_3+p_4)/5.",
+    "no_training": "No final full-source fit, tuning, coefficient updating, ensemble weighting, calibration updating or target-data retraining. All source models remain unchanged.",
+    "RNA": "RNA_off must be true and lambda_RNA null. Ignore the cached RNA_state in saved files. No RNA loading/transformation is necessary or authorized.",
+    "interpretation": "This prespecified deployment ensemble is distinct from the original single-outer-model OOF prediction rule; no direct paired comparison of its validation performance against historical OOF scores."
+  },
+  "benchmarks": {
+    "persistence": "Baseline education-adjusted MoCA.",
+    "source_typical_change": "Baseline MoCA plus equal-weight mean of the five already saved source outer-training median-change offsets per horizon, reconstructed from frozen source benchmark outputs. No new parameter estimation and no validation outcomes used.",
+    "binding": "config/Frozen_Benchmark_Binding.json"
+  },
+  "metrics": {
+    "primary": "Raw unclipped paired delta MAE, enhanced minus core.",
+    "per_model": [
+      "MAE",
+      "RMSE",
+      "R2",
+      "mean_prediction_error",
+      "calibration_intercept",
+      "calibration_slope",
+      "fraction_predictions_outside_0_30",
+      "clipped_MAE_0_30_descriptive"
+    ],
+    "R2": "1-SSE/SST around the validation-view observed mean; report NA if SST=0. Do not cap negative R2.",
+    "calibration": "Observed y regressed on fixed prediction for descriptive assessment only; do not use slope/intercept to update predictions. NA if prediction range<=1e-12 or centred variance is zero.",
+    "clipping": "No clipping for primary or main secondary metrics; clipping to[0,30] only for the explicitly descriptive extra MAE.",
+    "clinical_interpretation": "Report absolute errors in MoCA points. No MAE improvement threshold is labelled an MoCA MCID or clinical utility without a separate justification.",
+    "uncertainty": {
+      "replicates": 5000,
+      "generator": "NumPy default_rng/PCG64 using fixed per-view seeds in Evaluation_Views.json",
+      "unit": "participant/identity component; paired identical draws across all four predictions within a view",
+      "interval": "2.5th and97.5th percentiles, numpy percentile method=linear; conditional on the fixed five-model ensembles and the observed validation cohort. No training/refitting uncertainty is included.",
+      "coverage": "Intervals for per-model MAE/RMSE/R2/bias/calibration and all locked paired MAE contrasts. Record undefined bootstrap statistics; use valid replicates only if at least95% of5000 are finite, otherwise report the interval as NA. Never retry/reseed until significant.",
+      "primary_decision": "Report estimate and95% interval. An interval wholly below0 supports better average error in this validation sample, not clinical utility or independent biomarker validation. No post hoc primary replacement.",
+      "multiplicity": "Only main_12 enhanced-minus-core is designated primary; remaining horizons, benchmarks and sensitivities are descriptive/exploratory. Report them all, with no confirmatory secondary p-value claims."
+    }
+  },
+  "sensitivity_views": {
+    "complete_core": "Resolved complete-core participants: [204, 171, 38]",
+    "strict_inputs": "Same participant/endpoint membership but retain original strict diagnosis/age inputs and saved-source missing-value handling. This tests sensitivity to the ascertainment amendment; it is not an alternative selected by performance.",
+    "exclude_age_resolved": "Exclude newly age-resolved participants: [207, 171, 39]. Exact duplicate memberships alias main.",
+    "common_horizons": "Same 33 participants at all horizons, no fitting."
+  },
+  "reporting": {
+    "baseline_and_followup": "Describe baseline features, missingness, source/target periods and follow-up availability. No baseline-significance testing or target-driven covariate selection. Do not label unavailable/immature follow-up as dropout.",
+    "selection_limits": "Matched enhanced-test availability and PPMI recruitment constrain generalizability; small36-month cohort limits precision. Prior motor use and absence of bound RNA remain disclosed.",
+    "report_every_locked_view": true,
+    "preservation": "Original primary results and all historical files remain read-only. New outputs must be created in a fresh child folder inside Clinical_hallmark."
+  },
+  "execution_controls": {
+    "currently_allowed": [
+      "source/identity/hash/schema checks",
+      "static field derivation",
+      "contract and manifest generation",
+      "independent audit verification",
+      "inference-only implementation",
+      "numerical tests using synthetic fixtures; no temporal target predictions"
+    ],
+    "training_authorized": false,
+    "prediction_generation_authorized": false,
+    "scoring_authorized": false,
+    "paid_queries_authorized": false,
+    "future_fit_budget": 0,
+    "future_inference_requires": "Separate subsequent user authorisation for this completed amended package, passed numerical/preflight checks and a fresh output directory. Target prediction and scoring remain disabled.",
+    "output_rule": "Fresh output directory, no overwrites; separate frozen target prediction file from later outcome binding; verify complete coverage before metrics.",
+    "failure_rule": "Hash, identity, nonfinite parameter, schema, category, missing-member or coverage mismatch aborts; no partial completion or silent exclusion.",
+    "resources": "Local CPU only, one worker and one BLAS thread; no cloud/billing/downloads."
+  },
+  "amendment": {
+    "parent_contract": "<PRIVATE_STUDY_ROOT>/clinical_temporal_validation_contract_2026-10-28/config/Temporal_Validation_Contract.json",
+    "parent_sha256": "fe0727afe98c0b5b9086f6e753d118e1e1c998084c3fa17e12dde25f01eb1f41",
+    "reason": "New MoCA export supplied before any temporal target predictions/scoring; availability-based amendment only.",
+    "original_memberships_preserved": true,
+    "unchanged_old_endpoints": 420,
+    "added_followup_pairs": 7,
+    "new_unique_people": 2,
+    "unchanged_models": 30,
+    "unchanged_model_metric_plan": true,
+    "limit": "Only MoCA refreshed; non-MoCA predictors, diagnosis, withdrawal/death and identity metadata remain at the frozen 20Oct vintage. No assertion of absence of later metadata revisions."
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "core": {
+    "numeric": [
+      "age_index",
+      "sex_male",
+      "education",
+      "baseline_moca",
+      "diagnosis_duration_years",
+      "part2",
+      "part3",
+      "gds15",
+      "pd_medication"
+    ],
+    "categories": {
+      "motor_state": [
+        "untreated",
+        "off",
+        "on",
+        "treated_unknown",
+        "unknown"
+      ]
+    }
+  },
+  "optional18": [
+    {
+      "bit": 0,
+      "name": "SDMT",
+      "instrument": "SDMT"
+    },
+    {
+      "bit": 1,
+      "name": "HVLT_immediate",
+      "instrument": "HVLT"
+    },
+    {
+      "bit": 2,
+      "name": "HVLT_delayed",
+      "instrument": "HVLT"
+    },
+    {
+      "bit": 3,
+      "name": "Animal_fluency",
+      "instrument": "Animal_fluency"
+    },
+    {
+      "bit": 4,
+      "name": "LNS",
+      "instrument": "LNS"
+    },
+    {
+      "bit": 5,
+      "name": "JLO",
+      "instrument": "JLO"
+    },
+    {
+      "bit": 6,
+      "name": "HVLT_recognition_discrimination",
+      "instrument": "HVLT"
+    },
+    {
+      "bit": 7,
+      "name": "RBDSQ_full",
+      "instrument": "RBDSQ"
+    },
+    {
+      "bit": 8,
+      "name": "SCOPA_GI",
+      "instrument": "SCOPA_AUT"
+    },
+    {
+      "bit": 9,
+      "name": "SCOPA_urinary",
+      "instrument": "SCOPA_AUT"
+    },
+    {
+      "bit": 10,
+      "name": "SCOPA_cardiovascular",
+      "instrument": "SCOPA_AUT"
+    },
+    {
+      "bit": 11,
+      "name": "Systolic_BP_drop",
+      "instrument": "postural_BP"
+    },
+    {
+      "bit": 12,
+      "name": "Diastolic_BP_drop",
+      "instrument": "postural_BP"
+    },
+    {
+      "bit": 13,
+      "name": "STAI_trait",
+      "instrument": "STAI"
+    },
+    {
+      "bit": 14,
+      "name": "Apathy",
+      "instrument": "MDS_UPDRS_I"
+    },
+    {
+      "bit": 15,
+      "name": "Cognitive_complaint",
+      "instrument": "MDS_UPDRS_I"
+    },
+    {
+      "bit": 16,
+      "name": "APOE_e4_dosage",
+      "instrument": "APOE_assay"
+    },
+    {
+      "bit": 17,
+      "name": "NLR",
+      "instrument": "CBC_differential"
+    }
+  ],
+  "original_enhanced_additions": [
+    "SDMT",
+    "HVLT_immediate",
+    "HVLT_delayed"
+  ],
+  "compact4": [
+    "baseline_moca",
+    "SDMT",
+    "HVLT_immediate",
+    "HVLT_delayed"
+  ],
+  "GA_differences": {
+    "prior_MAE": "Best inner MAE anchor, ties within1e-12 by burden, score count, mask. Threshold=anchor pooled MAE + sample-SD of its three fold MAEs / sqrt(3). Among visited masks within threshold+1e-12, choose smallest burden, then pooled MAE, score count, numeric mask.",
+    "prior_R2": "Anchor is minimum pooled MSE; anchor ties within1e-12 prefer burden, score count, numeric mask. Threshold=anchor MSE+sample SD of its three fold MSEs/sqrt(3). Among all visited masks at or below threshold+1e-12 choose burden, pooled MSE, score count, numeric mask, in that order.",
+    "new_MoCA": "Smallest pooled inner MSE; within1e-12 choose fewest optional source features, then additional instruments, then numeric bitmask. No one-SE allowance. The selected record equals the accuracy anchor."
+  },
+  "important": "Prior GA requires10 core variables and uses heuristic one-SE parsimony; new GA requires only MoCA and uses accuracy-first selection. This is not a clean ablation of the core variables. Core-plus18 and MoCA-plus18 include APOE and CBC-derived NLR; they are not exclusively clinical-assessment models."
+}

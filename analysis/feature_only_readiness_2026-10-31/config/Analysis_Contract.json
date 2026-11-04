@@ -1,0 +1,389 @@
+{
+  "study_id": "Clinical_hallmark_feature_only_v1",
+  "version": "fixed_block_ablation_v1",
+  "date": "2026-10-31",
+  "status": "LOCKED_NO_PARTICIPANT_TRAINING",
+  "design": "Exploratory retrospective comparison motivated by earlier results; previously exposed participants. No untouched, external validation, causal or noninferiority claim.",
+  "objective": "Measure the standalone predictive performance of all18 optional features and the added contribution of baseline MoCA and the remaining core, compared with frozen core-plus18 full-model predictions.",
+  "population": {
+    "frame_n": 351,
+    "horizons": {
+      "12": 333,
+      "24": 321,
+      "36": 307
+    },
+    "primary_months": 36,
+    "secondary_months": [
+      12,
+      24
+    ],
+    "fixed_per_horizon": true,
+    "landmark": "Existing RNA collection month-end; baseline assessments in previous three calendar months. Original RNA-selected population is retained for matched comparison, although RNA is not a predictor. Monthly precision cannot establish order within a month.",
+    "outcome": "Existing education-adjusted continuous MoCA, exact locked source-row binding. No MCI/dementia label.",
+    "prior_use": "Prior discovery, earlier models and temporal evaluation remain acknowledged; nested CV does not undo exposure."
+  },
+  "arms": {
+    "optional18_only": {
+      "numeric": [
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed",
+        "Animal_fluency",
+        "LNS",
+        "JLO",
+        "HVLT_recognition_discrimination",
+        "RBDSQ_full",
+        "SCOPA_GI",
+        "SCOPA_urinary",
+        "SCOPA_cardiovascular",
+        "Systolic_BP_drop",
+        "Diastolic_BP_drop",
+        "STAI_trait",
+        "Apathy",
+        "Cognitive_complaint",
+        "APOE_e4_dosage",
+        "NLR"
+      ],
+      "categories": {
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ],
+        "jlo_form": [
+          "1",
+          "2",
+          "unknown"
+        ]
+      },
+      "source_features": 18,
+      "design_columns": 49,
+      "new_fit": true
+    },
+    "optional18_plus_moca": {
+      "numeric": [
+        "baseline_moca",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed",
+        "Animal_fluency",
+        "LNS",
+        "JLO",
+        "HVLT_recognition_discrimination",
+        "RBDSQ_full",
+        "SCOPA_GI",
+        "SCOPA_urinary",
+        "SCOPA_cardiovascular",
+        "Systolic_BP_drop",
+        "Diastolic_BP_drop",
+        "STAI_trait",
+        "Apathy",
+        "Cognitive_complaint",
+        "APOE_e4_dosage",
+        "NLR"
+      ],
+      "categories": {
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ],
+        "jlo_form": [
+          "1",
+          "2",
+          "unknown"
+        ]
+      },
+      "source_features": 19,
+      "design_columns": 51,
+      "new_fit": true
+    }
+  },
+  "mandatory_exclusion": {
+    "optional18_only": [
+      "age_index",
+      "sex_male",
+      "education",
+      "baseline_moca",
+      "diagnosis_duration_years",
+      "part2",
+      "part3",
+      "gds15",
+      "pd_medication",
+      "motor_state"
+    ],
+    "optional18_plus_moca": [
+      "age_index",
+      "sex_male",
+      "education",
+      "diagnosis_duration_years",
+      "part2",
+      "part3",
+      "gds15",
+      "pd_medication",
+      "motor_state"
+    ]
+  },
+  "exclusion_rule": "Exclude named raw predictors, all their missingness indicators and categorical encodings. No residualization, core-derived predictions, interactions, RNA, UPSIT or new feature selection.",
+  "form_controls": {
+    "baseline_sdmt_form": {
+      "levels": [
+        "1",
+        "2",
+        "unknown"
+      ],
+      "trigger": [
+        "SDMT"
+      ]
+    },
+    "baseline_hvlt_form": {
+      "levels": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "unknown"
+      ],
+      "trigger": [
+        "HVLT_immediate",
+        "HVLT_delayed",
+        "HVLT_recognition_discrimination"
+      ]
+    },
+    "jlo_form": {
+      "levels": [
+        "1",
+        "2",
+        "unknown"
+      ],
+      "trigger": [
+        "JLO"
+      ]
+    }
+  },
+  "optional_feature_register": [
+    {
+      "bit": 0,
+      "name": "SDMT",
+      "instrument": "SDMT"
+    },
+    {
+      "bit": 1,
+      "name": "HVLT_immediate",
+      "instrument": "HVLT"
+    },
+    {
+      "bit": 2,
+      "name": "HVLT_delayed",
+      "instrument": "HVLT"
+    },
+    {
+      "bit": 3,
+      "name": "Animal_fluency",
+      "instrument": "Animal_fluency"
+    },
+    {
+      "bit": 4,
+      "name": "LNS",
+      "instrument": "LNS"
+    },
+    {
+      "bit": 5,
+      "name": "JLO",
+      "instrument": "JLO"
+    },
+    {
+      "bit": 6,
+      "name": "HVLT_recognition_discrimination",
+      "instrument": "HVLT"
+    },
+    {
+      "bit": 7,
+      "name": "RBDSQ_full",
+      "instrument": "RBDSQ"
+    },
+    {
+      "bit": 8,
+      "name": "SCOPA_GI",
+      "instrument": "SCOPA_AUT"
+    },
+    {
+      "bit": 9,
+      "name": "SCOPA_urinary",
+      "instrument": "SCOPA_AUT"
+    },
+    {
+      "bit": 10,
+      "name": "SCOPA_cardiovascular",
+      "instrument": "SCOPA_AUT"
+    },
+    {
+      "bit": 11,
+      "name": "Systolic_BP_drop",
+      "instrument": "postural_BP"
+    },
+    {
+      "bit": 12,
+      "name": "Diastolic_BP_drop",
+      "instrument": "postural_BP"
+    },
+    {
+      "bit": 13,
+      "name": "STAI_trait",
+      "instrument": "STAI"
+    },
+    {
+      "bit": 14,
+      "name": "Apathy",
+      "instrument": "MDS_UPDRS_I"
+    },
+    {
+      "bit": 15,
+      "name": "Cognitive_complaint",
+      "instrument": "MDS_UPDRS_I"
+    },
+    {
+      "bit": 16,
+      "name": "APOE_e4_dosage",
+      "instrument": "APOE_assay"
+    },
+    {
+      "bit": 17,
+      "name": "NLR",
+      "instrument": "CBC_differential"
+    }
+  ],
+  "preprocessing": {
+    "numeric": "Training median imputation, all-missing training column ->0. Training mean and population-SD scaling of imputed values; SD<=1e-12 ->1. Fixed missing indicator for every numeric column, unscaled.",
+    "categorical": "Fixed complete one-hot dictionaries, no dropped level; blank/invalid raw values become unknown during binding. No outcome-derived vocabulary.",
+    "intercept": "Unpenalized; all design columns centred within solver training rows."
+  },
+  "missingness": "Identical participant rows for every mask and arm. Source-invalid optional values become missing. Median and scaling learned within each inner-training fold and outer refit; numeric missingness indicators attached. All-missing training column is zero/inactive with missingness indicator. No complete-case mask-specific cohorts.",
+  "model": {
+    "family": "linear ridge",
+    "objective": "mean squared training error + lambda*sum(coefficients squared); intercept unpenalized",
+    "lambdas": [
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "penalty_tie": "Minimum pooled inner MSE; within absolute 1e-12 MoCA-points-squared choose largest lambda.",
+    "prediction": "Unclipped for primary and tuning; no interaction or nonlinear expansion"
+  },
+  "tuning": "Each fixed new arm independently minimizes total inner SSE / total inner validation n across the same3folds. Largest lambda within absolute1e-12 of minimum. No one-SE burden rule, GA, or global penalty choice.",
+  "splits": {
+    "outer": 5,
+    "inner": 3,
+    "source": "Existing known-identity grouped master allocation from model_readiness_2026-10-24. Unchanged subsets across horizons.",
+    "selection_outcomes": "Only inner-validation outcomes from outer-training people may influence masks, penalties, seed pooling or final model. Outer-test outcomes inaccessible to search API."
+  },
+  "reference": {
+    "run": "<PRIVATE_STUDY_ROOT>/ga_r2_run_2026-10-31",
+    "arm": "full",
+    "reuse_only": true,
+    "refit": false,
+    "source_recipe": "Frozen MSE-tuned core-plus18, separately tuned in each outer training cohort",
+    "require": "Exact PATNO, identity component, outcome, fold and recorded full-model prediction binding; reject shuffled positional assumptions."
+  },
+  "context_only_reference_arms": [
+    "core",
+    "enhanced",
+    "persistence"
+  ],
+  "contrasts": [
+    {
+      "first": "optional18_only",
+      "reference": "full"
+    },
+    {
+      "first": "optional18_plus_moca",
+      "reference": "full"
+    },
+    {
+      "first": "optional18_plus_moca",
+      "reference": "optional18_only"
+    }
+  ],
+  "metrics": {
+    "primary": "36-month pooled outer delta R2: optional18_only minus frozen full; positive favours optional18_only.",
+    "secondary": [
+      "All9 fixed arm/horizon contrasts in R2 and MAE",
+      "RMSE",
+      "mean_prediction_error",
+      "calibration_intercept",
+      "calibration_slope",
+      "out_of_range_fraction",
+      "clipped_MAE_descriptive"
+    ],
+    "primary_months": 36,
+    "secondary_months": [
+      12,
+      24
+    ],
+    "R2": "1-SSE/SST using the pooled observed outcomes; never average fold R2; retain negative values.",
+    "clipping": "No clipping in tuning or primary metrics; fixed0\u201330 clipping descriptive only."
+  },
+  "inference": {
+    "bootstrap_replicates": 5000,
+    "seed": "20261031+horizon",
+    "unit": "known identity component; exactly one person per component in these fixed cohorts",
+    "interval": "Paired percentile2.5/97.5 intervals conditional on fixed OOF predictions. Resample aligned participants; recompute SST. R2-undefined constant-outcome draws counted/omitted without replacement; require4750/5000 valid for R2 interval.",
+    "primary_status": "Single designated exploratory contrast; original studies retain their primary claims.",
+    "secondary_status": "All remaining contrasts unadjusted/descriptive; no selectively reported horizon.",
+    "limitation": "No full development-process uncertainty, multiplicity-controlled confirmation, equivalence or noninferiority claim."
+  },
+  "burden": {
+    "optional18_instruments": 12,
+    "optional18_plus_moca_addition": "One baseline MoCA assessment beyond the18 panel",
+    "comparison": "List required information/assessments for each arm; old core_cost=0 is not an estimate of total workflow burden. No burden optimization or time/cost claim."
+  },
+  "budget": {
+    "horizons": 3,
+    "outer_folds": 5,
+    "inner_folds": 3,
+    "lambdas": 5,
+    "new_arms": 2,
+    "task_count": 30,
+    "inner_fits": 450,
+    "outer_refits": 30,
+    "total_new_fits": 480,
+    "reference_refits": 0
+  },
+  "execution": {
+    "participant_training_authorized": false,
+    "allowed_now": [
+      "Read-only input/outcome/fold binding",
+      "Contract and launcher locking",
+      "Synthetic numerical, exclusion, results and guard validation"
+    ],
+    "future_run_requires": "New explicit user training authorization bound to this PLAN_LOCK and LAUNCHER_LOCK; fresh direct sibling output folder under Clinical_hallmark.",
+    "workers": 12,
+    "BLAS_threads": 1,
+    "backend": "CPU float64; small fixed480-fit workload, no GPU or GA search",
+    "failure": "Abort on binding/numerical/identity failures. Fresh output only; failed runs retain failure record and cannot be overwritten. No automatic resumption.",
+    "paid_queries": 0,
+    "temporal_scoring": false
+  }
+}

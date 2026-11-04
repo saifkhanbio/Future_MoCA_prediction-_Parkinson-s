@@ -1,0 +1,30 @@
+{
+  "version": "static_field_resolution_v1",
+  "recorded_before_application": true,
+  "scope": "Resolve predictors for the fixed audited candidate frame; do not revise endpoint selection or eligibility membership. All existing frozen features/models remain read-only.",
+  "diagnosis_duration": {
+    "retain": "Keep every valid strict-audit diagnosis_duration_years unchanged.",
+    "fallback_trigger": "Only missing duration with diagnosis_history selection_status=no_timed_record. Do not rescue an invalid or conflicting selected recent record.",
+    "historical_sources": "Native PD_Diagnosis_History SC/BL forms with valid INFODT at or before the clinical index; no maximum look-back for this static historical date.",
+    "accept": "At least one eligible historical form; every such form has valid PDDXDT, all PDDXDT months identical, and diagnosis_month <= form_month <= index_month. Derived (index-diagnosis)/12 must be 0..80 years.",
+    "reject": "Any invalid/missing date, contradiction or unavailable eligible form leaves the optional predictor missing with a reason. Future diagnosis/history forms cannot rescue it.",
+    "no_medical_inference": "Do not substitute symptom onset, age at diagnosis, treatment onset or current diagnosis status."
+  },
+  "age": {
+    "retain": "Keep valid strict-audit age_index unchanged.",
+    "fallback_trigger": "Missing or conflicting strict age only.",
+    "birth_source": "Native SCREEN SC/BL demographics with valid INFODT <= index. All eligible pre-index SCREEN records must supply the same valid BIRTHDT month. TRANS/later records cannot supply the value.",
+    "derivation": "Round (index_month-birth_month)/12 to one decimal using decimal ROUND_HALF_UP; accept only age18..110. This is a month-derived age estimate, not exact birthday precision.",
+    "corroboration": "Require unique unified BL visit month equal to the audit baseline reference month, and unique finite unified BL age_at_visit. Adjust that corroborating age by(index-reference)/12; its distance from the unrounded birth-derived index age must be <= 1/12+0.05 years. Require at least one valid native BL AGE_AT_VISIT, similarly shifted to index, within that same tolerance. The tolerance accounts for monthly dates and one-decimal native ages; do not select or average a conflicting native age.",
+    "failure": "If any gate fails, leave age missing; later dates/ages and validation outcomes cannot adjudicate.",
+    "preservation": "No rounding or replacement of previously valid strict age values; retain all age-conflict flags and source-row provenance."
+  },
+  "sensitivity": "Preserve original strict-window predictor values in a separate variant on the same locked endpoint membership. Also define complete-core subsets after resolution and sensitivity excluding all newly age-resolved participants.",
+  "prohibited": [
+    "No model fitting or transformation fitting",
+    "No prediction generation or scoring",
+    "No paid/cloud queries",
+    "No change to prior artifacts",
+    "No endpoint-value-driven rule selection"
+  ]
+}

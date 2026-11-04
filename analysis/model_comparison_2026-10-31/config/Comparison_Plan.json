@@ -1,0 +1,208 @@
+{
+  "study_id": "Clinical_hallmark_frozen_model_comparison_v1",
+  "created_UTC": "2026-10-30T23:02:09.751185+00:00",
+  "status": "POST_HOC_COMPARISON_ONLY",
+  "user_request": "Compare latest mandatory-MoCA GA with previous GA and full clinical models; recommend model/feature set. No retraining or paid queries.",
+  "models": [
+    {
+      "model_id": "clinical_core_mae",
+      "source": "main",
+      "arm": "none",
+      "view": "core",
+      "label": "Original clinical core; MAE-tuned",
+      "fixed_substantive_predictor_count": 10
+    },
+    {
+      "model_id": "enhanced_clinical_mae",
+      "source": "main",
+      "arm": "none",
+      "view": "enhanced",
+      "label": "Original enhanced clinical; MAE-tuned",
+      "fixed_substantive_predictor_count": 13
+    },
+    {
+      "model_id": "clinical_core_mse",
+      "source": "r2",
+      "arm": "core",
+      "view": null,
+      "label": "Clinical core; MSE-tuned",
+      "fixed_substantive_predictor_count": 10
+    },
+    {
+      "model_id": "enhanced_clinical_mse",
+      "source": "r2",
+      "arm": "enhanced",
+      "view": null,
+      "label": "Enhanced clinical; MSE-tuned",
+      "fixed_substantive_predictor_count": 13
+    },
+    {
+      "model_id": "core_plus18",
+      "source": "r2",
+      "arm": "full",
+      "view": null,
+      "label": "Clinical core + all18 candidates",
+      "fixed_substantive_predictor_count": 28
+    },
+    {
+      "model_id": "prior_GA_MAE",
+      "source": "mae",
+      "arm": "GA_selected",
+      "view": null,
+      "label": "Prior GA: clinical core, MAE + burden",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "prior_GA_R2",
+      "source": "r2",
+      "arm": "GA_selected",
+      "view": null,
+      "label": "Prior GA: clinical core, R\u00b2 + burden",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "MoCA_plus18",
+      "source": "fixed",
+      "arm": "optional18_plus_moca",
+      "view": null,
+      "label": "MoCA + all18 candidates",
+      "fixed_substantive_predictor_count": 19
+    },
+    {
+      "model_id": "optional18_only",
+      "source": "fixed",
+      "arm": "optional18_only",
+      "view": null,
+      "label": "All18 without baseline MoCA",
+      "fixed_substantive_predictor_count": 18
+    },
+    {
+      "model_id": "MoCA_GA",
+      "source": "new",
+      "arm": "GA_selected",
+      "view": null,
+      "label": "New GA: mandatory MoCA, accuracy first",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "cognitive4",
+      "source": "new",
+      "arm": "enhanced",
+      "view": null,
+      "label": "Fixed four-predictor cognitive model",
+      "fixed_substantive_predictor_count": 4
+    },
+    {
+      "model_id": "MoCA_ridge",
+      "source": "new",
+      "arm": "core",
+      "view": null,
+      "label": "Baseline MoCA-only ridge",
+      "fixed_substantive_predictor_count": 1
+    },
+    {
+      "model_id": "persistence",
+      "source": "new",
+      "arm": "persistence",
+      "view": null,
+      "label": "Baseline MoCA unchanged",
+      "fixed_substantive_predictor_count": 1
+    },
+    {
+      "model_id": "typical_change",
+      "source": "new",
+      "arm": "typical_change",
+      "view": null,
+      "label": "Baseline MoCA + training-median change",
+      "fixed_substantive_predictor_count": 1
+    }
+  ],
+  "contrasts": [
+    {
+      "a": "MoCA_GA",
+      "b": "prior_GA_MAE"
+    },
+    {
+      "a": "MoCA_GA",
+      "b": "prior_GA_R2"
+    },
+    {
+      "a": "MoCA_GA",
+      "b": "core_plus18"
+    },
+    {
+      "a": "MoCA_GA",
+      "b": "enhanced_clinical_mae"
+    },
+    {
+      "a": "MoCA_GA",
+      "b": "enhanced_clinical_mse"
+    },
+    {
+      "a": "MoCA_GA",
+      "b": "MoCA_plus18"
+    },
+    {
+      "a": "MoCA_GA",
+      "b": "cognitive4"
+    },
+    {
+      "a": "cognitive4",
+      "b": "core_plus18"
+    },
+    {
+      "a": "cognitive4",
+      "b": "enhanced_clinical_mae"
+    },
+    {
+      "a": "cognitive4",
+      "b": "enhanced_clinical_mse"
+    },
+    {
+      "a": "cognitive4",
+      "b": "MoCA_plus18"
+    },
+    {
+      "a": "core_plus18",
+      "b": "enhanced_clinical_mae"
+    },
+    {
+      "a": "core_plus18",
+      "b": "enhanced_clinical_mse"
+    },
+    {
+      "a": "core_plus18",
+      "b": "MoCA_plus18"
+    }
+  ],
+  "horizons": [
+    12,
+    24,
+    36
+  ],
+  "n_expected": {
+    "12": 333,
+    "24": 321,
+    "36": 307
+  },
+  "identity_gate": "Same participant identities, components, folds and outcomes within horizon. No cross-cohort pooling.",
+  "metrics": [
+    "R2",
+    "MAE",
+    "RMSE",
+    "MSE",
+    "bias",
+    "calibration_slope",
+    "calibration_intercept",
+    "outside_0_30_fraction"
+  ],
+  "uncertainty": {
+    "method": "5000 paired identity bootstrap draws conditional on frozen predictions",
+    "seed": "20261030+horizon",
+    "multiplicity": "No adjusted significance claim; all42 contrasts exploratory and reported."
+  },
+  "interpretation": "36 months retains its historical priority; do not choose a different primary horizon or tuning recipe from the best observed score. Evaluate accuracy, fixed versus varying features, assay requirements, selection stability and temporal limitations.",
+  "no_new_fits": true,
+  "no_new_patient_predictions": true,
+  "paid_queries": 0
+}

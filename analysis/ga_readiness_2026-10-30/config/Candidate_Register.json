@@ -1,0 +1,92 @@
+[
+  {
+    "bit": 0,
+    "name": "SDMT",
+    "instrument": "SDMT"
+  },
+  {
+    "bit": 1,
+    "name": "HVLT_immediate",
+    "instrument": "HVLT"
+  },
+  {
+    "bit": 2,
+    "name": "HVLT_delayed",
+    "instrument": "HVLT"
+  },
+  {
+    "bit": 3,
+    "name": "Animal_fluency",
+    "instrument": "Animal_fluency"
+  },
+  {
+    "bit": 4,
+    "name": "LNS",
+    "instrument": "LNS"
+  },
+  {
+    "bit": 5,
+    "name": "JLO",
+    "instrument": "JLO"
+  },
+  {
+    "bit": 6,
+    "name": "HVLT_recognition_discrimination",
+    "instrument": "HVLT"
+  },
+  {
+    "bit": 7,
+    "name": "RBDSQ_full",
+    "instrument": "RBDSQ"
+  },
+  {
+    "bit": 8,
+    "name": "SCOPA_GI",
+    "instrument": "SCOPA_AUT"
+  },
+  {
+    "bit": 9,
+    "name": "SCOPA_urinary",
+    "instrument": "SCOPA_AUT"
+  },
+  {
+    "bit": 10,
+    "name": "SCOPA_cardiovascular",
+    "instrument": "SCOPA_AUT"
+  },
+  {
+    "bit": 11,
+    "name": "Systolic_BP_drop",
+    "instrument": "postural_BP"
+  },
+  {
+    "bit": 12,
+    "name": "Diastolic_BP_drop",
+    "instrument": "postural_BP"
+  },
+  {
+    "bit": 13,
+    "name": "STAI_trait",
+    "instrument": "STAI"
+  },
+  {
+    "bit": 14,
+    "name": "Apathy",
+    "instrument": "MDS_UPDRS_I"
+  },
+  {
+    "bit": 15,
+    "name": "Cognitive_complaint",
+    "instrument": "MDS_UPDRS_I"
+  },
+  {
+    "bit": 16,
+    "name": "APOE_e4_dosage",
+    "instrument": "APOE_assay"
+  },
+  {
+    "bit": 17,
+    "name": "NLR",
+    "instrument": "CBC_differential"
+  }
+]

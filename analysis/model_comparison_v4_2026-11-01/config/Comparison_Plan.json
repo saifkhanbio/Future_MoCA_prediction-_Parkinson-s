@@ -1,0 +1,175 @@
+{
+  "comparison_id": "Clinical_hallmark_v4_frozen_comparison",
+  "status": "POST_HOC_COMPARISON_ONLY",
+  "created_Riyadh": "2026-11-01T12:28:46.402044+03:00",
+  "models": [
+    {
+      "model_id": "v4_unrestricted_GA",
+      "source": "v4",
+      "arm": "unrestricted28_GA_selected",
+      "view": null,
+      "label": "v4 GA: unrestricted 28 features",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "v4_MoCA_GA",
+      "source": "v4",
+      "arm": "moca27_GA_selected",
+      "view": null,
+      "label": "v4 GA: MoCA mandatory + 27 candidates",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "v4_unrestricted_random",
+      "source": "v4",
+      "arm": "unrestricted28_random_selected",
+      "view": null,
+      "label": "v4 matched random: unrestricted",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "v4_MoCA_random",
+      "source": "v4",
+      "arm": "moca27_random_selected",
+      "view": null,
+      "label": "v4 matched random: MoCA mandatory",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "clinical_core_mae",
+      "source": "main",
+      "arm": "none",
+      "view": "core",
+      "label": "Original clinical core; MAE-tuned",
+      "fixed_substantive_predictor_count": 10
+    },
+    {
+      "model_id": "enhanced_clinical_mae",
+      "source": "main",
+      "arm": "none",
+      "view": "enhanced",
+      "label": "Original enhanced clinical; MAE-tuned",
+      "fixed_substantive_predictor_count": 13
+    },
+    {
+      "model_id": "clinical_core_mse",
+      "source": "r2",
+      "arm": "core",
+      "view": null,
+      "label": "Clinical core; MSE-tuned",
+      "fixed_substantive_predictor_count": 10
+    },
+    {
+      "model_id": "enhanced_clinical_mse",
+      "source": "r2",
+      "arm": "enhanced",
+      "view": null,
+      "label": "Enhanced clinical; MSE-tuned",
+      "fixed_substantive_predictor_count": 13
+    },
+    {
+      "model_id": "core_plus18",
+      "source": "r2",
+      "arm": "full",
+      "view": null,
+      "label": "Full 28: core clinical + 18 candidates",
+      "fixed_substantive_predictor_count": 28
+    },
+    {
+      "model_id": "prior_GA_MAE",
+      "source": "mae",
+      "arm": "GA_selected",
+      "view": null,
+      "label": "Prior GA: clinical core, MAE + burden",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "prior_GA_R2",
+      "source": "r2",
+      "arm": "GA_selected",
+      "view": null,
+      "label": "Prior GA: clinical core, R\u00b2 + burden",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "MoCA_plus18",
+      "source": "fixed",
+      "arm": "optional18_plus_moca",
+      "view": null,
+      "label": "MoCA + all18 candidates",
+      "fixed_substantive_predictor_count": 19
+    },
+    {
+      "model_id": "optional18_only",
+      "source": "fixed",
+      "arm": "optional18_only",
+      "view": null,
+      "label": "All18 without baseline MoCA",
+      "fixed_substantive_predictor_count": 18
+    },
+    {
+      "model_id": "MoCA_GA",
+      "source": "new",
+      "arm": "GA_selected",
+      "view": null,
+      "label": "Previous GA: MoCA mandatory + 18 candidates",
+      "fixed_substantive_predictor_count": null
+    },
+    {
+      "model_id": "cognitive4",
+      "source": "new",
+      "arm": "enhanced",
+      "view": null,
+      "label": "Fixed cognitive4: MoCA + SDMT + HVLT immediate/delayed",
+      "fixed_substantive_predictor_count": 4
+    },
+    {
+      "model_id": "MoCA_ridge",
+      "source": "new",
+      "arm": "core",
+      "view": null,
+      "label": "Baseline MoCA-only ridge",
+      "fixed_substantive_predictor_count": 1
+    },
+    {
+      "model_id": "persistence",
+      "source": "new",
+      "arm": "persistence",
+      "view": null,
+      "label": "Baseline MoCA unchanged",
+      "fixed_substantive_predictor_count": 1
+    },
+    {
+      "model_id": "typical_change",
+      "source": "new",
+      "arm": "typical_change",
+      "view": null,
+      "label": "Baseline MoCA + training-median change",
+      "fixed_substantive_predictor_count": 1
+    }
+  ],
+  "horizons": [
+    12,
+    24,
+    36
+  ],
+  "participants": {
+    "12": 333,
+    "24": 321,
+    "36": 307
+  },
+  "matching": "Exact participants, known identity components, outer folds and outcomes within each horizon.",
+  "contrasts": "All 153 unordered model pairs at each horizon, with frozen ordering: 459 post hoc contrasts. Retain the v4 original 36-month primary contrast and its original status.",
+  "bootstrap": {
+    "replicates": 5000,
+    "seed": "20261031+horizon, matching v4",
+    "unit": "known identity component; one row per component",
+    "conditional_on_frozen_predictions": true,
+    "multiplicity": "Unadjusted exploratory intervals; no confirmatory superiority or equivalence claims."
+  },
+  "recommendation_basis": "Observed accuracy, paired uncertainty, calibration, feature and acquisition-group burden, selection stability and whether a fixed recipe already has frozen predictions.",
+  "feature_burden": "Use the v4 mapping to count total acquisition groups for all models; do not compare legacy extra-group counts directly with v4 total counts.",
+  "no_training": true,
+  "no_new_patient_predictions": true,
+  "paid_queries": 0
+}

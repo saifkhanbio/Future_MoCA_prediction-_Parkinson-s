@@ -1,0 +1,337 @@
+{
+  "study_id": "Clinical_hallmark_GA_R2_v1",
+  "version": "locked_r2_burden_v1",
+  "date": "2026-10-30",
+  "status": "LOCKED_NOT_AUTHORIZED_FOR_PARTICIPANT_TRAINING",
+  "objective": "Explore whether selecting ridge penalties and assessment subsets by pooled inner squared error, jointly with assessment burden, improves 36-month out-of-fold R2 relative to matched MSE-tuned enhanced clinical assessment; 12/24 months secondary.",
+  "design": "Exploratory retrospective objective-sensitivity analysis, motivated by previously seen MAE-based results. No untouched, confirmatory, noninferiority or external-validation claim.",
+  "scope": "Same 18 eligible optional features, fixed core, cohort rows, grouped folds, preprocessing and burden as MAE study. No new data, UPSIT release, interactions, model-family changes, horizon selection or burden reweighting.",
+  "population": {
+    "frame_n": 351,
+    "horizons": {
+      "12": 333,
+      "24": 321,
+      "36": 307
+    },
+    "primary_months": 36,
+    "secondary_months": [
+      12,
+      24
+    ],
+    "fixed_per_horizon": true,
+    "landmark": "Existing RNA collection month-end; baseline assessments in previous three calendar months. Original RNA-selected population is retained for matched comparison, although RNA is not a predictor. Monthly precision cannot establish order within a month.",
+    "outcome": "Existing education-adjusted continuous MoCA, exact locked source-row binding. No MCI/dementia label.",
+    "prior_use": "Prior discovery, earlier models and temporal evaluation remain acknowledged; nested CV does not undo exposure."
+  },
+  "features": {
+    "core": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ]
+      }
+    },
+    "optional": [
+      {
+        "bit": 0,
+        "name": "SDMT",
+        "instrument": "SDMT"
+      },
+      {
+        "bit": 1,
+        "name": "HVLT_immediate",
+        "instrument": "HVLT"
+      },
+      {
+        "bit": 2,
+        "name": "HVLT_delayed",
+        "instrument": "HVLT"
+      },
+      {
+        "bit": 3,
+        "name": "Animal_fluency",
+        "instrument": "Animal_fluency"
+      },
+      {
+        "bit": 4,
+        "name": "LNS",
+        "instrument": "LNS"
+      },
+      {
+        "bit": 5,
+        "name": "JLO",
+        "instrument": "JLO"
+      },
+      {
+        "bit": 6,
+        "name": "HVLT_recognition_discrimination",
+        "instrument": "HVLT"
+      },
+      {
+        "bit": 7,
+        "name": "RBDSQ_full",
+        "instrument": "RBDSQ"
+      },
+      {
+        "bit": 8,
+        "name": "SCOPA_GI",
+        "instrument": "SCOPA_AUT"
+      },
+      {
+        "bit": 9,
+        "name": "SCOPA_urinary",
+        "instrument": "SCOPA_AUT"
+      },
+      {
+        "bit": 10,
+        "name": "SCOPA_cardiovascular",
+        "instrument": "SCOPA_AUT"
+      },
+      {
+        "bit": 11,
+        "name": "Systolic_BP_drop",
+        "instrument": "postural_BP"
+      },
+      {
+        "bit": 12,
+        "name": "Diastolic_BP_drop",
+        "instrument": "postural_BP"
+      },
+      {
+        "bit": 13,
+        "name": "STAI_trait",
+        "instrument": "STAI"
+      },
+      {
+        "bit": 14,
+        "name": "Apathy",
+        "instrument": "MDS_UPDRS_I"
+      },
+      {
+        "bit": 15,
+        "name": "Cognitive_complaint",
+        "instrument": "MDS_UPDRS_I"
+      },
+      {
+        "bit": 16,
+        "name": "APOE_e4_dosage",
+        "instrument": "APOE_assay"
+      },
+      {
+        "bit": 17,
+        "name": "NLR",
+        "instrument": "CBC_differential"
+      }
+    ],
+    "held": {
+      "UPSIT": "No verified historical calendar assessment date; nominal source conflicts are resolved but timing is not. Excluded, not imputed."
+    },
+    "mask_space_including_core": 262144,
+    "nonempty_masks": 262143,
+    "original_proposed_19bit_space": 524288,
+    "nuisance_categories": {
+      "baseline_sdmt_form": {
+        "levels": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "trigger": [
+          "SDMT"
+        ]
+      },
+      "baseline_hvlt_form": {
+        "levels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ],
+        "trigger": [
+          "HVLT_immediate",
+          "HVLT_delayed",
+          "HVLT_recognition_discrimination"
+        ]
+      },
+      "jlo_form": {
+        "levels": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "trigger": [
+          "JLO"
+        ]
+      }
+    }
+  },
+  "preprocessing": {
+    "numeric": "Training median imputation, all-missing training column ->0. Training mean and population-SD scaling of imputed values; SD<=1e-12 ->1. Fixed missing indicator for every numeric column, unscaled.",
+    "categorical": "Fixed complete one-hot dictionaries, no dropped level; blank/invalid raw values become unknown during binding. No outcome-derived vocabulary.",
+    "intercept": "Unpenalized; all design columns centred within solver training rows."
+  },
+  "qc_rules_file": "config/Candidate_Readiness_Rules.json",
+  "missingness": "Identical participant rows for every mask and arm. Source-invalid optional values become missing. Median and scaling learned within each inner-training fold and outer refit; numeric missingness indicators attached. All-missing training column is zero/inactive with missingness indicator. No complete-case mask-specific cohorts.",
+  "burden": {
+    "objective": "Number of distinct additional instruments/assays represented by selected scores",
+    "core_cost": 0,
+    "enhanced_cost": 2,
+    "full_cost": 12,
+    "limitations": "Unweighted instrument count is only a proxy. It is not validated time, money, patient burden or cost effectiveness; delayed HVLT administration and genotyping availability are not equivalent to one questionnaire item. Report selected scores and forms, not only the count."
+  },
+  "model": {
+    "family": "linear ridge",
+    "objective": "mean squared training error + lambda*sum(coefficients squared); intercept unpenalized",
+    "lambdas": [
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "penalty_tie": "Minimum pooled inner MSE; within absolute 1e-12 MoCA-points-squared choose largest lambda.",
+    "prediction": "Unclipped for primary and tuning; no interaction or nonlinear expansion",
+    "cached_preprocessing": "Fit all fixed numeric columns independently using inner training rows only, then slice requested numeric/missing columns and triggered form columns. Cache scoped to horizon and outer fold. No cross-fold or global training states."
+  },
+  "splits": {
+    "outer": 5,
+    "inner": 3,
+    "source": "Existing known-identity grouped master allocation from model_readiness_2026-10-24. Unchanged subsets across horizons.",
+    "selection_outcomes": "Only inner-validation outcomes from outer-training people may influence masks, penalties, seed pooling or final model. Outer-test outcomes inaccessible to search API."
+  },
+  "search": {
+    "algorithm": "NSGA-II",
+    "population": 256,
+    "offspring_batches": 500,
+    "offspring_each": 256,
+    "restarts": 10,
+    "seeds": [
+      20261030,
+      20261031,
+      20261032,
+      20261033,
+      20261034,
+      20261035,
+      20261036,
+      20261037,
+      20261038,
+      20261039
+    ],
+    "context_seed_offset": "10000*horizon + 100*outer_fold",
+    "initial": "Core, existing enhanced, full, all 18 singletons; fill remaining slots with uniform random masks. Each restart receives the same mandatory masks. All-zero mask allowed.",
+    "crossover": "Uniform bitwise crossover with probability0.9; otherwise copy first tournament parent.",
+    "mutation": "Independent per-bit flip probability1/18; unchanged offspring allowed and cached.",
+    "parent_tournament": "Lower nondomination rank, then greater crowding, then seeded random tie.",
+    "survival": "Parents plus offspring, nondomination fronts, truncate last front by descending crowding then fixed numeric bitmask. Duplicates allowed in population; objective evaluation cached by mask.",
+    "objectives": [
+      "Pooled inner-validation MSE at selected lambda (equivalent to maximizing pooled R2 on fixed context outcomes)",
+      "Distinct additional instruments/assays"
+    ],
+    "maximum_proposals_per_outer_horizon": 1282560,
+    "final_archive": "Union of unique masks from ten restarts. Freeze GA and equal-distinct-mask random archives before exhaustive completion.",
+    "final_choice": "Anchor is minimum pooled MSE; anchor ties within1e-12 prefer burden, score count, numeric mask. Threshold=anchor MSE+sample SD of its three fold MSEs/sqrt(3). Among all visited masks at or below threshold+1e-12 choose burden, pooled MSE, score count, numeric mask, in that order.",
+    "selection_uncertainty": "MSE one-SE tolerance is an unequal-fold, correlated-fold heuristic; not a confidence interval or clinical margin.",
+    "maximum_unique_GA_masks_per_context": 100000,
+    "pooled_score": "Sum validation SSE across three folds divided by their total n. Pooled R2=1-MSE/variance of all outer-training outcomes (ddof0). Never average fold-specific R2. Retain negative R2; reject nonpositive/nonfinite pooled variance.",
+    "stagnation": "At generation>=200: across100 generation transitions/101 observations, all burden-envelope improvements in normalized MSE (MSE/pooled outcome variance, equivalent to R2 gains) must be <0.0001, and the selected mask must remain unchanged. Max500 generations or10000 distinct masks/restart can stop earlier.",
+    "fitness_schema": "mse_r2_v1"
+  },
+  "arms": [
+    "core",
+    "enhanced",
+    "full",
+    "GA_selected",
+    "random_selected",
+    "exhaustive_selected"
+  ],
+  "random_search": {
+    "purpose": "Check whether the evolutionary search adds value over a simple search at the same logical fitness-evaluation budget",
+    "selection_rule": "Identical parsimony rule to GA",
+    "seeds": "20271030 + 10000*horizon +100*outer_fold",
+    "budget": "Exactly the number of distinct masks visited by GA in this outer/horizon context. Start with the same 21 mandatory masks, then sample masks uniformly without replacement until that number. The count is derived from inner-only GA activity; outer outcomes never determine the budget.",
+    "cache": "Share deterministic computed fitness only for identical mask and identical inner folds. Each algorithm still receives the same number of distinct fitness values. Report logical budgets and physical shared ridge solves separately."
+  },
+  "controls": {
+    "core_mask": 0,
+    "enhanced_mask": 7,
+    "full_mask": 262143,
+    "penalties": "Each of six fitted arms chooses its own lambda by pooled inner MSE, then refits on its full outer-training set, including separate refits if masks coincide.",
+    "persistence": "baseline MoCA",
+    "typical_change": "baseline MoCA + training-median change, preserved from original MAE comparator recipe; not retuned to a training-mean benchmark."
+  },
+  "metrics": {
+    "primary": "Pooled outer OOF delta R2, GA_selected minus MSE-tuned enhanced, at36 months. Positive favours GA. Assessment burden reported jointly.",
+    "secondary": [
+      "MAE",
+      "RMSE",
+      "mean_prediction_error",
+      "calibration_intercept",
+      "calibration_slope",
+      "fraction_predictions_outside_0_30",
+      "clipped_MAE_0_30_descriptive",
+      "12/24-month R2",
+      "matched contrasts against frozen MAE-selected models"
+    ],
+    "R2": "1-SSE/sum((y-mean(y))^2); undefined if denominator zero.",
+    "calibration": "Observed y on raw OOF prediction; slope/intercept undefined if prediction range<=1e-12 or centred sum of squares is zero. Range tolerance avoids false nonzero variance from floating-point means.",
+    "clipping": "No clipping for tuning or primary metrics. Fixed [0,30] clipped MAE descriptive only; no retuning."
+  },
+  "inference": {
+    "primary_exploratory_contrast": "Delta R2, GA_selected minus MSE-tuned enhanced,36 months; original MAE-study primary unchanged.",
+    "other_contrasts": "All28 pairwise arm contrasts at each of3 horizons (84); plus six matched new-versus-frozen-MAE model-arm contrasts per horizon (18), all descriptive/unadjusted. All horizons reported.",
+    "interval": "5000 paired identity-component bootstrap draws, seed20261030+horizon. Recompute each resample SST and delta R2=(SSE_reference-SSE_first)/SST; also paired delta MAE. No model refitting. Constant-outcome resamples undefined for R2, counted and omitted without replacement; R2 CI only if>=4750/5000 valid. MAE uses all draws. Percentile2.5/97.5. Report counts and conditional uncertainty.",
+    "seed": 20261030,
+    "no_claim": "No multiplicity-controlled confirmation, noninferiority, future-patient optimality, independent test-set or external-generalizability claim."
+  },
+  "stability": "Report selected masks, instrument/score counts, alpha and selection frequency across five outer folds separately by horizon. These folds are not independent replications; only five selections per horizon.",
+  "budget": {
+    "contexts": 15,
+    "fitness_fits_per_unique_mask": 15,
+    "masks_per_context": 262144,
+    "total_mask_evaluations": 3932160,
+    "inner_ridge_solves": 58982400,
+    "outer_arm_refits": 90,
+    "total_ridge_solve_upper": 58982490,
+    "actual_count": "Exactly262144*15*15 +90 logical solves after complete enumeration. Cache reuse incurs no new solve. Physical retries separately accounted.",
+    "not_activated": [
+      "Participant training until a later explicit authorization",
+      "New data or paid queries",
+      "New models/interactions/penalty grids",
+      "Outcome-dependent rule changes",
+      "Prior result modification"
+    ]
+  },
+  "execution": {
+    "participant_training_authorized": false,
+    "stage_allowed": [
+      "Source QC",
+      "Hash/schema/grouped-split checks",
+      "Synthetic numerical and routing checks"
+    ],
+    "future_run": "Requires later actual user authorization bound to this PLAN_LOCK, LAUNCHER_LOCK and r2_expanded_v1 profile SHA256. Fresh sibling output only; older MAE authorizations and caches rejected.",
+    "failure_policy": "Numerical/data/hash/identity failures abort; GPU hardware failure alone permits logged CPU recovery. Scoring only after all15 contexts complete.12h active guard pauses incomplete run; does not establish convergence.",
+    "workers": 12,
+    "BLAS_threads": 1,
+    "GPU_jobs": 1,
+    "paid_queries": 0,
+    "CPU_fallback_workers": 15
+  }
+}

@@ -1,0 +1,371 @@
+{
+  "population": {
+    "frame_n": 351,
+    "horizons": {
+      "12": 333,
+      "24": 321,
+      "36": 307
+    },
+    "primary_months": 36,
+    "secondary_months": [
+      12,
+      24
+    ],
+    "fixed_per_horizon": true,
+    "landmark": "Existing RNA collection month-end; baseline assessments in previous three calendar months. Original RNA-selected population is retained for matched comparison, although RNA is not a predictor. Monthly precision cannot establish order within a month.",
+    "outcome": "Existing education-adjusted continuous MoCA, exact locked source-row binding. No MCI/dementia label.",
+    "prior_use": "Prior discovery, earlier models and temporal evaluation remain acknowledged; nested CV does not undo exposure."
+  },
+  "preprocessing": {
+    "numeric": "Training median imputation, all-missing training column ->0. Training mean and population-SD scaling of imputed values; SD<=1e-12 ->1. Fixed missing indicator for every numeric column, unscaled.",
+    "categorical": "Fixed complete one-hot dictionaries, no dropped level; blank/invalid raw values become unknown during binding. No outcome-derived vocabulary.",
+    "intercept": "Unpenalized; all design columns centred within solver training rows."
+  },
+  "missingness": "Identical participant rows for every mask and arm. Source-invalid optional values become missing. Median and scaling learned within each inner-training fold and outer refit; numeric missingness indicators attached. All-missing training column is zero/inactive with missingness indicator. No complete-case mask-specific cohorts.",
+  "model": {
+    "family": "linear ridge",
+    "objective": "mean squared training error + lambda*sum(coefficients squared); intercept unpenalized",
+    "lambdas": [
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "penalty_tie": "Minimum pooled inner MSE; within absolute 1e-12 MoCA-points-squared choose largest lambda.",
+    "prediction": "Unclipped for primary and tuning; no interaction or nonlinear expansion",
+    "cached_preprocessing": "Fit all fixed numeric columns independently using inner training rows only, then slice requested numeric/missing columns and triggered form columns. Cache scoped to horizon and outer fold. No cross-fold or global training states."
+  },
+  "splits": {
+    "outer": 5,
+    "inner": 3,
+    "source": "Existing known-identity grouped master allocation from model_readiness_2026-10-24. Unchanged subsets across horizons.",
+    "selection_outcomes": "Only inner-validation outcomes from outer-training people may influence masks, penalties, seed pooling or final model. Outer-test outcomes inaccessible to search API."
+  },
+  "study_id": "Clinical_hallmark_GA_unrestricted_v4_200k_10kgen",
+  "status": "LOCKED_NOT_AUTHORIZED_FOR_PARTICIPANT_TRAINING",
+  "design": "Exploratory retrospective paired search on previously exposed participants; no untouched/general-optimum claim.",
+  "arms": [
+    "unrestricted28",
+    "moca27"
+  ],
+  "features": {
+    "core": {
+      "numeric": [],
+      "categories": {}
+    },
+    "optional": [
+      {
+        "bit": 0,
+        "name": "age_index",
+        "instrument": "demographic_history",
+        "type": "numeric"
+      },
+      {
+        "bit": 1,
+        "name": "sex_male",
+        "instrument": "demographic_history",
+        "type": "numeric"
+      },
+      {
+        "bit": 2,
+        "name": "education",
+        "instrument": "demographic_history",
+        "type": "numeric"
+      },
+      {
+        "bit": 3,
+        "name": "baseline_moca",
+        "instrument": "MoCA",
+        "type": "numeric"
+      },
+      {
+        "bit": 4,
+        "name": "diagnosis_duration_years",
+        "instrument": "PD_history",
+        "type": "numeric"
+      },
+      {
+        "bit": 5,
+        "name": "part2",
+        "instrument": "MDS_UPDRS_II",
+        "type": "numeric"
+      },
+      {
+        "bit": 6,
+        "name": "part3",
+        "instrument": "MDS_UPDRS_III",
+        "type": "numeric"
+      },
+      {
+        "bit": 7,
+        "name": "gds15",
+        "instrument": "GDS15",
+        "type": "numeric"
+      },
+      {
+        "bit": 8,
+        "name": "pd_medication",
+        "instrument": "medication_history",
+        "type": "numeric"
+      },
+      {
+        "bit": 9,
+        "name": "motor_state",
+        "instrument": "MDS_UPDRS_III",
+        "type": "categorical"
+      },
+      {
+        "bit": 10,
+        "name": "SDMT",
+        "instrument": "SDMT",
+        "type": "numeric"
+      },
+      {
+        "bit": 11,
+        "name": "HVLT_immediate",
+        "instrument": "HVLT",
+        "type": "numeric"
+      },
+      {
+        "bit": 12,
+        "name": "HVLT_delayed",
+        "instrument": "HVLT",
+        "type": "numeric"
+      },
+      {
+        "bit": 13,
+        "name": "Animal_fluency",
+        "instrument": "Animal_fluency",
+        "type": "numeric"
+      },
+      {
+        "bit": 14,
+        "name": "LNS",
+        "instrument": "LNS",
+        "type": "numeric"
+      },
+      {
+        "bit": 15,
+        "name": "JLO",
+        "instrument": "JLO",
+        "type": "numeric"
+      },
+      {
+        "bit": 16,
+        "name": "HVLT_recognition_discrimination",
+        "instrument": "HVLT",
+        "type": "numeric"
+      },
+      {
+        "bit": 17,
+        "name": "RBDSQ_full",
+        "instrument": "RBDSQ",
+        "type": "numeric"
+      },
+      {
+        "bit": 18,
+        "name": "SCOPA_GI",
+        "instrument": "SCOPA_AUT",
+        "type": "numeric"
+      },
+      {
+        "bit": 19,
+        "name": "SCOPA_urinary",
+        "instrument": "SCOPA_AUT",
+        "type": "numeric"
+      },
+      {
+        "bit": 20,
+        "name": "SCOPA_cardiovascular",
+        "instrument": "SCOPA_AUT",
+        "type": "numeric"
+      },
+      {
+        "bit": 21,
+        "name": "Systolic_BP_drop",
+        "instrument": "postural_BP",
+        "type": "numeric"
+      },
+      {
+        "bit": 22,
+        "name": "Diastolic_BP_drop",
+        "instrument": "postural_BP",
+        "type": "numeric"
+      },
+      {
+        "bit": 23,
+        "name": "STAI_trait",
+        "instrument": "STAI",
+        "type": "numeric"
+      },
+      {
+        "bit": 24,
+        "name": "Apathy",
+        "instrument": "MDS_UPDRS_I",
+        "type": "numeric"
+      },
+      {
+        "bit": 25,
+        "name": "Cognitive_complaint",
+        "instrument": "MDS_UPDRS_I",
+        "type": "numeric"
+      },
+      {
+        "bit": 26,
+        "name": "APOE_e4_dosage",
+        "instrument": "APOE_assay",
+        "type": "numeric"
+      },
+      {
+        "bit": 27,
+        "name": "NLR",
+        "instrument": "CBC_differential",
+        "type": "numeric"
+      }
+    ],
+    "feature_categories": {
+      "motor_state": [
+        "untreated",
+        "off",
+        "on",
+        "treated_unknown",
+        "unknown"
+      ]
+    },
+    "nuisance_categories": {
+      "baseline_sdmt_form": {
+        "levels": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "trigger": [
+          "SDMT"
+        ]
+      },
+      "baseline_hvlt_form": {
+        "levels": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ],
+        "trigger": [
+          "HVLT_immediate",
+          "HVLT_delayed",
+          "HVLT_recognition_discrimination"
+        ]
+      },
+      "jlo_form": {
+        "levels": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "trigger": [
+          "JLO"
+        ]
+      }
+    },
+    "mandatory_instruments": []
+  },
+  "controls": {
+    "core_mask": 1023,
+    "enhanced_mask": 7176,
+    "full_mask": 268435455
+  },
+  "selection": {
+    "fitness": "Pooled inner MSE / pooled training-outcome variance, equivalent to maximum pooled inner R2; all candidate preprocessing within inner training folds.",
+    "objective2": "Count distinct acquisition groups, INCLUDING selected core information and mandatory MoCA. Proxy only, not validated time/cost.",
+    "final_choice": "Smallest pooled inner MSE; within1e-12 choose fewest total substantive predictors, then fewest acquisition groups, then numeric genome mask. No one-SE allowance.",
+    "paired_arm": "Identical budget, selection rules, rows and folds. moca27 fixes MoCA and reindexes the other27bits; mandatory MoCA counts as1predictor and1acquisition group.",
+    "category_rule": "motor_state is a single feature bit controlling all5dummy columns; missing indicators and form dummies follow selected parent tests. No interaction products.",
+    "zero_mask": "unrestricted28 includes intercept-only anchor as an explicit benchmark; moca27 zero mask is MoCA-only."
+  },
+  "search": {
+    "algorithm": "NSGA-II",
+    "crossover": 0.9,
+    "mutation": "independent probability1/d per optional bit",
+    "initial": "zero, full, all singletons, full minus each optional bit, clinical-core, compact4 and MoCA-plus18 masks; fill uniform random masks.",
+    "parent_tournament": "Pareto rank, then greater crowding, then seeded random tie",
+    "survival": "rank, descending crowding, numeric mask; deterministic stable tie",
+    "restarts": 25,
+    "cross_restart_archive": "union of visited masks; repeat mask under the same context shares fitness but each restart retains its own visitation history",
+    "random_control": "Same mandatory initial masks; uniform without replacement until exactly the number of distinct GA masks, independently per arm/horizon/fold.",
+    "exhaustive_enumeration": false,
+    "meaning_of_thorough": "Heavy bounded exploration, not an exhaustive optimum certificate. All28/27dimensions are searchable.",
+    "seeds": "Main20261031..20261050; confirmation20361031..20361035. Same arm/horizon/fold offsets; random20271031.",
+    "main_restarts": 20,
+    "confirmation_restarts": 5,
+    "convergence": "Two consecutive200-transition plateaus, >=400generations and >=50000distinct masks. Final cross-restart and random-challenge gate before outer refits.",
+    "archive": "Incremental exact objective envelopes and tie candidates; full fitness/visitation records in compressed SQLite. No whole-history RAM cache."
+  },
+  "metrics": {
+    "primary": "36-month pooled outer deltaR2: unrestricted28_GA minus moca27_GA",
+    "secondary": "12/24months; all45pairwise contrasts among4new search outputs plus frozen compact4,MoCA_plus18,core_plus18,prior_MoCA_GA,persistence,typical_change at each horizon. Report all in fixed order.",
+    "per_model": [
+      "MAE",
+      "RMSE",
+      "R2",
+      "bias",
+      "calibration",
+      "out_of_range",
+      "clipped_MAE_descriptive"
+    ],
+    "interval": "5000paired identity-component percentile bootstrap, seed20261031+horizon, same draws across contrasts; no refitting. Undefined R2 draws recorded, require>=4750valid. Conditional, unadjusted exploratory intervals.",
+    "final_subset_warning": "One selected mask per outer fold; no global fixed panel can inherit nested OOF performance. Any subsequent all-source model needs a separate plan.",
+    "reference_predictions": "Exact existing OOF predictions, never refitted. Same IDs/components/outcomes/folds required.",
+    "clipping": "Unclipped tuning and main evaluation;[0,30]clipped MAE descriptive only."
+  },
+  "budget": {
+    "contexts": 30,
+    "GA_restarts_per_context": 25,
+    "unique_per_restart_max": 200000,
+    "GA_distinct_per_context_max": 5000000,
+    "random_distinct_per_context_max": 5000000,
+    "union_per_context_max": 10000000,
+    "inner_solves_per_mask": 15,
+    "total_inner_solves_upper": 4500000000,
+    "outer_refits": 60,
+    "total_ridge_solve_upper": 4500000060,
+    "bound_note": "Upper bound before cross-restart/shared-cache reuse, not a planned exact fit count. Random control consumes no more distinct masks than GA. No enumeration."
+  },
+  "execution": {
+    "participant_training_authorized": false,
+    "paid_queries": false,
+    "readiness_only": true,
+    "synthetic_only_now": true,
+    "production_requires": "Subsequent explicit execution authorization bound to this v4 PLAN_LOCK and LAUNCHER_LOCK; fresh sibling output, no parent checkpoint reuse.",
+    "memory_guard": "Pause all contexts below4GiB MemAvailable; no partial-study scoring.",
+    "startup_gate": "20CPUs,24GiB available RAM,1250GiB free disk;16CPU+1GPU;18CPU if CUDA unavailable at startup.",
+    "active_guard_seconds": 2592000,
+    "guard_meaning": "30 days cumulative active coordinator time INCLUDING the prior v3 segment; v4 initialization carries25250.402346900984 seconds. Not evidence of convergence.",
+    "fit_cancel": "Numerical/integrity failures abort; only CUDA hardware failures trigger CPU fallback.",
+    "cache": "Fresh context-scoped caches in a new output. Never modify or rebind parent checkpoints; no participant cache import is authorized by this amendment.",
+    "convergence_hold": "If any convergence criterion fails, preserve inner-only diagnostics, withhold outer refits and all study metrics. Further search requires a prospective amendment without outer-outcome review.",
+    "ongoing_external_monitoring": false,
+    "monitoring_note": "No external watcher or automation is requested. The launcher retains its internal checkpoint heartbeat.",
+    "prior_active_seconds": 25250.402346900984,
+    "prior_run": "<PRIVATE_STUDY_ROOT>/ga_unrestricted_run_v3_200k_2026-10-31",
+    "prior_run_state_sha256": "506fe6d8a9f713c3044152914cb1cd90c1a35c825f92c0495c9607ea3cacebad"
+  },
+  "convergence": {
+    "restart_minimum_generation": 400,
+    "restart_minimum_unique": 50000,
+    "consecutive_windows": 2,
+    "window": 200,
+    "restart_progress_threshold": 1e-05,
+    "selected_mask_stable_for_both_windows": true,
+    "all_25_restarts_must_stagnate": true,
+    "confirmation_minimum_replicates": 3,
+    "confirmation_and_main_envelope_tolerance_R2": 0.0001,
+    "random_challenge_tolerance_R2": 0.0001,
+    "evaluation": "All criteria jointly required. Main and confirmation archives must each match the combined archive at every attainable burden within1e-4 normalizedMSE; >=3of5 confirmations within1e-4 of combined best. Random may not exceed GA R2 by>1e-4.",
+    "failure": "CONVERGENCE_HOLD, no outer refit or new participant predictions; never label a hard cap as convergence.",
+    "guarantee": "Evidence of empirical stabilization, not global optimality."
+  }
+}

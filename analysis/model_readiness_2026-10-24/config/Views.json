@@ -1,0 +1,222 @@
+[
+  {
+    "view_id": "main_12_core",
+    "horizon": 12,
+    "clinical": "core",
+    "arms": [
+      "none",
+      "Genes5",
+      "Hallmark11",
+      "Genes5_Hallmark11"
+    ],
+    "population": "main",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 333,
+    "inner_candidate_fits": 975,
+    "outer_refits": 20,
+    "planned_ridge_fits": 995
+  },
+  {
+    "view_id": "main_12_enhanced",
+    "horizon": 12,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5",
+      "Hallmark11",
+      "Genes5_Hallmark11"
+    ],
+    "population": "main",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 333,
+    "inner_candidate_fits": 975,
+    "outer_refits": 20,
+    "planned_ridge_fits": 995
+  },
+  {
+    "view_id": "main_24_core",
+    "horizon": 24,
+    "clinical": "core",
+    "arms": [
+      "none",
+      "Genes5",
+      "Hallmark11",
+      "Genes5_Hallmark11"
+    ],
+    "population": "main",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 321,
+    "inner_candidate_fits": 975,
+    "outer_refits": 20,
+    "planned_ridge_fits": 995
+  },
+  {
+    "view_id": "main_24_enhanced",
+    "horizon": 24,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5",
+      "Hallmark11",
+      "Genes5_Hallmark11"
+    ],
+    "population": "main",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 321,
+    "inner_candidate_fits": 975,
+    "outer_refits": 20,
+    "planned_ridge_fits": 995
+  },
+  {
+    "view_id": "main_36_core",
+    "horizon": 36,
+    "clinical": "core",
+    "arms": [
+      "none",
+      "Genes5",
+      "Hallmark11",
+      "Genes5_Hallmark11"
+    ],
+    "population": "main",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 307,
+    "inner_candidate_fits": 975,
+    "outer_refits": 20,
+    "planned_ridge_fits": 995
+  },
+  {
+    "view_id": "main_36_enhanced",
+    "horizon": 36,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5",
+      "Hallmark11",
+      "Genes5_Hallmark11"
+    ],
+    "population": "main",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 307,
+    "inner_candidate_fits": 975,
+    "outer_refits": 20,
+    "planned_ridge_fits": 995
+  },
+  {
+    "view_id": "common_12_enhanced",
+    "horizon": 12,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5_Hallmark11"
+    ],
+    "population": "common",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 280,
+    "inner_candidate_fits": 375,
+    "outer_refits": 10,
+    "planned_ridge_fits": 385
+  },
+  {
+    "view_id": "common_24_enhanced",
+    "horizon": 24,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5_Hallmark11"
+    ],
+    "population": "common",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 280,
+    "inner_candidate_fits": 375,
+    "outer_refits": 10,
+    "planned_ridge_fits": 385
+  },
+  {
+    "view_id": "common_36_enhanced",
+    "horizon": 36,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5_Hallmark11"
+    ],
+    "population": "common",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 280,
+    "inner_candidate_fits": 375,
+    "outer_refits": 10,
+    "planned_ridge_fits": 385
+  },
+  {
+    "view_id": "RINge6_36_enhanced",
+    "horizon": 36,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5_Hallmark11"
+    ],
+    "population": "RINge6",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 289,
+    "inner_candidate_fits": 375,
+    "outer_refits": 10,
+    "planned_ridge_fits": 385
+  },
+  {
+    "view_id": "PDrecruitment_36_enhanced",
+    "horizon": 36,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5_Hallmark11"
+    ],
+    "population": "PDrecruitment",
+    "technical_covariates": false,
+    "omit_npipb8": false,
+    "expected_n": 302,
+    "inner_candidate_fits": 375,
+    "outer_refits": 10,
+    "planned_ridge_fits": 385
+  },
+  {
+    "view_id": "noNPIPB8_36_enhanced",
+    "horizon": 36,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5_Hallmark11"
+    ],
+    "population": "main",
+    "technical_covariates": false,
+    "omit_npipb8": true,
+    "expected_n": 307,
+    "inner_candidate_fits": 375,
+    "outer_refits": 10,
+    "planned_ridge_fits": 385
+  },
+  {
+    "view_id": "technical_36_enhanced",
+    "horizon": 36,
+    "clinical": "enhanced",
+    "arms": [
+      "none",
+      "Genes5_Hallmark11"
+    ],
+    "population": "main",
+    "technical_covariates": true,
+    "omit_npipb8": false,
+    "expected_n": 307,
+    "inner_candidate_fits": 375,
+    "outer_refits": 10,
+    "planned_ridge_fits": 385
+  }
+]

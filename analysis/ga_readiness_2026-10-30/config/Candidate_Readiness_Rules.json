@@ -1,0 +1,34 @@
+{
+  "status": "LOCKED_SOURCE_QC_VERIFIED",
+  "ready_optional_scores": [
+    "SDMT",
+    "HVLT_immediate",
+    "HVLT_delayed",
+    "Animal_fluency",
+    "LNS",
+    "JLO",
+    "HVLT_recognition_discrimination",
+    "RBDSQ_full",
+    "SCOPA_GI",
+    "SCOPA_urinary",
+    "SCOPA_cardiovascular",
+    "Systolic_BP_drop",
+    "Diastolic_BP_drop",
+    "STAI_trait",
+    "Apathy",
+    "Cognitive_complaint",
+    "APOE_e4_dosage",
+    "NLR"
+  ],
+  "held": {
+    "UPSIT": "No verified historical calendar assessment date; nominal source conflicts are resolved but timing is not. Excluded, not imputed."
+  },
+  "SC_BL_selection": "Strict monthly INFODT, latest within prior three months through RNA month-end landmark, BL before SC within that month, select before value QC, conflicting relevant fields within selected month/event held; no favourable fallback.",
+  "LNS": "Binary items; require complete triples until first all-zero triple, permit missing/zero unadministered tail only, sum must equal supplied raw total.",
+  "JLO": "Version1 odd and version2 even items, all 15 binary active items, other items blank; native sum and calculated score=2*raw must agree. Raw scale0..15; form indicator attached.",
+  "HVLT_recognition": "Correct recognition minus two false-positive fields; native trial sums, delayed score and form must match frozen enhanced assessment.",
+  "blood_pressure": "Use observed supine-minus-standing differences only, not diagnosis of OH. Historical standing duration and medication timing remain unverified contextual limitations. Optional missing scores retained with training-only imputation. The archived5/6/10 source form specifies1–3 minutes in each posture; individual adherence remains unrecorded.",
+  "APOE": "Valid source consensus E2/E3/E4 pair, dosage0..2, no flagged identity notes, WGS presence inventory. Static retrospectively ascertained germline trait; no claim the test was known at baseline or ancestry-adjusted causal effect.",
+  "NLR": "Latest source month/event before QC; same draw, absolute GI/L units, positive uncensored counts, benign/verified comments only, normal or H/L flags retained, nonfuture known report month, conflicting latest absolute draw pairs held. Feature is natural-log NLR, raw ratio retained for provenance.",
+  "missingness": "Do not remove otherwise eligible participants because optional scores are missing. Apply training-only median imputation, missingness indicator and standardized continuous features as locked subsequently. No imputation for wholly unavailable UPSIT."
+}

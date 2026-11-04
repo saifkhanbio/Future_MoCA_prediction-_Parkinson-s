@@ -1,0 +1,255 @@
+{
+  "study_id": "Clinical_hallmark",
+  "version": "locked_v1.0.0",
+  "date": "2026-10-24",
+  "stage": "MODEL_READINESS_NO_TRAINING",
+  "design": "Discovery-informed retrospective internal prognostic evaluation; prior participant/outcome exposure acknowledged. No untouched or external validation claim.",
+  "population": {
+    "baseline_frame": 351,
+    "main_eligible": {
+      "12": 333,
+      "24": 321,
+      "36": 307
+    },
+    "common_horizons": 280,
+    "SWEDD": "Excluded from main and activated sensitivities. No new case-control classification.",
+    "genetic_cohort": "Five baseline participants with native pre-index PD diagnosis retained; PD-recruitment-only sensitivity prespecified.",
+    "source": "Exact verified audit row bindings; no new endpoint selection, value changes or exclusions by RNA-outcome association.",
+    "timing": "RNA collection month-end landmark; SC/BL dynamic predictors within prior three months; MoCA windows 9..15,21..27,33..39. Source monthly precision and same-month ambiguity retained.",
+    "optional_clinical_missingness": "Five missing diagnosis durations retained; training-only imputation and fixed missing indicators."
+  },
+  "outcome": {
+    "variable": "education_adjusted_MoCA",
+    "bounds": [
+      0,
+      30
+    ],
+    "primary_horizon_months": 36,
+    "secondary_horizons_months": [
+      12,
+      24
+    ],
+    "source_score_rules": "Audit_Rules.json plus source hashes preserved; no threshold-defined MCI/dementia labels."
+  },
+  "comparators": {
+    "core": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ]
+      }
+    },
+    "enhanced": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication",
+        "baseline_sdmt",
+        "baseline_hvlt_immediate",
+        "baseline_hvlt_delayed"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ],
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    }
+  },
+  "clinical_preprocessing": {
+    "numeric": "Training median imputation, all-missing training column ->0. Training mean and population-SD scaling of imputed values; SD<=1e-12 ->1. Fixed missing indicator for every numeric column, unscaled.",
+    "categorical": "Fixed complete one-hot dictionaries, no dropped level; blank/invalid raw values become unknown during binding. No outcome-derived vocabulary.",
+    "intercept": "Unpenalized; all design columns centred within solver training rows."
+  },
+  "RNA": {
+    "counts": "Original int64 raw counts; exact count_row/sample/versioned gene binding. No DESeq2/global-normalized expression, global PCs, label-based genes, ComBat or full-cohort learned transformations.",
+    "normalization": "Per-sample log2(1+1e6*count/sum_all_58780_gene_counts). Denominator is all raw genes, not selected panel. Deterministic sample-local, no fitting across participants.",
+    "training_gene_gate": {
+      "minimum_raw_count": 10,
+      "minimum_training_fraction": 0.2,
+      "minimum_training_samples": 3,
+      "minimum_population_sd": 1e-12,
+      "rule": "For selected mapped gene union only: raw count >=10 in at least max(3,ceil(0.20*n_training)) training samples, and nonconstant logCPM. Fit separately within each inner training and outer refit partition."
+    },
+    "genes5": "Five fixed candidates, exact versions; apply training gate and training z-score. Failed gate -> fixed zero column, labelled inactive, no replacement.",
+    "hallmark11": "Keep full frozen mapped membership; average eligible training-z-scored gene expression per set, then standardize pathway mean using training mean/population SD. At least 5 eligible members per set. Failure or constant score -> fixed zero inactive pathway column.",
+    "fixed_layout": "5 standalone and/or 11 ordered pathway columns; inactive columns remain zero and are recorded in every preprocessing state. No selection by cognitive association.",
+    "all_RNA_inactive": "Do not remove participants. Record degeneracy; predictions may reduce to clinical model. No post-result feature substitutions.",
+    "NPIPB8": "Exact GENCODE v29 ENSG00000255524.7 and exon length2338 match the original counts. This does not prove unique-read/paralog assay specificity. Retain main fixed panel; prespecified sensitivity removes its standalone feature. If it is a member of a pathway, remove it there too in that sensitivity.",
+    "annotation_presence_is_not_expression_QC": true,
+    "gene_names": [
+      "LINC01806",
+      "CISD2",
+      "CDK6",
+      "CPT1A",
+      "NPIPB8"
+    ],
+    "gene_ids": [
+      "ENSG00000227403.1",
+      "ENSG00000145354.11",
+      "ENSG00000105810.9",
+      "ENSG00000110090.12",
+      "ENSG00000255524.7"
+    ],
+    "pathways": [
+      "HALLMARK_APICAL_JUNCTION",
+      "HALLMARK_APOPTOSIS",
+      "HALLMARK_COAGULATION",
+      "HALLMARK_COMPLEMENT",
+      "HALLMARK_HEME_METABOLISM",
+      "HALLMARK_HYPOXIA",
+      "HALLMARK_IL6_JAK_STAT3_SIGNALING",
+      "HALLMARK_INFLAMMATORY_RESPONSE",
+      "HALLMARK_INTERFERON_ALPHA_RESPONSE",
+      "HALLMARK_INTERFERON_GAMMA_RESPONSE",
+      "HALLMARK_PI3K_AKT_MTOR_SIGNALING"
+    ]
+  },
+  "model": {
+    "family": "block-penalized linear ridge",
+    "objective": "mean((y-intercept-Xclinical*bc-Xrna*br)^2)+lambda_clinical*sum(bc^2)+lambda_RNA*sum(br^2)",
+    "clinical_lambdas": [
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "RNA_lambdas": [
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "RNA_off": "Each augmented arm includes the five clinical-only candidates as a genuine RNA-off option. Inner clinical-only fits shared among augmented arms in that view.",
+    "tuning": "Pooled inner-validation absolute error over all inner held-out participants, not unweighted mean of fold means. Select only within outer training cohort.",
+    "tie": "Within absolute1e-12 of minimum pooled MAE: prefer RNA-off, then larger RNA penalty, then larger clinical penalty. Clinical-only ties prefer larger clinical penalty.",
+    "outer_refits": "One independent outer-training refit per requested arm, including arms selecting RNA-off. No full-cohort final fit in this evaluation.",
+    "no_adaptation": "No grid expansion, early stopping, hyperparameter revisions or representation changes after scores."
+  },
+  "splits": {
+    "outer_folds": 5,
+    "inner_folds": 3,
+    "master_population": 351,
+    "unit": "known identity component",
+    "seed_label": "Clinical_hallmark_v1_20261024",
+    "strata": [
+      "phase",
+      "recruitment_group"
+    ],
+    "algorithm": "Deterministic SHA256 order within strata; allocate to least-used fold within stratum, then least-used total, then salted fold-hash tie. For each outer fold, allocate its training components into three inner folds with a distinct salt. Outer test components have inner=-1.",
+    "reuse": "One master allocation, subset unchanged for every horizon and sensitivity. No outcome values or follow-up availability used to create splits."
+  },
+  "metrics": {
+    "primary": "Raw, unclipped paired MAE difference augmented minus comparator; negative favours augmentation.",
+    "secondary": [
+      "RMSE",
+      "R2",
+      "mean_prediction_error",
+      "calibration_intercept",
+      "calibration_slope",
+      "fraction_predictions_outside_0_30",
+      "clipped_MAE_0_30_descriptive"
+    ],
+    "R2": "1-SSE/sum((y-mean(y))^2); undefined if denominator zero.",
+    "calibration": "Observed y on raw OOF prediction; slope/intercept undefined if prediction range<=1e-12 or centred sum of squares is zero. Range tolerance avoids false nonzero variance from floating-point means.",
+    "clipping": "No clipping for tuning or primary metrics. Fixed [0,30] clipped MAE descriptive only; no retuning."
+  },
+  "benchmarks": {
+    "persistence": "Baseline education-adjusted MoCA.",
+    "typical_change": "Baseline MoCA plus median(y-baseline_MoCA) in the outer-training participants for the same horizon/view. No held-out outcomes; not counted as ridge fitting."
+  },
+  "inference": {
+    "primary_contrast": "main_36_enhanced: Genes5_Hallmark11 minus none",
+    "bootstrap_replicates": 5000,
+    "resampling_unit": "participant/identity component paired across model predictions",
+    "seed": 20261024,
+    "interval": "2.5/97.5 percentiles of paired delta-MAE; conditional on fixed OOF predictions, not full-refitting uncertainty.",
+    "secondary_status": "All other contrasts and horizons exploratory/descriptive with no confirmatory multiplicity or novelty claim. Report every locked result.",
+    "clinical_significance": "No established clinical-utility threshold claimed for a MAE change; report absolute and relative differences without calling them an MoCA MCID.",
+    "planned_contrasts_full_execution": 63
+  },
+  "execution": {
+    "authorized_now": false,
+    "real_fits": 0,
+    "synthetic_fits": 0,
+    "current_allowed": [
+      "hash/binding checks",
+      "split and schedule checks",
+      "hand-specified transform/metric fixtures",
+      "fake-backend routing and file-handling checks"
+    ],
+    "future_gate": "Explicit future user authorization recorded outside this frozen package, matching PLAN_LOCK SHA and selected view IDs. Output must be a fresh directory within Clinical_hallmark.",
+    "failure_policy": "Any fit/numerical/coverage-input integrity failure aborts run and leaves failure marker. Never silently skip failed jobs, return partial success or overwrite existing output.",
+    "CPU_workers": 1,
+    "BLAS_threads": 1,
+    "GPU_jobs": 0
+  },
+  "not_activated": [
+    "CBC modelling until a separate raw-value/unit/timing contract is verified",
+    "Hallmark15/25 or all-significant-gene fishing",
+    "Detailed SDMT/HVLT follow-up outcomes",
+    "SWEDD pooling",
+    "External validation",
+    "Additional neural models",
+    "Paid queries or cloud calls"
+  ],
+  "technical_sensitivity": {
+    "numeric_additions": [
+      "RIN",
+      "log10_library_total"
+    ],
+    "categorical_additions": {
+      "RNA_phase": [
+        "PPMI-Phase1-IR1",
+        "PPMI-Phase2-IR1",
+        "unknown"
+      ]
+    },
+    "paired": "Add the same technical variables to both enhanced clinical-only and RNA-augmented arms. No global residualization or plate effects learned using test rows."
+  },
+  "budget": {
+    "main": 5970,
+    "prespecified_sensitivities": 2695,
+    "total": 8665,
+    "interpretation": "Planned future solutions, not executed. Inner clinical-only candidate fits cached within each view; no reuse across views. Outer refit per arm counted even when RNA-off wins."
+  }
+}

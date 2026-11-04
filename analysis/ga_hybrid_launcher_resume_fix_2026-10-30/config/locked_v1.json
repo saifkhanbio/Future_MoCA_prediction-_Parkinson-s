@@ -1,0 +1,22 @@
+{
+  "profile_id": "locked_v1",
+  "status": "IMPLEMENTATION_ONLY_NOT_EXECUTION_AUTHORIZATION",
+  "population": 40,
+  "offspring": 40,
+  "seeds": [
+    20261030,
+    20261031,
+    20261032
+  ],
+  "generations": 25,
+  "unique_limit": null,
+  "stagnation": null,
+  "exhaustive": false,
+  "active_guard_seconds": 43200,
+  "batch_masks": 256,
+  "cpu_workers": 12,
+  "gpu_workers": 1,
+  "cpu_only_workers": 15,
+  "backend": "cached_float64",
+  "participant_training_authorized": false
+}

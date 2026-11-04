@@ -1,0 +1,36 @@
+{
+  "profile_id": "r2_expanded_v1",
+  "status": "LOCKED_NOT_AUTHORIZED_FOR_PARTICIPANT_TRAINING",
+  "population": 256,
+  "offspring": 256,
+  "seeds": [
+    20261030,
+    20261031,
+    20261032,
+    20261033,
+    20261034,
+    20261035,
+    20261036,
+    20261037,
+    20261038,
+    20261039
+  ],
+  "generations": 500,
+  "unique_limit": 10000,
+  "stagnation": {
+    "minimum_generation": 200,
+    "window": 100,
+    "minimum_progress": 0.0001,
+    "units": "pooled_inner_R2_gain"
+  },
+  "exhaustive": true,
+  "active_guard_seconds": 43200,
+  "batch_masks": 256,
+  "cpu_workers": 12,
+  "gpu_workers": 1,
+  "cpu_only_workers": 15,
+  "backend": "cached_float64",
+  "participant_training_authorized": false,
+  "study_id": "Clinical_hallmark_GA_R2_v1",
+  "fitness_schema": "mse_r2_v1"
+}

@@ -1,0 +1,33 @@
+{
+  "profile_id": "expanded_proposed",
+  "status": "IMPLEMENTATION_ONLY_NOT_EXECUTION_AUTHORIZATION",
+  "population": 256,
+  "offspring": 256,
+  "seeds": [
+    20261030,
+    20261031,
+    20261032,
+    20261033,
+    20261034,
+    20261035,
+    20261036,
+    20261037,
+    20261038,
+    20261039
+  ],
+  "generations": 500,
+  "unique_limit": 10000,
+  "stagnation": {
+    "minimum_generation": 200,
+    "window": 100,
+    "minimum_progress": 0.001
+  },
+  "exhaustive": true,
+  "active_guard_seconds": 43200,
+  "batch_masks": 256,
+  "cpu_workers": 12,
+  "gpu_workers": 1,
+  "cpu_only_workers": 15,
+  "backend": "cached_float64",
+  "participant_training_authorized": false
+}
