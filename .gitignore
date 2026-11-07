@@ -36,3 +36,10 @@
 __pycache__/
 *.pyc
 # Explicit aggregate publication supplement is included by allowlist.
+
+# Private runtime artifacts remain outside the public release.
+Model_Bundle.json
+Training_Row_Bindings.csv
+Source_Bindings.json
+Execution_Authorization.json
+**/synthetic/outputs/

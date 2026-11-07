@@ -4,7 +4,7 @@
 
 The scripts are selected historical snapshots, not a newly fitted or refactored prediction pipeline. Their algorithmic source is byte-identical to the locally frozen scripts. The manifest identifies path-only changes in three JSON contracts. The publication directory was created separately; frozen analyses were not overwritten.
 
-Only the named aggregate supplementary files are included as results. Raw PPMI/AMP-PD records, individual outcomes/predictions, identifiers, identity components, actual fold assignments, saved coefficients, source bindings, execution authorizations, historical seals and checkpoint/search databases are deliberately absent. Model inference requires coefficients and preprocessing states, so it cannot be run on the study cohort from this release alone. Gene-set names do not supply membership definitions; obtain the exact licensed release independently.
+Only the named aggregate supplementary files are included as results. Raw PPMI/AMP-PD records, individual outcomes/predictions, identifiers, identity components, actual fold assignments, participant-bound model bundles, source bindings, execution authorizations, historical seals and checkpoint/search databases are deliberately absent. Table S14 includes the six LCC clinical-model equations and source offsets as an explicit aggregate supplement. These do not supply controlled inputs, identity/fold manifests, provenance or execution seals. Gene-set names do not supply membership definitions; obtain the exact licensed release independently.
 
 ## Workflow map
 
@@ -15,12 +15,13 @@ All package names below are children of `analysis/`. Keep this sibling layout: s
 | Original eligibility | `participant_eligibility_2026-10-24` | `scripts/run_audit.py`, audit verification and rule-edge checks |
 | Clinical/RNA main comparison | `model_readiness_2026-10-24`, `main_comparison_2026-10-28` | `scripts/prepare_design.py`, `scripts/launcher.py`, numerical/reference and independent verification scripts |
 | Earlier MAE GA | `ga_readiness_2026-10-30`, `ga_hybrid_launcher_resume_fix_2026-10-30` | `src/ga_engine.py`, `src/launch_hybrid.py`, cache/search/backend modules |
-| Earlier R² GA | `ga_r2_readiness_2026-10-30` | `src/launch_hybrid.py`, `r2_engine.py`, `binding.py` |
+| Earlier RÂ² GA | `ga_r2_readiness_2026-10-30` | `src/launch_hybrid.py`, `r2_engine.py`, `binding.py` |
 | Fixed feature recipes | `feature_only_readiness_2026-10-31` | `src/launch.py`, `engine.py`, `numerics.py` |
 | MoCA-mandatory GA | `ga_moca_readiness_v2_2026-10-31` | `src/launch_hybrid.py` and versioned search/binding modules |
 | Final v4 GA/random search | `ga_unrestricted_readiness_v4_10kgen_2026-11-01` | `src/launch_hybrid.py`, `search_core.py`, guarded CPU/GPU backend and resume handling |
 | Independent v4 verification | `ga_unrestricted_verification_v4_2026-11-01` | Context, metric, completion-gate and historical WAL verification scripts |
 | Frozen model comparison | `model_comparison_2026-10-31`, `model_comparison_v4_2026-11-01` | Comparison and independently implemented verification; require existing private predictions |
+| Independent LCC evaluation | `lcc_nominal_validation_2026-11-05` | Frozen `src/core.py`, `src/io_contract.py` and `src/launcher.py`; see [the LCC guide](LCC_VALIDATION.md) before use |
 | Later-calendar inference | `temporal_validation_readiness_2026-10-28` | `src/clinical_inference.py`, guarded launcher and numerical/pipeline checks; execution subfolder contains verification code only |
 
 The final v4 profile records 20 main and five confirmation seeds, population/offspring size 1,024, a 200,000-distinct-mask ceiling per restart, a 10,000-generation ceiling, minimum-search and plateau checks, and a global active-time safeguard. Ceilings do not imply every run evaluated every possible mask. The recorded profile uses 16 CPU workers plus one GPU worker, with 18 CPU-only fallback workers. Earlier hybrid profiles differ; use each version's own configuration. A new reproduction must size resources appropriately and disclose any changes, rather than silently claiming the frozen configuration.
@@ -40,4 +41,6 @@ The final v4 profile records 20 main and five confirmation seeds, population/off
 
 ## Interpretation boundaries
 
-The source clinical/RNA, earlier search, final v4 search and temporal evaluation have separate historical contracts. They must not be presented as a single prospectively registered experiment. The final model-comparison scripts summarize existing predictions and do not perform a new external evaluation. Temporal evaluation concerns the earlier core/enhanced clinical ensembles only. Study-level conclusions must retain prior-use, multiplicity, uncertainty and cohort-selection limitations described in the manuscript and appendix.
+The source clinical/RNA, earlier search, final v4 search, temporal evaluation and LCC evaluation have separate historical contracts. They must not be presented as a single prospectively registered experiment. The final model-comparison scripts summarize existing predictions and do not perform a new external evaluation. Temporal evaluation concerns the earlier core/enhanced clinical ensembles only. Study-level conclusions must retain prior-use, multiplicity, uncertainty and cohort-selection limitations described in the manuscript and appendix.
+
+The LCC source code is byte-identical to the validated implementation. Its public placement preserves `src/` structure, but the adjacent private protocol, manifests, source bindings and authorization seals are absent. No bypass or dummy authorization is supplied. The repository smoke test imports only the I/O-free LCC numerical core and evaluates synthetic arrays.

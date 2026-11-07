@@ -96,7 +96,31 @@ def main():
     bad[0]['PATNO'] = 'synthetic_B'
     must_reject(lambda: temporal.bind_outcomes(predictions, bad))
     must_reject(lambda: temporal.bind_outcomes(predictions, outcomes + outcomes[:1]))
-    print('PASS: publication checksums, Python syntax, synthetic ridge/preprocessing/metrics, mask mapping and identity guards.')
+    # Independent LCC clinical kernel, synthetic inputs only.
+    lcc = load('analysis/lcc_nominal_validation_2026-11-05/src/core.py', 'release_lcc_core')
+    x_lcc = rng.normal(size=(19, 4))
+    x_lcc[:, 2] = 1.0
+    y_lcc = rng.normal(size=19)
+    for alpha in lcc.GRID:
+        model = lcc.ridge_fit(x_lcc, y_lcc, alpha)
+        frozen_state = copy.deepcopy(model)
+        scale = x_lcc.std(axis=0)
+        z = (x_lcc - x_lcc.mean(axis=0)) / np.where(scale == 0, 1.0, scale)
+        z[:, scale == 0] = 0.0
+        augmented = np.vstack([z, np.sqrt(len(y_lcc) * alpha) * np.eye(4)])
+        target = np.r_[y_lcc - y_lcc.mean(), np.zeros(4)]
+        coefficient = np.linalg.lstsq(augmented, target, rcond=None)[0]
+        expected = y_lcc.mean() + z @ coefficient
+        np.testing.assert_allclose(lcc.ridge_predict(model, x_lcc), expected, atol=1e-10, rtol=1e-10)
+        shifted = x_lcc.copy()
+        shifted[:, 2] = 900.0
+        np.testing.assert_allclose(lcc.ridge_predict(model, shifted), expected, atol=1e-10, rtol=1e-10)
+        assert model == frozen_state
+    assert lcc.choose_penalty(np.ones(len(lcc.GRID))) == len(lcc.GRID) - 1
+    must_reject(lambda: lcc.ridge_fit(x_lcc, y_lcc, 0))
+    np.testing.assert_allclose(lcc.metrics(observed, predicted)['R2'], 0.9)
+
+    print('PASS: publication checksums, Python syntax, synthetic PPMI/LCC ridge/preprocessing/metrics, mask mapping and identity guards.')
     print('No participant data, study training, GPU execution or cloud queries were used.')
 
 if __name__ == '__main__':

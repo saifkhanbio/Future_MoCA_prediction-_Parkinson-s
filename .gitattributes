@@ -1,0 +1,2 @@
+# Preserve byte-exact frozen-source and supplementary checksums on all platforms.
+* -text

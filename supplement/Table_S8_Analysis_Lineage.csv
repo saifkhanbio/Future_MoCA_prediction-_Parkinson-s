@@ -3,3 +3,4 @@ Original RNA study,36-month enhanced + five genes/11 Hallmarks minus enhanced MA
 Final v4 GA study,36-month unrestricted GA minus MoCA-mandatory GA R²,0.000; conditional interval zero within floating-point precision. No observed gain from relaxing mandatory MoCA.
 Temporal clinical evaluation,12-month enhanced minus core MAE,"−0.069 (−0.195, 0.058). Earlier clinical ensembles only; no compact-panel or final-GA temporal evaluation."
 Current clinical emphasis,"Matched core, enhanced, compact and expanded comparisons at all three horizons",Exploratory integration after prior source-outcome use. No new primary hypothesis or confirmatory validation is assigned.
+Independent LCC reduced-model validation,MAE with GDS15 minus without at nominal 12/24/36 months,-0.054/+0.081/+0.036; all 95% and adjusted 98.33% intervals include zero. Models trained exclusively in PPMI and frozen before external scoring; external scope: reduced clinical models.
