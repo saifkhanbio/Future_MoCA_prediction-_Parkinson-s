@@ -1,0 +1,43 @@
+{
+  "version": 3,
+  "stages": {
+    "A": "compact",
+    "B": "nominal",
+    "C": "expanded"
+  },
+  "horizons": [
+    12,
+    24,
+    36
+  ],
+  "bands": [
+    [
+      0,
+      25
+    ],
+    [
+      26,
+      28
+    ],
+    [
+      29,
+      30
+    ]
+  ],
+  "minimum_n": 30,
+  "omit_subdivision": [
+    [
+      "A",
+      36
+    ]
+  ],
+  "measures": [
+    "baseline/followup exactly 30 and near ceiling 29–30",
+    "change = observed minus baseline; integer frequency and mean, median, quartiles, unchanged, improved, declined",
+    "signed error = predicted minus observed; existing calibration intercept/slope and intervals by cohort",
+    "within-band difference of mean absolute errors model minus persistence; paired pointwise percentile CI, 5000 identity resamples PCG64 linear quantiles, identity ascending; counts only below minimum, skip all A36 bands"
+  ],
+  "seed": "20261115 + 10000*stage ordinal (A=1,B=2,C=3) + 100*horizon + band lower bound",
+  "availability": "A frozen baseline four-score adult frame 301; C baseline-ready four-score excluding Stage A 1175; PDBP 887 baseline PD with no known PPMI link is a broad screening frame, not a comparable follow-up risk set. Report each numerator with denominator named.",
+  "use": "Only existing primary populations and their forecasts. Reproduce A/B frozen forecasts to recover participant errors. Descriptive. No new model fitting or recalibration."
+}

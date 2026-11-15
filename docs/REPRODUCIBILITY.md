@@ -15,7 +15,7 @@ All package names below are children of `analysis/`. Keep this sibling layout: s
 | Original eligibility | `participant_eligibility_2026-10-24` | `scripts/run_audit.py`, audit verification and rule-edge checks |
 | Clinical/RNA main comparison | `model_readiness_2026-10-24`, `main_comparison_2026-10-28` | `scripts/prepare_design.py`, `scripts/launcher.py`, numerical/reference and independent verification scripts |
 | Earlier MAE GA | `ga_readiness_2026-10-30`, `ga_hybrid_launcher_resume_fix_2026-10-30` | `src/ga_engine.py`, `src/launch_hybrid.py`, cache/search/backend modules |
-| Earlier RÂ² GA | `ga_r2_readiness_2026-10-30` | `src/launch_hybrid.py`, `r2_engine.py`, `binding.py` |
+| Earlier R² GA | `ga_r2_readiness_2026-10-30` | `src/launch_hybrid.py`, `r2_engine.py`, `binding.py` |
 | Fixed feature recipes | `feature_only_readiness_2026-10-31` | `src/launch.py`, `engine.py`, `numerics.py` |
 | MoCA-mandatory GA | `ga_moca_readiness_v2_2026-10-31` | `src/launch_hybrid.py` and versioned search/binding modules |
 | Final v4 GA/random search | `ga_unrestricted_readiness_v4_10kgen_2026-11-01` | `src/launch_hybrid.py`, `search_core.py`, guarded CPU/GPU backend and resume handling |
@@ -23,6 +23,10 @@ All package names below are children of `analysis/`. Keep this sibling layout: s
 | Frozen model comparison | `model_comparison_2026-10-31`, `model_comparison_v4_2026-11-01` | Comparison and independently implemented verification; require existing private predictions |
 | Independent LCC evaluation | `lcc_nominal_validation_2026-11-05` | Frozen `src/core.py`, `src/io_contract.py` and `src/launcher.py`; see [the LCC guide](LCC_VALIDATION.md) before use |
 | Later-calendar inference | `temporal_validation_readiness_2026-10-28` | `src/clinical_inference.py`, guarded launcher and numerical/pipeline checks; execution subfolder contains verification code only |
+| Expanded PPMI (Stage C) | `iscience_extensions_2026-11-15/Stage_C_*` | `audit.py` and `verify.py` (eligibility), `prepare.py`, `launcher.py`, `seal.py`, `paired_metrics.py`, synthetic validation, independent `verify.py` |
+| Temporal validation and PDBP (Stages A, B) | `iscience_extensions_2026-11-15/Stage_AB_*` | Eligibility `audit.py`/`verify.py`, `bind_inputs.py`, `evaluation.py`, `launch.py`, synthetic `fixtures.py`/`validate_synthetic.py`, independent `verify_results.py` |
+| Diagnostics (Stage J) | `iscience_extensions_2026-11-15/Stage_J_diagnostics_v3` | `scripts/diagnostics.py`, `scripts/verify.py` |
+| Manuscript figures | `iscience_extensions_2026-11-15/Stage_ABC_manuscript_comparison_v1`, `manuscript_figures` | `compare.py`, `build_figures.py`, `build_figure_S4.py`; read aggregate CSVs only |
 
 The final v4 profile records 20 main and five confirmation seeds, population/offspring size 1,024, a 200,000-distinct-mask ceiling per restart, a 10,000-generation ceiling, minimum-search and plateau checks, and a global active-time safeguard. Ceilings do not imply every run evaluated every possible mask. The recorded profile uses 16 CPU workers plus one GPU worker, with 18 CPU-only fallback workers. Earlier hybrid profiles differ; use each version's own configuration. A new reproduction must size resources appropriately and disclose any changes, rather than silently claiming the frozen configuration.
 

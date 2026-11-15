@@ -1,0 +1,74 @@
+{
+  "horizons": [
+    12,
+    24,
+    36
+  ],
+  "primary_horizon": 12,
+  "primary_statistic": "MAE(model) minus MAE(persistence), MoCA points. Negative favors the model.",
+  "secondary_horizons": [
+    24,
+    36
+  ],
+  "estimates": [
+    "MAE",
+    "RMSE",
+    "R2",
+    "bias",
+    "calibration_intercept",
+    "calibration_slope",
+    "outside_0_30"
+  ],
+  "contrasts": [
+    "delta_MAE",
+    "delta_R2"
+  ],
+  "interval": "Pointwise 95% conditional paired percentile intervals using linear quantiles, one identity per row within horizon and view. Sort by identity before sampling. PCG64, same draws for every method and contrast. No redraw.",
+  "min_valid_fraction": 0.95,
+  "undefined": "R2 undefined when SST=0. Calibration intercept and slope undefined when prediction range <=1e-12. Retain negative R2. Missing or undefined results reported as null.",
+  "bias": "Prediction minus observation. Calibration is descriptive OLS of observed on predicted. Outside-range fraction uses raw prediction. No clipping or recalibration.",
+  "multiplicity": "One leading contrast per scientific question. All other estimates and comparisons descriptive. No joint significance claim across the two studies or equivalence margin.",
+  "handling": "Do not impute outcomes, exclude outliers after prediction or tune in the target. Use exact audited membership and one outcome per component/horizon. Report all horizons even with imprecise intervals.",
+  "authorization": "Local protocol and synthetic validation only. Study prediction and evaluation require subsequent user instruction.",
+  "primary_reference": "persistence",
+  "stage": "B",
+  "population": "201 PDBP identity components after baseline PD, age 18–89, sex, >12 years of education, M0 plus unique M12/M24/M36, concordant domain sums/adjustment and known PPMI/LCC identity and released WGS QC exclusions. No age/education imputation. Baseline and follow-up both explicitly indicate greater than 12 years, consistent with baseline demographics. Source baseline was anchored to GDS, target baseline is M0.",
+  "interpretation": "External transport of the three-input equations under scheduled-visit timing and domain-concordant total scores. Actual dates, fully item-verified totals, complete disposition and cutoff unavailable. Independence bounded by available links.",
+  "primary_view": "nominal",
+  "primary_model": "reduced3",
+  "fit": "At each horizon use its independently verified PPMI Reduced3 regression with ordered baseline MoCA, completed age and sex (male=1), and exact stored center, scale, intercept and coefficients. Three equations total.",
+  "reference": "Persistence = baseline MoCA. Typical change = baseline plus the PPMI source mean change for the corresponding reduced-model training sample.",
+  "views": {
+    "nominal": {
+      "rank": 1,
+      "n": [
+        180,
+        153,
+        119
+      ],
+      "models": [
+        "reduced3",
+        "persistence",
+        "typical"
+      ]
+    },
+    "strict_education": {
+      "rank": 2,
+      "n": [
+        89,
+        72,
+        56
+      ],
+      "models": [
+        "reduced3",
+        "persistence",
+        "typical"
+      ]
+    }
+  },
+  "comparison": "Every pair within each view, first minus second in listed order. Strict education is the frozen >16 demographic-band sensitivity.",
+  "bootstrap": 20000,
+  "seed_base": 20263115,
+  "seed_rule": "seed_base + 100*view.rank + horizon",
+  "precision": "Report conditional intervals and denominators at each nominal visit. Sample estimates apply to available follow-up among eligible participants."
+}

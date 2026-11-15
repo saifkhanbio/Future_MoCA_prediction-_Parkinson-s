@@ -1,0 +1,248 @@
+Document S1
+This supplement documents the original and expanded PPMI benchmarks, the later PPMI evaluations, the independent PDBP and LCC evaluations of the MoCA–age–sex equations, and the additional GDS15 analysis in LCC.
+Supplementary methods
+Analysis sequence and scope
+The original Clinical_hallmark analysis selected five genes and 11 Hallmark pathways from earlier transcriptomic work and tested them beyond core and enhanced clinical comparators. Its 36-month enhanced-plus-combined-RNA comparison remained primary. Subsequent individual feature, pathway, expanded-panel and GA studies were exploratory extensions. This paper synthesizes the matched clinical benchmark and reports the original RNA comparison for provenance. The internal source cohort was repeatedly analyzed. Of the 307 participants at 36 months, 292 had contributed to the earlier 558-person RNA discovery analysis and 233 were eligible for an earlier plasma cognitive analysis.
+Eligibility and calendar rules
+The source flow was 410 exact baseline RNA specimens, 387 with baseline timing/diagnosis/MoCA readiness, 354 after excluding 33 SWEDD participants, and 351 after requiring enhanced cognitive scores and forms. RNA phases contributed 250 and 101 participants. Among 351, unavailable timed MoCA records numbered 14, 28 and 42; selected-score quality holds numbered 4, 2 and 2; retained outcomes numbered 333, 321 and 307. The three windows were 9–15, 21–27 and 33–39 months. Selection preceded quality filtering and did not substitute a more favorable record. A 280-person common-outcome subset existed. Baseline sex was corroborated across baseline RNA, unified baseline and native screening information; this did not imply a later TRANS demographic visit occurred before index. Five missing diagnosis durations were retained for training-only imputation.
+Missingness and preprocessing
+Each numerical feature received its training median, then training mean and population-SD scaling. All-missing training columns were set to zero, and near-zero SD was replaced by one. A fixed missing indicator was retained for every numerical column. Categorical variables used complete fixed dictionaries, including unknown values. Test-form controls followed the selected parent cognitive test. No outcome imputation, future test forms, future medication values or withdrawal flags entered the predictors. The enhanced scores were complete by cohort construction. Medication status and examination state had no source variation. Optional predictor missingness was handled by the locked preprocessing.
+Splits and penalties
+One identity-component master allocation was inherited across horizons: five outer folds and three inner folds. Neither outcomes nor later follow-up availability determined that allocation. All learned preprocessing and selection were refitted within each inner training partition and the corresponding outer training partition. Ridge penalties were 0.001, 0.01, 0.1, 1 and 10; the intercept was not penalized. Ties within 10⁻¹² favored the larger penalty. The earlier clinical comparators used pooled inner MAE; later fixed panels and R²-oriented searches used pooled inner MSE. MSE normalization by the fixed outcome variance does not change candidate ranking. Calibration slope and intercept were descriptive regressions of observed outcomes on predictions, not target recalibration.
+Search design and termination
+The final v4 NSGA-II searches used population and offspring sizes of 1,024, a 10,000-generation ceiling, and crossover probability 0.9 and independent mutation probability 1/d per optional bit. Initial candidates included null, full, singleton, leave-one-out and reference panels, with remaining initialization random. Each of 30 arm/horizon/fold contexts had 20 main and five confirmation restarts. Each restart could visit at most 200,000 distinct masks. Stopping required at least 400 generations and 50,000 distinct masks, two consecutive 200-transition plateaus with progress below 10⁻⁵, and selected-mask stability. All 25 restarts had to satisfy stagnation checks. Main and confirmation objective envelopes had to match the combined envelope at each attainable burden within 10⁻⁴ normalized MSE; at least three of five confirmation restarts had to approach the combined best within that tolerance. Matched random search could not outperform the GA envelope beyond the locked tolerance. Hard limits alone were not accepted as convergence. These conditions defined the empirical stabilization criterion.
+Search verification
+Frozen verification checked 24,596,833 stored cache records and 368,952,555 recorded ridge solves across search and controls, 750 restart summaries and 60 outer models. These counts describe repeated evaluations within the study participants. Final predictions and metrics were independently reconstructed without model retraining. Audit inputs comprised the retained cache records, stopping summaries, minimum coverage and generation bounds, and main/confirmation/random objective envelopes. The integrated comparison independently verified 54 metric rows, 459 contrasts and 270 feature sets.
+Earlier GA recipes
+Earlier core-mandatory MAE and MSE searches used an accuracy anchor plus a one-standard-error allowance calculated from three inner-fold errors. Among eligible visited candidates they favored smaller acquisition burden. The later MoCA-mandatory optional-feature search and final v4 searches instead prioritized best pooled MSE, without that allowance. Their rows therefore compare complete model-selection recipes, not only mandatory-feature constraints. The unrestricted null mask meant intercept-only; the MoCA-mandatory null optional mask meant MoCA-only. Reported performance refers to each complete fold-specific selection recipe.
+Temporal evaluation
+The temporal candidate frame contained 570 participants; 227 unique participants were eligible at one or more horizons, and 33 had outcomes at all three. There were 222, 182 and 43 calendar-selected outcomes; score checks retained 221, 182 and 43; withdrawal holds and comparator availability led to final counts of 213, 175 and 39. Index years were 2023–2025. The non-MoCA inputs were frozen before the MoCA update and temporal scoring. The amended audit added seven valid pairs and two participants without changing earlier bound outcomes. Historical diagnosis-date fallback and age rules were frozen before scoring. No overlaps with source clinical training/test identities were found; 224 of 227 had earlier motor-model exposure. The clinical models were equal-weight ensembles of five earlier MAE-tuned outer models. Typical change used the average of the five stored source-fold median offsets. No temporal data were used for fitting or recalibration.
+Temporal sensitivity interpretation
+Complete-core samples were 204, 171 and 38; age-resolution exclusions left 207, 171 and 39. Other frozen sensitivities used stricter provenance or the common 33-person follow-up subset. The age-excluded 36-month result is an explicit alias of the main 36-month result, not a new independent analysis. Median elapsed follow-up was 13, 25 and 36 months, and median MoCA change was zero at each horizon. The full sensitivity metrics and intervals are in Table S6. The 24-month age-resolution exclusion gave enhanced-minus-core MAE −0.141 (95% interval −0.273 to −0.005; n=171). Its enhanced-minus-persistence interval crossed zero. This contrast belongs to the prespecified exploratory sensitivity analysis.
+Preserved RNA methods
+Raw counts were transformed within sample as log₂(1 + 10⁶ × count / total count across all 58,780 genes). The fixed genes were LINC01806, CISD2, CDK6, CPT1A and NPIPB8. A training gene required at least 10 counts in at least max(3, ceiling[0.20 × training n]) samples and nonconstant log expression. Training-standardized eligible member expression was averaged for each fixed Hallmark set, then the pathway score was standardized using training information. At least five eligible members were required. Failed features remained fixed zero columns without replacement. A block-penalized ridge used the clinical penalty grid above and RNA penalties 0.01, 0.1, 1 and 10. Each augmented arm also offered all five clinical-only candidates as genuine RNA-off options. Selection used pooled inner MAE; ties preferred RNA-off, then larger RNA and clinical penalties. This allowed an augmented arm to return the clinical prediction exactly.
+Paired comparisons and bootstrap calculations
+The internal comparison supplied every pair among 18 recipes at each horizon, giving 459 contrasts. Bootstrap resampling was paired by participant identity with 5,000 replicates. Contrast direction in CSV is model a minus model b; lower MAE and higher R² are preferable. Internal intervals are conditional on frozen predictions and use unadjusted 95% levels. The analysis used one master outer-fold partition. Manuscript preparation used frozen aggregate evidence and descriptive summaries of locked predictor matrices, preserving all fitted models and participant predictions.
+Table S1 Cohort flow and follow-up availability
+Table S2 Predictor definitions
+APOE ε4 dosage is the allele count. NLR is the neutrophil-to-lymphocyte ratio from the historical CBC. Autonomic domains are gastrointestinal, urinary and cardiovascular components; blood-pressure drops compare postural measurements. Apathy and subjective cognitive complaint are baseline MDS-UPDRS I items. These are the frozen feature bindings, not newly selected thresholds. Core and enhanced scores are baseline variables; future values are outcomes or audit information only. Full encoded columns include the attached form controls and missing indicators.
+Table S3 Complete internal model metrics
+The accompanying Table_S3_All_54_Internal_Metrics.csv contains all 18 recipes at all three horizons, including R², MSE, RMSE, MAE, mean prediction error, calibration slope/intercept and out-of-range prediction fraction. Figure S1 displays their R² estimates. Table 2 gives the main reference models. The additional rows include optional-18-only, earlier GA recipes and matched final random-search controls.
+Table S4 All paired internal contrasts
+Table_S4_All_459_Paired_Contrasts.csv supplies every comparison with its horizon, participant count, difference, conditional interval, bootstrap count and seed. The difference is a minus b. Figures and text use explicitly oriented contrasts; reversing a contrast negates its estimate and reverses/negates its interval endpoints.
+Table S5 Selection frequencies
+Table_S5_Feature_Selection_Frequencies.csv records selection counts by model, feature and horizon. Table_S5b_All_270_Feature_Sets.csv lists the exact fold-specific sets and acquisition groups. Figure S2 displays the unrestricted final GA. Counts measure inclusion among the five outer models at each horizon.
+Table S6 Temporal evaluation and sensitivities
+Differences are enhanced minus core. The full model-specific metrics, calibration summaries and conditional intervals are in Table_S6_Temporal_Metrics_All_Sensitivities.csv. The age-excluded 36-month row reuses the main result by design.
+Table S7 Original RNA contrasts
+The 11 fixed Hallmark sets were apical junction, apoptosis, coagulation, complement, heme metabolism, hypoxia, IL6–JAK–STAT3 signaling, inflammatory response, interferon alpha response, interferon gamma response and PI3K–AKT–mTOR signaling. Full frozen membership and gene-version bindings remain in the original analysis contract; no pathways were selected using cognitive outcomes.
+Differences are augmented minus clinical-only MAE. Combined RNA with the enhanced comparator at 36 months was the original primary comparison. Off folds counts selections of the clinical-only option among five outer folds. The original seed-specific intervals are retained; they need not equal intervals recomputed under a later unified comparison seed. Full precision is retained in Table_S7_Original_RNA_Contrasts.csv.
+Reporting map and author declarations
+Data and participants
+STAR Methods and Tables 1 and 3; Tables S1 and S13. The internal PPMI, later PPMI and independent LCC populations have distinct eligibility and timing rules. PPMI development records have prior analysis exposure; LCC outcomes were audited for eligibility before predictive evaluation. Expanded PPMI and the separate PDBP evaluation are described in Table 1 and Tables S15–S21.
+Outcome and predictors
+STAR Methods and supplemental Table S2. Outcome is continuous future MoCA; predictor selection is entirely baseline-bound.
+Model development and evaluation
+STAR Methods and supplementary search, preprocessing and temporal sections. Fixed penalties, grouped folds, inner-only selection and separate temporal ensembles are described.
+Results and uncertainty
+Main Tables 1–5 and Figs. 1–4; complete CSV Tables S3–S14. Internal and temporal intervals are conditional and unadjusted. External paired intervals additionally use Bonferroni-adjusted 98.33% levels for the three prespecified GDS15 contrasts. Figures 5–7 and Tables S15–S21 report the subsequent PPMI and PDBP analyses. The adjusted GDS15 comparisons apply only to LCC.
+Implementation and availability
+PPMI benchmarking, temporal-evaluation and independent LCC clinical-validation code is publicly available at https://github.com/saifkhanbio/Future_MoCA_prediction-_Parkinson-s (commit 08648072709aec602f51b8677671a195759b1d73). The LCC numerical core, binding checks and guarded launcher are in analysis/lcc_nominal_validation_2026-11-05/src/. The repository also supplies a validation guide, source/public checksums, data-free synthetic tests and the designated aggregate supplements, including Tables S11–S14. Data S1 retains byte-identical copies of the three LCC implementation files. Controlled participant records and execution bindings require separate approved access. The cited public code release is listed in the supplemental references [S1].
+Author declarations
+Author names, affiliations, contributions, funding and competing interests are provided in the main manuscript. The manuscript acknowledges PPMI, LCC/MJFF and AMP-PD. AI assistance in code, verification, plotting and drafting is disclosed; authors are accountable for interpretation and final approval.
+Additional reporting and interpretation details
+Table S8 Distinct analysis questions and original primary contrasts
+Separate contracts defined the questions before their corresponding runs; Table S8 records the primary contrasts and later exploratory analyses. Numerically near-zero GA intervals reflect identical evaluated predictions. The GA contrast shown uses the unified comparison records; the original GA bootstrap seed differs, and the zero result is unchanged.
+Table S9 Descriptive internal calibration
+Calibration regresses observed scores on fixed out-of-fold predictions; ideal slope/intercept are one/zero. Mean error is predicted minus observed. Values are descriptive regressions of frozen out-of-fold predictions. Full unrounded results remain in Table S3.
+Table S10 Tuning criterion and paired enhanced-minus-core error
+Negative values favor enhanced assessment. Both loss functions select a ridge penalty on the same inner validation participants, but need not choose the same prediction rule. These intervals use the unified comparison seed, retain all horizons and are unadjusted. The MAE-tuned 24-month interval crosses zero. Figure 2 shows the MSE-tuned comparison.
+Prediction target and research applications
+The target is future observed MoCA in the defined eligible cohorts. The internal clinical comparison used the common RNA-linked frame and matched enhanced-test availability. Temporal evaluation applied the earlier core/enhanced ensembles, while the independent LCC experiment evaluated the specified clinical models. The framework supports prospective assessment-battery planning and evaluation of additional cognitive or biological measurements against matched clinical comparators. PDBP independently assessed the MoCA–age–sex equations; the four-score panel was evaluated within PPMI.
+Additional internal quality and verification details
+Clinical predictors were selected from screening or baseline assessments in the three calendar months preceding the baseline RNA month-end index. Ties for follow-up proximity favored the earlier assessment and then fixed source ordering. Death and withdrawal records were used for eligibility checks, not predictors or surrogate outcomes.
+PPMI MoCA scores required 26 item fields. Reported totals had to agree with either the unadjusted sum or the education-corrected score; one point was added for pre-index education of 12 years or less when the unadjusted score was below 30. Unresolved fluency score/word-count discrepancies remained quality holds. Neither missing outcomes nor failed selected scores were replaced.
+Independent numerical reconstruction reproduced 54 internal metric rows, 459 paired contrasts and 270 feature sets, with maximum metric discrepancy below 2.5 × 10⁻¹⁴. The final GA audit verified 30 search contexts, 750 restart summaries, 60 outer models and stored objective envelopes. Audit coverage comprises the retained stopping summaries and convergence envelopes.
+Patient and public involvement
+Patients and members of the public were not directly involved in the design, conduct, interpretation or reporting of this secondary analysis.
+Independent LCC validation methods
+The independent-cohort experiment used the LCC Ashkenazi Jewish New York longitudinal export with AMP-PD release 2023_v4release_1027 clinical and identity records. Its design was locked before model fitting and evaluation. The two horizon-specific ridge recipes used baseline MoCA, completed age and sex, with or without GDS15. These were newly specified clinical models fitted in their own development stage. They were trained exclusively in a separately defined PPMI sample without RNA or detailed cognitive-test eligibility requirements.
+To avoid an ambiguous second MoCA education correction, source development required documented education of 13–40 years and LCC required native higher-education categories 3 or 6 without contradictory lower categories. Education determined eligibility, not a numerical predictor. PPMI MoCA items were range-checked and reconciled with totals and fluency fields; LCC supplied integer totals in the range 0–30 were retained only when native and harmonized records agreed. Baseline GDS15 required all 15 binary items and agreement with the standard reverse-scored sum. LCC baseline MoCA and GDS15 came from native V01 with the same recorded whole-year age.
+Released participant mappings, nonempty shared global identifiers, whole-genome-sequence duplicate links, provider aliases and existing identity components screened for known PPMI overlap. Among 114 native LCC participants with baseline Parkinson disease and longitudinal MoCA, six known PPMI links and 24 unmapped participants were excluded. The remaining 84 had released genomic inventory coverage without a listed identity-related flag. Timing, education, baseline consistency and complete-feature rules yielded matched samples of 16, 28 and 34, representing 46 distinct people. LCC outcomes had been inspected for eligibility and score concordance before the lock, but did not inform predictive tuning.
+PPMI baseline was anchored to the native baseline GDS assessment month; MoCA was the latest screening/baseline assessment no later than that index within three months. Outcomes used the nearest recorded-month assessment within ±3 months of each target, selected before quality checks. LCC required unique AMP M0 and nominal M12, M24 or M36 records with the previously locked sequence checks. Records were not re-anchored to a later nominal baseline, outcomes were not imputed, and no alternate favorable record was substituted.
+Development samples were 301, 292 and 281 PPMI participants. Five fixed identity-grouped source folds selected penalties from 0.001, 0.01, 0.1, 1, 10 and 100 by pooled validation MSE, with ties favoring stronger regularization. Means and population standard deviations were learned in each source training partition; there was no imputation. The ridge objective was mean squared error plus λ times the squared coefficient norm, with an unpenalized intercept. The 180 tuning fits and six full-source fits were completed and independently verified before LCC scoring. Source coefficients and preprocessing were then frozen; there was no LCC-driven recalibration, clipping, fitting or feature selection. Unchanged baseline MoCA and baseline plus the PPMI mean change were prespecified descriptive benchmarks. This mean-change rule differs from the earlier internal and temporal median-change benchmark.
+Outcome quality and source harmonization
+LCC education categories 3/6 represent more than 12 years; category 2 spans 9–13 years and remained ambiguous. Supplied MoCA totals were retained without another education increment. Five GDS15 items were reverse-scored: GDSSATIS, GDSGSPIR, GDSHAPPY, GDSALIVE and GDSENRGY. The other ten affirmative items were summed in their standard direction. A valid baseline required 15 binary responses, exact supplied-total agreement and the same recorded MoCA/GDS assessment age.
+Source ages were floored to completed years in the range 18–89 and checked against harmonized screening age within one year. Sex was harmonized as female=0 and male=1; native PPMI and LCC coding differed and was corroborated. Known PPMI components linked to any mapped LCC component were excluded from development. WGS inventory and released duplicate/QC information were identity-screening evidence, not new genomic sequencing or kinship analysis.
+External uncertainty and verification
+For LCC, the primary family was paired MAE with GDS15 minus MAE without GDS15 at all three horizons; negative values favor GDS15. Twenty thousand paired bootstrap resamples of known identity components per horizon produced pointwise 95% intervals and Bonferroni-adjusted 98.33% intervals for this family. Secondary metrics were MAE, RMSE, R² relative to the LCC horizon mean, prediction-minus-observed bias and predictions outside 0–30. Negative R² was retained; invalid zero-variance resamples were excluded only for that metric, and a confidence interval required at least 95% valid replicates. Intervals condition on fixed source models and retained target records. Benchmark rankings are descriptive and were not added to the confirmatory contrast family.
+A separate implementation passed 703 external-evaluation checks. It reconstructed all 312 model and benchmark prediction values from sealed coefficients and source bindings and independently reproduced metrics, contrasts, bootstrap distributions and confidence limits without importing production numerical prediction or metric functions. Maximum absolute discrepancies were 3.6 × 10⁻¹⁵ for predictions and 1.4 × 10⁻¹⁴ across bootstrap statistics. A guard prevented fitting during evaluation; six fixed-model calls generated 156 learned predictions, supplemented by 156 benchmark values. Independent source-model verification had previously passed 2,140 checks.
+Bootstrap generators used NumPy PCG64 with seed 20261105 + horizon in months, with linear-interpolated percentile quantiles. All known components in the retained LCC horizon samples contained one selected participant. The first execution attempt stopped during a checksum read before loading LCC rows or generating predictions. Only the new access-guard wrapper was corrected; the sealed protocol, numerical launcher and six models were unchanged. One completed external evaluation was then independently reconstructed. This implementation detail did not trigger a second model choice or an outcome-dependent cohort amendment.
+Table S11 External metric estimates and uncertainty
+Table_S11_LCC_Metrics.csv supplies all 60 model/benchmark metric entries across three nominal horizons, including point estimates, pointwise 95% intervals and valid bootstrap denominators. Table 4 in the main manuscript shows the corresponding point estimates. Each horizon has its own eligible sample.
+Table S12 Primary GDS15 contrasts
+The primary family contains all three paired contrasts. No subgroup, alternate education scenario, target recalibration, clipping analysis or complete-all-horizons model was added after external scoring. Benchmark comparisons remained descriptive.
+Table S13 Reduced-model cohort characteristics
+Table_S13_Reduced_Cohort_Characteristics.csv gives baseline means, sample standard deviations and sex counts for the exact six source/target horizon samples. These descriptive aggregates were prepared for this manuscript from the locked feature matrices, without re-running prediction, fitting or eligibility selection. Main Table 3 displays these values.
+Table S14 Frozen reduced-model equations
+Predicted MoCA = intercept + bMoCA × baseline MoCA + bage × completed age + bsex × male indicator + bGDS × GDS15. Use male=1 and female=0. For Reduced3 the GDS15 term is absent. The table reports original-unit coefficients derived algebraically from the sealed standardized coefficients and source means/scales. No refitting or target-data transformation was performed. Full-precision values, selected penalties and source mean-change offsets are in Table_S14_Frozen_Reduced_Model_Equations.csv. Displayed values below are rounded for readability.
+Selected λ was 0.01 for both 12- and 24-month models and the 36-month Reduced3 model, and 0.1 for 36-month Reduced4. For a sum-of-squares ridge library, alpha = ntraining × λ. The PPMI-only mean-change offsets were −0.704319, −0.739726 and −0.658363 at 12, 24 and 36 months. These offsets define the external typical-change benchmark; they must not be substituted for the earlier median-change benchmark.
+Data versions and source acknowledgement
+PPMI supplied the clinical and RNA data, with a MoCA update before the temporal evaluation. The independent validation used LRRK2C20170626_AJ_Long_NY_sites.csv from the MJFF LCC portal, together with AMP-PD release 2023_v4release_1027 clinical and identity/QC records. The LCC database clarification document was updated August 2020. Resource names identify the provenance of the clinical and identity/QC inputs. The PDBP evaluation used harmonized PDBP clinical records and known-identity links in AMP-PD.
+The main manuscript gives the PPMI, MJFF/LCC, PDBP and AMP-PD acknowledgments. The LCC study [S2], AMP-PD clinical harmonization documentation [S3] and LCC case-report forms [S4] describe these sources.
+Original PPMI baseline characteristics
+Values are mean (SD), except sex and medication status. m denotes missing values. Source identifies the original internal benchmarking cohort; main Table 3 describes the separately defined reduced-model source samples.
+
+Figure S1 Complete internal benchmark of 18 recipes across three horizons. Samples and folds are matched within each horizon (n=333, 321 and 307). Each cell reports a verified R² estimate. Fixed panels, GA recipes and matched random-search controls retain their specified tuning and selection rules. These comparisons evaluate complete prediction procedures; detailed metrics and paired uncertainty intervals appear in Tables S3–S4
+
+
+Figure S2 Selection stability for the final unrestricted GA. Cells show selection counts across five outer folds at each horizon. Features are ordered by total selection frequency, then name. Frequencies describe the consistency of predictor inclusion across training partitions; performance estimates correspond to the complete fold-specific selection procedure. Baseline MoCA was selected in all 15 outer folds
+
+Subsequent exploratory protocols and assessment planning
+The original 36-month primary contrasts and the targeted one-year exploratory questions retained their separate analysis contracts. The numbers in Tables S15–S21 are horizon specific. Stage A used the earlier frozen four-score ensemble. Stage C refitted four scores under a clinical landmark without requiring baseline RNA. Stage B transferred only the three-input equations to PDBP.
+Feature search mechanics
+The nondominated sorting genetic algorithm II (NSGA-II) [S5] searched either all 28 predictors or 27 optional predictors with MoCA mandatory. Objectives were normalized inner MSE and acquisition-group count, a proxy for assessment burden. Final selection prioritized minimum MSE, then fewer predictors and acquisition groups. Two arms, three horizons and five outer folds yielded 30 contexts. Each used a population of 1,024 and 25 restarts, with ceilings of 200,000 distinct masks per restart and 10,000 generations. Coverage, plateau, mask-stability and cross-restart checks assessed convergence within this bounded search. Equal-budget random search supplied a control [S6]. All preprocessing, tuning and selection remained within training partitions [S7]. Document S1 specifies restart allocation, termination and fallback rules.
+Descriptive follow-up diagnostics
+Later PPMI had 213, 175 and 39 evaluable follow-ups among 301 baseline-ready adults. Expanded PPMI had 777, 716 and 651 among 1,175 baseline-ready participants after excluding later evaluation identities. PDBP retained 180, 153 and 119 from a broad screen of 887 baseline PD participants without a known PPMI link. That screening denominator also includes exclusions for education, identity and assessment compatibility. These fractions therefore answer different availability questions. See Tables S18–S21 for calibration, change distributions, ceiling frequencies and prespecified baseline bands.
+
+Figure S3. Using the findings to plan longitudinal research. Collect compatible baseline measures, compare against the baseline score in the intended setting, and choose external equations according to available inputs. These are research design applications.
+
+Direction of forecast error across cohorts
+
+Figure S4. Mean forecast minus observed MoCA at each horizon. Cells show the mean signed error, its pointwise 95% bootstrap interval and the number of evaluable participants. A value of 0.00 reflects rounding. Expanded PPMI used cross-validation, later PPMI used frozen four-score ensembles, and PDBP and LCC used frozen MoCA–age–sex equations. LCC also tested the version adding GDS15 on the same participants. Negative values indicate underprediction. Cohort estimates are descriptive and are not pooled. Sources: Tables S11, S17 and S18.
+Supplemental references
+[S1] Khan et al. Future MoCA prediction in Parkinson disease. Analysis code, commit 08648072709aec602f51b8677671a195759b1d73. https://github.com/saifkhanbio/Future_MoCA_prediction-_Parkinson-s
+[S2] Saunders-Pullman, R., Mirelman, A., Alcalay, R.N., Wang, C., Ortega, R.A., Raymond, D., Mejia-Santana, H., Orbe-Reilly, M., Johannes, B.A., Thaler, A., et al. (2018). Progression in the LRRK2-associated Parkinson disease population. JAMA Neurology 75, 312–319. https://doi.org/10.1001/jamaneurol.2017.4019
+[S3] AMP-PDRD (2026). Clinical Assessment Data. https://amp-pdrd.org/harmonized-clinical-assessments
+[S4] The Michael J. Fox Foundation. LRRK2 Cohort Consortium case-report forms. https://www.michaeljfox.org/sites/default/files/media/document/LRRK2C%20All%20in%20One%20-%20updated.pdf
+[S5] Deb, K., Pratap, A., Agarwal, S., Meyarivan, T. (2002). A fast and elitist multiobjective genetic algorithm: NSGA-II. IEEE Transactions on Evolutionary Computation 6, 182–197. https://doi.org/10.1109/4235.996017
+[S6] Bergstra, J., Bengio, Y. (2012). Random search for hyper-parameter optimization. Journal of Machine Learning Research 13, 281–305. https://www.jmlr.org/papers/v13/bergstra12a.html
+[S7] Varma, S., Simon, R. (2006). Bias in error estimation when using cross-validation for model selection. BMC Bioinformatics 7, 91. https://doi.org/10.1186/1471-2105-7-91
+Stage	Source	Temporal
+Initial audited frame	410 RNA participants	570 later candidates
+Baseline eligible frame	351	227 eligible at ≥1 horizon
+12-month outcome	333	213
+24-month outcome	321	175
+36-month outcome	307	39
+All three outcomes	280	33
+Index years	2010–2016	2023–2025
+Substantive predictor	Panel membership	Acquisition group
+Age	Core	demographic history
+Sex	Core	demographic history
+Education	Core	demographic history
+Baseline MoCA	Core; compact 4	MoCA
+Diagnosis duration	Core	PD history
+MDS-UPDRS II	Core	MDS UPDRS II
+MDS-UPDRS III	Core	MDS UPDRS III
+GDS-15	Core	GDS15
+Medication status	Core	medication history
+Motor examination state	Core	MDS UPDRS III
+SDMT	Optional 18; compact 4	SDMT
+HVLT immediate recall	Optional 18; compact 4	HVLT
+HVLT delayed recall	Optional 18; compact 4	HVLT
+Animal fluency	Optional 18	Animal fluency
+Letter-number sequencing	Optional 18	LNS
+Judgment of line orientation	Optional 18	JLO
+HVLT recognition discrimination	Optional 18	HVLT
+REM sleep behaviour symptoms	Optional 18	RBDSQ
+Autonomic gastrointestinal	Optional 18	SCOPA AUT
+Autonomic urinary	Optional 18	SCOPA AUT
+Autonomic cardiovascular	Optional 18	SCOPA AUT
+Postural systolic BP drop	Optional 18	postural BP
+Postural diastolic BP drop	Optional 18	postural BP
+Trait anxiety	Optional 18	STAI
+Apathy	Optional 18	MDS UPDRS I
+Subjective cognitive complaint	Optional 18	MDS UPDRS I
+APOE ε4 dosage	Optional 18	APOE assay
+Neutrophil-to-lymphocyte ratio	Optional 18	CBC differential
+Evaluation	n	ΔMAE	95% conditional interval
+main 12	213	-0.069	-0.195 to 0.058
+complete core 12	204	-0.053	-0.184 to 0.078
+strict inputs 12	213	-0.089	-0.219 to 0.039
+exclude age resolved 12	207	-0.069	-0.196 to 0.057
+common horizons 12	33	-0.082	-0.401 to 0.232
+main 24	175	-0.128	-0.262 to 0.004
+complete core 24	171	-0.118	-0.245 to 0.008
+strict inputs 24	175	-0.127	-0.254 to 0.002
+exclude age resolved 24	171	-0.141	-0.273 to -0.005
+common horizons 24	33	-0.106	-0.460 to 0.237
+main 36	39	-0.012	-0.334 to 0.304
+complete core 36	38	0.045	-0.254 to 0.348
+strict inputs 36	39	-0.045	-0.335 to 0.259
+exclude age resolved 36	39	-0.012	-0.334 to 0.304
+common horizons 36	33	0.004	-0.339 to 0.339
+Horizon and comparator	RNA block	ΔMAE	95% conditional interval	Off folds
+12 core	Genes5	0.0168	-0.0127 to 0.0480	1
+12 core	Hallmark11	-0.0027	-0.0178 to 0.0121	1
+12 core	Combined	0.0059	-0.0222 to 0.0329	1
+12 enhanced	Genes5	0.0076	-0.0266 to 0.0424	0
+12 enhanced	Hallmark11	0.0005	-0.0066 to 0.0074	2
+12 enhanced	Combined	0.0055	-0.0146 to 0.0264	0
+24 core	Genes5	0.0065	-0.0033 to 0.0166	3
+24 core	Hallmark11	0.0144	-0.0223 to 0.0533	2
+24 core	Combined	0.0345	-0.0114 to 0.0824	2
+24 enhanced	Genes5	0.0026	-0.0088 to 0.0140	3
+24 enhanced	Hallmark11	0.0108	-0.0137 to 0.0376	2
+24 enhanced	Combined	0.0125	-0.0176 to 0.0429	2
+36 core	Genes5	0.0000	0.0000 to 0.0000	5
+36 core	Hallmark11	0.0059	-0.0076 to 0.0192	4
+36 core	Combined	0.0071	-0.0080 to 0.0227	4
+36 enhanced	Genes5	0.0000	0.0000 to 0.0000	5
+36 enhanced	Hallmark11	0.0077	-0.0019 to 0.0168	4
+36 enhanced	Combined	0.0028	-0.0012 to 0.0067	4
+Analysis stage	Designated question	Result and interpretation
+Original RNA study	36-month enhanced + five genes/11 Hallmarks minus enhanced MAE	+0.002754 (−0.001184, 0.006681). No demonstrated benefit for this tested representation.
+Final v4 GA study	36-month unrestricted GA minus MoCA-mandatory GA R²	0.000; conditional interval zero within floating-point precision. No observed gain from relaxing mandatory MoCA.
+Temporal clinical evaluation	12-month enhanced minus core MAE	−0.069 (−0.195, 0.058). Earlier clinical ensembles only; no compact-panel or final-GA temporal evaluation.
+Current clinical emphasis	Matched core, enhanced, compact and expanded comparisons at all three horizons	Exploratory integration after prior source-outcome use. No new primary hypothesis or confirmatory validation is assigned.
+Independent LCC reduced-model validation	Paired MAE with minus without GDS15 at nominal 12/24/36 months	−0.054/+0.081/+0.036; all 95% and adjusted 98.33% intervals include zero. Scope: separately trained reduced clinical models.
+Panel	Months	Slope	Intercept	Mean error
+Four cognitive scores	12	1.028	-0.736	0.007
+Four cognitive scores	24	1.032	-0.836	-0.003
+Four cognitive scores	36	1.033	-0.873	-0.011
+Expanded 28 predictors	12	1.250	-6.588	0.005
+Expanded 28 predictors	24	1.251	-6.588	-0.011
+Expanded 28 predictors	36	1.233	-6.150	-0.004
+Inner tuning	Months	MAE difference	95% conditional interval
+MSE	12	-0.094	-0.179 to -0.013
+MSE	24	-0.116	-0.220 to -0.015
+MSE	36	-0.144	-0.230 to -0.057
+MAE	12	-0.114	-0.199 to -0.033
+MAE	24	-0.086	-0.184 to 0.013
+MAE	36	-0.176	-0.271 to -0.078
+Nominal months	n	ΔMAE	95% interval	Adjusted 98.33%
+12	16	-0.054	-0.267 to +0.165	-0.317 to +0.217
+24	28	+0.081	-0.111 to +0.292	-0.150 to +0.343
+36	34	+0.036	-0.099 to +0.171	-0.130 to +0.203
+Months	Recipe	Intercept	MoCA	Age	Male	GDS15
+12	reduced3	18.614602	0.504797	-0.088279	-0.836328	Not included
+12	reduced4	19.346159	0.497533	-0.092306	-0.834234	-0.127095
+24	reduced3	12.862338	0.668438	-0.072309	-0.321625	Not included
+24	reduced4	13.752662	0.655124	-0.075425	-0.324479	-0.146316
+36	reduced3	17.045047	0.544680	-0.079350	-0.771471	Not included
+36	reduced4	18.601035	0.495626	-0.077453	-0.749018	-0.153894
+Characteristic	12 months
+Source
+n=333	12 months
+Temporal
+n=213	24 months
+Source
+n=321	24 months
+Temporal
+n=175	36 months
+Source
+n=307	36 months
+Temporal
+n=39
+Age, years	61.5 (9.8)	64.2 (9.8)	61.6 (9.9)	64.1 (10.2)	61.6 (9.8)	64.6 (7.7)
+Male sex, n (%)	214 (64.3)	126 (59.2)	208 (64.8)	110 (62.9)	202 (65.8)	25 (64.1)
+Education, years	15.6 (2.8)	16.4 (2.8)	15.7 (2.8)	16.4 (2.7)	15.7 (2.8)	16.7 (2.3)
+Baseline MoCA	27.1 (2.4)	27.0 (2.4)	27.1 (2.4)	27.1 (2.6)	27.2 (2.3)	28.0 (1.7)
+Diagnosis duration, years	0.5 (0.5) [m=5]	1.0 (1.5)	0.5 (0.5) [m=5]	0.8 (0.8)	0.5 (0.5) [m=5]	0.9 (1.3)
+MDS-UPDRS II	6.1 (4.3)	7.2 (5.1)	5.9 (4.1)	7.0 (4.9)	5.8 (4.1)	7.5 (5.5)
+MDS-UPDRS III	21.2 (8.9)	22.8 (9.9) [m=9]	20.7 (8.8)	22.7 (10.0) [m=4]	20.6 (9.0)	21.1 (8.9) [m=1]
+GDS-15	2.4 (2.5)	2.2 (2.4)	2.4 (2.5)	2.2 (2.4)	2.4 (2.5)	1.7 (2.0)
+SDMT	41.3 (9.7)	42.9 (10.1)	41.3 (9.7)	42.7 (9.8)	41.5 (9.7)	45.3 (9.3)
+HVLT immediate recall	24.7 (4.7)	24.3 (5.0)	24.6 (5.0)	24.1 (5.3)	24.7 (4.9)	25.0 (4.3)
+HVLT delayed recall	8.5 (2.5)	8.2 (3.0)	8.4 (2.6)	8.1 (3.0)	8.5 (2.6)	8.5 (2.8)
+On PD medication, n (%)	0 (0.0)	21 (10.0) [m=2]	0 (0.0)	6 (3.4)	0 (0.0)	2 (5.1)

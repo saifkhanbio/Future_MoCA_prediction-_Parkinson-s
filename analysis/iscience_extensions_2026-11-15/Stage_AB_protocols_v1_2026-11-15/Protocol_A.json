@@ -1,0 +1,119 @@
+{
+  "horizons": [
+    12,
+    24,
+    36
+  ],
+  "primary_horizon": 12,
+  "primary_statistic": "MAE(model) minus MAE(persistence), MoCA points. Negative favors the model.",
+  "secondary_horizons": [
+    24,
+    36
+  ],
+  "estimates": [
+    "MAE",
+    "RMSE",
+    "R2",
+    "bias",
+    "calibration_intercept",
+    "calibration_slope",
+    "outside_0_30"
+  ],
+  "contrasts": [
+    "delta_MAE",
+    "delta_R2"
+  ],
+  "interval": "Pointwise 95% conditional paired percentile intervals using linear quantiles, one identity per row within horizon and view. Sort by identity before sampling. PCG64, same draws for every method and contrast. No redraw.",
+  "min_valid_fraction": 0.95,
+  "undefined": "R2 undefined when SST=0. Calibration intercept and slope undefined when prediction range <=1e-12. Retain negative R2. Missing or undefined results reported as null.",
+  "bias": "Prediction minus observation. Calibration is descriptive OLS of observed on predicted. Outside-range fraction uses raw prediction. No clipping or recalibration.",
+  "multiplicity": "One leading contrast per scientific question. All other estimates and comparisons descriptive. No joint significance claim across the two studies or equivalence margin.",
+  "handling": "Do not impute outcomes, exclude outliers after prediction or tune in the target. Use exact audited membership and one outcome per component/horizon. Report all horizons even with imprecise intervals.",
+  "authorization": "Local protocol and synthetic validation only. Study prediction and evaluation require subsequent user instruction.",
+  "primary_reference": "persistence",
+  "stage": "A",
+  "population": "PPMI baseline clinical landmark in 2023–2025, PD at baseline, baseline MoCA, SDMT and HVLT learning/delayed recall with forms. Audited prior three-month window, education-adjusted follow-up MoCA at 9–15/21–27/33–39 months and withdrawal review. Target cohort comprises 227 source-disjoint identities previously used for core/enhanced temporal testing.",
+  "interpretation": "Exploratory temporal performance in later PPMI recruitment. The existing independent-cohort compact 36-month primary contract retains its original estimand.",
+  "primary_view": "compact",
+  "primary_model": "compact4",
+  "fit": "Each member uses source-state median replacement for allowed sporadic missingness, z scaling, missingness indicators and categorical design in saved order. Unseen or missing forms use the frozen unknown category only where eligibility allows. Weight each of five members 0.2. Fixed compact four, MoCA plus 18 and core plus 18. The last two correspond to 19 and 28 predictors.",
+  "reference": "Persistence = baseline MoCA. Typical change = baseline plus the frozen source ensemble median-change offsets.",
+  "views": {
+    "compact": {
+      "rank": 1,
+      "n": [
+        213,
+        175,
+        39
+      ],
+      "models": [
+        "compact4",
+        "persistence",
+        "typical"
+      ]
+    },
+    "complete_all": {
+      "rank": 2,
+      "n": [
+        69,
+        62,
+        24
+      ],
+      "models": [
+        "compact4",
+        "MoCA_plus18",
+        "core_plus18",
+        "persistence",
+        "typical"
+      ]
+    },
+    "complete19": {
+      "rank": 3,
+      "n": [
+        70,
+        62,
+        24
+      ],
+      "models": [
+        "compact4",
+        "MoCA_plus18",
+        "persistence",
+        "typical"
+      ]
+    },
+    "supported_all": {
+      "rank": 4,
+      "n": [
+        131,
+        115,
+        37
+      ],
+      "models": [
+        "compact4",
+        "MoCA_plus18",
+        "core_plus18",
+        "persistence",
+        "typical"
+      ]
+    },
+    "supported19": {
+      "rank": 5,
+      "n": [
+        132,
+        115,
+        37
+      ],
+      "models": [
+        "compact4",
+        "MoCA_plus18",
+        "persistence",
+        "typical"
+      ]
+    }
+  },
+  "comparison": "Every pair within each view, first minus second in listed order. Key secondary contrast compact4 minus core_plus18 on complete_all. Separate 19-only comparison and same-center/year collection-supported missingness sensitivities per audit.",
+  "bootstrap": 5000,
+  "seed_base": 20262031,
+  "seed_rule": "seed_base + 100*view.rank + horizon",
+  "precision": "Report observed intervals, especially for the 24-person fully observed 36-month group. Bootstrap uncertainty is conditional on the frozen fit and participants."
+}

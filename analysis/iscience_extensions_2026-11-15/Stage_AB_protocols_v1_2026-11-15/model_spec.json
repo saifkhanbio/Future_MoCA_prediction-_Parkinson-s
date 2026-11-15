@@ -1,0 +1,144 @@
+{
+ "active": {
+  "active_numeric": {
+   "compact4": [
+    "baseline_moca",
+    "SDMT",
+    "HVLT_immediate",
+    "HVLT_delayed"
+   ],
+   "core_plus18": [
+    "age_index",
+    "sex_male",
+    "education",
+    "baseline_moca",
+    "diagnosis_duration_years",
+    "part2",
+    "part3",
+    "gds15",
+    "pd_medication",
+    "SDMT",
+    "HVLT_immediate",
+    "HVLT_delayed",
+    "Animal_fluency",
+    "LNS",
+    "JLO",
+    "HVLT_recognition_discrimination",
+    "RBDSQ_full",
+    "SCOPA_GI",
+    "SCOPA_urinary",
+    "SCOPA_cardiovascular",
+    "Systolic_BP_drop",
+    "Diastolic_BP_drop",
+    "STAI_trait",
+    "Apathy",
+    "Cognitive_complaint",
+    "APOE_e4_dosage",
+    "NLR"
+   ],
+   "MoCA_plus18": [
+    "baseline_moca",
+    "SDMT",
+    "HVLT_immediate",
+    "HVLT_delayed",
+    "Animal_fluency",
+    "LNS",
+    "JLO",
+    "HVLT_recognition_discrimination",
+    "RBDSQ_full",
+    "SCOPA_GI",
+    "SCOPA_urinary",
+    "SCOPA_cardiovascular",
+    "Systolic_BP_drop",
+    "Diastolic_BP_drop",
+    "STAI_trait",
+    "Apathy",
+    "Cognitive_complaint",
+    "APOE_e4_dosage",
+    "NLR"
+   ]
+  },
+  "active_categories": {
+   "compact4": {
+    "baseline_sdmt_form": [
+     "1",
+     "2",
+     "unknown"
+    ],
+    "baseline_hvlt_form": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "unknown"
+    ]
+   },
+   "core_plus18": {
+    "motor_state": [
+     "untreated",
+     "off",
+     "on",
+     "treated_unknown",
+     "unknown"
+    ],
+    "baseline_sdmt_form": [
+     "1",
+     "2",
+     "unknown"
+    ],
+    "baseline_hvlt_form": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "unknown"
+    ],
+    "jlo_form": [
+     "1",
+     "2",
+     "unknown"
+    ]
+   },
+   "MoCA_plus18": {
+    "baseline_sdmt_form": [
+     "1",
+     "2",
+     "unknown"
+    ],
+    "baseline_hvlt_form": [
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "unknown"
+    ],
+    "jlo_form": [
+     "1",
+     "2",
+     "unknown"
+    ]
+   }
+  },
+  "substantive_counts": {
+   "compact4": 4,
+   "core_plus18": 28,
+   "MoCA_plus18": 19
+  }
+ },
+ "offset_A": {
+  "12": -0.4,
+  "24": -0.6000000000000001,
+  "36": 0.0
+ },
+ "offset_B": {
+  "12": -0.7043189368770764,
+  "24": -0.7397260273972602,
+  "36": -0.6583629893238434
+ }
+}

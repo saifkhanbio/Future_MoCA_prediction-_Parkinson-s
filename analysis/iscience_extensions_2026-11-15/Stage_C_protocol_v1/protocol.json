@@ -1,0 +1,223 @@
+{
+  "study": "Stage_C_expanded_PPMI_v1",
+  "horizons": [
+    12,
+    24,
+    36
+  ],
+  "primary_horizon": 12,
+  "primary_contrast": "expanded, compact4 minus persistence, paired raw MAE",
+  "panels": {
+    "compact4": {
+      "numeric": [
+        "baseline_moca",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed"
+      ],
+      "categories": {
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    },
+    "moca_only": {
+      "numeric": [
+        "baseline_moca"
+      ],
+      "categories": {}
+    },
+    "core": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ]
+      }
+    },
+    "enhanced": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ],
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    },
+    "full28": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed",
+        "Animal_fluency",
+        "LNS",
+        "JLO",
+        "HVLT_recognition_discrimination",
+        "RBDSQ_full",
+        "SCOPA_GI",
+        "SCOPA_urinary",
+        "SCOPA_cardiovascular",
+        "Systolic_BP_drop",
+        "Diastolic_BP_drop",
+        "STAI_trait",
+        "Apathy",
+        "Cognitive_complaint",
+        "APOE_e4_dosage",
+        "NLR"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ],
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ],
+        "jlo_form": [
+          "1",
+          "2",
+          "unknown"
+        ]
+      }
+    }
+  },
+  "views": {
+    "expanded": {
+      "n": [
+        777,
+        716,
+        651
+      ],
+      "models": [
+        "compact4",
+        "persistence",
+        "moca_only",
+        "core",
+        "enhanced"
+      ]
+    },
+    "complete28": {
+      "n": [
+        560,
+        527,
+        494
+      ],
+      "models": [
+        "compact4",
+        "persistence",
+        "moca_only",
+        "core",
+        "enhanced",
+        "full28"
+      ]
+    },
+    "historical": {
+      "n": [
+        475,
+        385,
+        343
+      ],
+      "models": [
+        "compact4",
+        "persistence",
+        "moca_only",
+        "core",
+        "enhanced"
+      ]
+    }
+  },
+  "penalties": [
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "ridge_objective": "mean squared error plus lambda times sum of squared coefficients; unpenalized intercept",
+  "inner_selection": "minimum pooled inner validation MAE; within 1e-12 prefer largest penalty",
+  "splits": "5 outer, 3 inner; single component master allocation stratified on clinical baseline year, reused across horizons and views",
+  "bootstrap": 5000,
+  "seed_base": 20261115,
+  "seed_rule": "base + 100 * view ordinal (1,2,3) + horizon",
+  "study_fits_planned": 3120,
+  "stage_A_reserved": 227,
+  "validation_scope": "grouped internal validation; no external or fresh temporal evaluation"
+}

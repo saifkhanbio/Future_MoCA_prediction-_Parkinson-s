@@ -1,6 +1,6 @@
 # Future MoCA prediction in Parkinson's disease
 
-Analysis code, methods documentation and designated aggregate supplements for **Cognitive prognosis in Parkinson disease: Model benchmarking and independent validation**. This repository is independent of any journal or submission destination.
+Analysis code, methods documentation and designated aggregate supplements for **A brief cognitive panel improves forecasts of future cognition in Parkinson disease: Development and temporal validation**. This repository is independent of any journal or submission destination.
 
 This repository documents **Clinical_hallmark**: exploratory PPMI benchmarking of future Montreal Cognitive Assessment (MoCA) scores at **12, 24 and 36 months**, within-PPMI temporal evaluation, and a separately specified independent clinical-model evaluation in the **LRRK2 Cohort Consortium (LCC)**. The endpoint is the continuous education-adjusted future MoCA level, not a diagnosis of dementia or MCI and not necessarily within-person decline. This is a manuscript code release, not a clinical prediction service or a claim of peer-reviewed publication.
 
@@ -8,7 +8,8 @@ This repository documents **Clinical_hallmark**: exploratory PPMI benchmarking o
 
 - The original analysis, numerical, launcher and independent-verification scripts relevant to the manuscript.
 - Methods-only contracts, predictor definitions and search profiles. Three contracts replace the author's local filesystem root with `<PRIVATE_STUDY_ROOT>`; their numerical settings are unchanged.
-- The current supplementary methods and **13 aggregate CSV tables**, including the independent LCC evaluation. The appendix is presented without journal branding; CSV values are copied unchanged from the verified manuscript supplement.
+- The current supplementary methods (Document S1) and **20 aggregate CSV tables** (Tables S3–S21), including the later analyses described below. CSV values are copied unchanged from the verified manuscript supplement.
+- Scripts, protocols and verification code for the later analyses: expanded PPMI, temporal validation of the four-score panel, PDBP and descriptive diagnostics, plus the scripts that draw the manuscript figures.
 - The frozen LCC numerical core and guarded I/O/launcher code, with an execution-scope guide.
 - Documentation and a small, data-free synthetic numerical check.
 
@@ -32,9 +33,9 @@ The manuscript compares:
 
 The optional panel includes cognitive, sleep, autonomic and neuropsychiatric assessments, APOE dosage and neutrophil-to-lymphocyte ratio. It is not exclusively a questionnaire panel. Form controls and missing indicators are additional design columns, not extra substantive predictor counts. See [feature definitions](analysis/model_comparison_v4_2026-11-01/config/Feature_Definitions.json).
 
-MAE- and MSE-tuned recipes are distinct. For a fixed inner evaluation set, minimizing pooled MSE is equivalent to maximizing pooled RÂ². Acquisition-group burden is the second GA objective; the final selected model follows the version-specific rule, not an assumed common rule across all searches. Final v4 uses bounded stochastic search with convergence checks; neither a large mask budget nor convergence establishes a global optimum. See the [final v4 contract](analysis/ga_unrestricted_readiness_v4_10kgen_2026-11-01/config/Analysis_Contract.json) and [search profile](analysis/ga_unrestricted_readiness_v4_10kgen_2026-11-01/config/r2_expanded_v1.json).
+MAE- and MSE-tuned recipes are distinct. For a fixed inner evaluation set, minimizing pooled MSE is equivalent to maximizing pooled R². Acquisition-group burden is the second GA objective; the final selected model follows the version-specific rule, not an assumed common rule across all searches. Final v4 uses bounded stochastic search with convergence checks; neither a large mask budget nor convergence establishes a global optimum. See the [final v4 contract](analysis/ga_unrestricted_readiness_v4_10kgen_2026-11-01/config/Analysis_Contract.json) and [search profile](analysis/ga_unrestricted_readiness_v4_10kgen_2026-11-01/config/r2_expanded_v1.json).
 
-A separate later-calendar PPMI evaluation applies the earlier frozen core/enhanced clinical ensembles. It is **within-PPMI temporal evaluation**, not external validation of the final GA or compact models. Those models were not evaluated in that temporal cohort.
+A separate later-calendar PPMI evaluation applies the earlier frozen core/enhanced clinical ensembles. It is **within-PPMI temporal evaluation**, not external validation. The four-score compact ensemble was later applied to the same later recruits (see [Later analyses](#later-analyses-15-november-2026)); the final GA recipes were not evaluated there.
 
 ### Independent external clinical validation
 
@@ -42,12 +43,26 @@ A separately locked experiment trained six horizon-specific clinical models usin
 
 PPMI supplies development and temporal data, LCC supplies the external cohort, and AMP-PD harmonized records and identity/QC metadata support reconciliation and overlap checks. AMP-PD copies of PPMI records do not create an independent cohort. See [LCC methods and execution scope](docs/LCC_VALIDATION.md).
 
+## Later analyses (15 November 2026)
+
+Each later analysis was locked before scoring. All are exploratory and reuse PPMI participants from earlier work. Code is in [`analysis/iscience_extensions_2026-11-15/`](analysis/iscience_extensions_2026-11-15).
+
+| Analysis | Package | What it does |
+| --- | --- | --- |
+| Expanded PPMI | `Stage_C_eligibility_v1`, `Stage_C_protocol_v1`, `Stage_C_verified_results_v1` | Refits the four-score panel (MoCA, SDMT, HVLT immediate and delayed recall) with grouped nested cross-validation, without the RNA requirement. Compares it with carrying baseline MoCA forward, a MoCA-only model and broader panels. |
+| Temporal validation | `Stage_AB_eligibility_2026-11-15`, `Stage_AB_protocols_v1_2026-11-15`, `Stage_AB_verified_results_v1` | Applies the earlier frozen four-score ensemble, unchanged, to later PPMI recruits. |
+| PDBP | same packages as temporal validation | Applies the frozen PPMI equations using baseline MoCA, age and sex to PDBP at nominal annual visits. |
+| Diagnostics | `Stage_J_diagnostics_v3` | Descriptive summaries of score change, follow-up, calibration and error by baseline MoCA band. |
+| Figures | `Stage_ABC_manuscript_comparison_v1`, `manuscript_figures` | Draw the manuscript figures from the aggregate tables only. |
+
+The expanded cohort excludes every participant used in temporal validation. These packages keep their original folder names so their relative references remain readable; they still need the private inputs described in [REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) and cannot run from a public clone.
+
 ## Repository map
 
 | Location | Contents |
 | --- | --- |
 | [`analysis/`](analysis) | Versioned original scripts and selected methods configurations; package names preserve historical dependencies |
-| [`supplement/`](supplement) | Current aggregate tables and a journal-neutral methods appendix |
+| [`supplement/`](supplement) | Document S1 (supplementary methods) and aggregate Tables S3–S21 |
 | [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) | Workflow map, controlled-input requirements and reproduction limits |
 | [`docs/SUPPLEMENT_INVENTORY.md`](docs/SUPPLEMENT_INVENTORY.md) | Description of each supplementary file |
 | [`CODE_MANIFEST.json`](CODE_MANIFEST.json) | Source/public SHA-256 hashes, logical source labels and recorded editorial normalization |
@@ -76,13 +91,13 @@ A public clone can inspect methods, verify the supplied file checksums and exerc
 
 ## PPMI data source and acknowledgement
 
-Data used in the preparation of this article were obtained on 2026-10-20 (clinical and RNA data), with a MoCA update obtained on 2026-10-28 for the temporal evaluation, from the Parkinsonâ€™s Progression Markers Initiative (PPMI) database (https://www.ppmi-info.org/access-data-specimens/download-data), RRID:SCR_006431. For up-to-date information on the study, visit https://www.ppmi-info.org. Data were accessed under approved PPMI data-access permissions; the investigator holds Tier 2 approval.
+Data used in the preparation of this article were obtained on 2026-10-20 (clinical and RNA data), with a MoCA update obtained on 2026-10-28 for the temporal evaluation, from the Parkinson’s Progression Markers Initiative (PPMI) database (https://www.ppmi-info.org/access-data-specimens/download-data), RRID:SCR_006431. For up-to-date information on the study, visit https://www.ppmi-info.org. Data were accessed under approved PPMI data-access permissions; the investigator holds Tier 2 approval.
 
-PPMI â€“ a public-private partnership â€“ is funded by the Michael J. Fox Foundation for Parkinsonâ€™s Research and funding partners, including AbbVie, Alamar Biosciences, Aligning Science Across Parkinsonâ€™s (ASAP), Arrowhead Pharma, Arvinas, AskBio, BIAL, BioArctic, Biohaven, BlueRock Therapeutics, Bristol Myers Squibb, Calico Labs, Capsida Biotherapeutics, Critical Path Institute, DaCapo Brainscience, Denali, Edmond J. Safra Foundation, Eli Lilly, Gain Therapeutics, GE Healthcare, Genentech, GSK, Insitro, Johnson & Johnson Innovative Medicine, Lundbeck, Merck, Neumora, Neuron23, Novartis, Olink, Regeneron, Roche, Sanofi, Tenvie, UCB, Vanqua Bio, Voyager Therapeutics, The Weston Family Foundation.
+PPMI – a public-private partnership – is funded by the Michael J. Fox Foundation for Parkinson’s Research and funding partners, including AbbVie, Alamar Biosciences, Aligning Science Across Parkinson’s (ASAP), Arrowhead Pharma, Arvinas, AskBio, BIAL, BioArctic, Biohaven, BlueRock Therapeutics, Bristol Myers Squibb, Calico Labs, Capsida Biotherapeutics, Critical Path Institute, DaCapo Brainscience, Denali, Edmond J. Safra Foundation, Eli Lilly, Gain Therapeutics, GE Healthcare, Genentech, GSK, Insitro, Johnson & Johnson Innovative Medicine, Lundbeck, Merck, Neumora, Neuron23, Novartis, Olink, Regeneron, Roche, Sanofi, Tenvie, UCB, Vanqua Bio, Voyager Therapeutics, The Weston Family Foundation.
 
-The RNA download date was confirmed by the corresponding investigator. Clinical export provenance identifies 20 October 2026; the later-calendar evaluation uses the MoCA refresh dated 28 October 2026. These are download/export dates, not participant visit dates. The preserved scripts were created during Octoberâ€“November 2026; versioned package names and the code manifest identify their provenance. The evolving PPMI database may require code adaptation for a different export vintage.
+The RNA download date was confirmed by the corresponding investigator. Clinical export provenance identifies 20 October 2026; the later-calendar evaluation uses the MoCA refresh dated 28 October 2026. These are download/export dates, not participant visit dates. The preserved scripts were created during October–November 2026; versioned package names and the code manifest identify their provenance. The evolving PPMI database may require code adaptation for a different export vintage.
 
-PPMI study reference: K. Marek, D. Jennings, S. Lasch, A. Siderowf, C. Tanner, T. Simuni, et al., *The Parkinson Progression Marker Initiative (PPMI)*, Progress in Neurobiology 95 (2011) 629â€“635. [doi:10.1016/j.pneurobio.2011.09.005](https://doi.org/10.1016/j.pneurobio.2011.09.005).
+PPMI study reference: K. Marek, D. Jennings, S. Lasch, A. Siderowf, C. Tanner, T. Simuni, et al., *The Parkinson Progression Marker Initiative (PPMI)*, Progress in Neurobiology 95 (2011) 629–635. [doi:10.1016/j.pneurobio.2011.09.005](https://doi.org/10.1016/j.pneurobio.2011.09.005).
 
 Attribution was checked on 4 November 2026 against the [PPMI Publication Policy (September 2024)](https://www.ppmi-info.org/sites/default/files/docs/ppmi-publication-policy.pdf) and the [current funding-partner list (May 2026)](https://www.ppmi-info.org/sites/default/files/docs/PPMI%20Funding%20Partners.pdf). Data-access approval does not imply PPMI consortium authorship or institutional ethics approval. No participant-level source data are redistributed here.
 

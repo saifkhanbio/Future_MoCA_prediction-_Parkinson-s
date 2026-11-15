@@ -1,6 +1,6 @@
 {
-  "release_date": "2026-11-07",
-  "scope": "Frozen PPMI and independent LCC clinical-model code, method configurations and designated aggregate supplements; journal-neutral presentation. No participant-level inputs or outputs.",
+  "release_date": "2026-11-15",
+  "scope": "Frozen PPMI, temporal-validation, PDBP and LCC clinical-model code, method configurations, figure scripts and designated aggregate supplements; journal-neutral presentation. No participant-level inputs or outputs.",
   "files": [
     {
       "path": "analysis/feature_only_readiness_2026-10-31/config/Analysis_Contract.json",
@@ -395,6 +395,230 @@
       "changes": "None; byte-identical copy."
     },
     {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_ABC_manuscript_comparison_v1/compare.py",
+      "source_relative_path": "iScience/codex_improv/Stage_ABC_manuscript_comparison_v1/compare.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "29579cd9bbb7323668d4471e8d9c6590f7db62ea8ffce793d9c59e9bc8eeba99",
+      "published_sha256": "29579cd9bbb7323668d4471e8d9c6590f7db62ea8ffce793d9c59e9bc8eeba99",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_eligibility_2026-11-15/audit.py",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_eligibility_2026-11-15/audit.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "7c834b8464cd7b51f6d2bf81f936b7bd21cc717eeec75d90437d0a585212f79e",
+      "published_sha256": "7c834b8464cd7b51f6d2bf81f936b7bd21cc717eeec75d90437d0a585212f79e",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_eligibility_2026-11-15/verify.py",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_eligibility_2026-11-15/verify.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "3b954b514102eb4ad726e6e2f320bf5c5673b314259ee8c0dd727cc9ba419ff2",
+      "published_sha256": "3b954b514102eb4ad726e6e2f320bf5c5673b314259ee8c0dd727cc9ba419ff2",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/Evaluation_protocols.md",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/Evaluation_protocols.md",
+      "kind": "method_configuration",
+      "source_sha256": "63df10b90dce9a1a1cfc08e76e94228c30a808c7636df204bbd9328bfc2dfa61",
+      "published_sha256": "63df10b90dce9a1a1cfc08e76e94228c30a808c7636df204bbd9328bfc2dfa61",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/Protocol_A.json",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/Protocol_A.json",
+      "kind": "method_configuration",
+      "source_sha256": "4329204555a9458d814dd27ea50c21d0f5daf8cd87bd126895d48417b64d9724",
+      "published_sha256": "4329204555a9458d814dd27ea50c21d0f5daf8cd87bd126895d48417b64d9724",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/Protocol_B.json",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/Protocol_B.json",
+      "kind": "method_configuration",
+      "source_sha256": "c15d6e5a29b6efd0287c2c9b45b7bb8d87f61d3489779df5576d299b99b1c22c",
+      "published_sha256": "c15d6e5a29b6efd0287c2c9b45b7bb8d87f61d3489779df5576d299b99b1c22c",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/bind_inputs.py",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/bind_inputs.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "88ccfc49e0effe6fc668bc8707fff8042afa183fcf17ac6c83c0dc269919cc90",
+      "published_sha256": "88ccfc49e0effe6fc668bc8707fff8042afa183fcf17ac6c83c0dc269919cc90",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/evaluation.py",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/evaluation.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "02e4b1429ca06abc0caef70b0854f7896925121090fedd425a7bfbfe55f3684f",
+      "published_sha256": "02e4b1429ca06abc0caef70b0854f7896925121090fedd425a7bfbfe55f3684f",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/fixtures.py",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/fixtures.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "d8583fda77ea8e97dfddd52e14b33611d30a844bbd259b958be943314c8e9737",
+      "published_sha256": "d8583fda77ea8e97dfddd52e14b33611d30a844bbd259b958be943314c8e9737",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/launch.py",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/launch.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "7578f87ad276a4efd0ef52f125f7946e6488d99954f60b1ef993088604d9cd41",
+      "published_sha256": "7578f87ad276a4efd0ef52f125f7946e6488d99954f60b1ef993088604d9cd41",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/model_spec.json",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/model_spec.json",
+      "kind": "method_configuration",
+      "source_sha256": "8ab29ef7cf006e49997896c9e7b2c44ff94934334d42ef6490134f761e62a0d9",
+      "published_sha256": "8ab29ef7cf006e49997896c9e7b2c44ff94934334d42ef6490134f761e62a0d9",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_protocols_v1_2026-11-15/validate_synthetic.py",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_protocols_v1_2026-11-15/validate_synthetic.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "cbd4f7e1317fd48d5bad0d3371db7920188f1e31c9091745dd62479d00be68d8",
+      "published_sha256": "cbd4f7e1317fd48d5bad0d3371db7920188f1e31c9091745dd62479d00be68d8",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_AB_verified_results_v1/verify_results.py",
+      "source_relative_path": "iScience/codex_improv/Stage_AB_verified_results_v1/verify_results.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "bc239af3d6ecb7ad8eb6d87aa3f481d7ebbf1ae429e6ca15f41a10a815b2f1d0",
+      "published_sha256": "bc239af3d6ecb7ad8eb6d87aa3f481d7ebbf1ae429e6ca15f41a10a815b2f1d0",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_eligibility_v1/audit.py",
+      "source_relative_path": "iScience/codex_improv/Stage_C_eligibility_v1/audit.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "9b2e28a62e33b177eedf4a64f1f15be9ace18b065729c4f628fcc084cfe383a5",
+      "published_sha256": "9b2e28a62e33b177eedf4a64f1f15be9ace18b065729c4f628fcc084cfe383a5",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_eligibility_v1/verify.py",
+      "source_relative_path": "iScience/codex_improv/Stage_C_eligibility_v1/verify.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "d17a2e9bea0c1e5f3fe05acbb23083481c5393313f857b9463aa5c9bab3481e2",
+      "published_sha256": "d17a2e9bea0c1e5f3fe05acbb23083481c5393313f857b9463aa5c9bab3481e2",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_protocol_v1/Protocol.md",
+      "source_relative_path": "iScience/codex_improv/Stage_C_protocol_v1/Protocol.md",
+      "kind": "method_configuration",
+      "source_sha256": "ecc1c3a5abe8c27c1cbf692ea30deac6fd25b3bce1e3dd6f9e31efe1fc89884d",
+      "published_sha256": "ecc1c3a5abe8c27c1cbf692ea30deac6fd25b3bce1e3dd6f9e31efe1fc89884d",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_protocol_v1/launcher.py",
+      "source_relative_path": "iScience/codex_improv/Stage_C_protocol_v1/launcher.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "f8773141b4242cb78fd940772579703480c1198a5b6aac38355b31e5617b7827",
+      "published_sha256": "f8773141b4242cb78fd940772579703480c1198a5b6aac38355b31e5617b7827",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_protocol_v1/paired_metrics.py",
+      "source_relative_path": "iScience/codex_improv/Stage_C_protocol_v1/paired_metrics.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "b4a8ef842f0466420b2669f5e5eb7d3548f79932eb744ebf856ec2379a372973",
+      "published_sha256": "b4a8ef842f0466420b2669f5e5eb7d3548f79932eb744ebf856ec2379a372973",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_protocol_v1/prepare.py",
+      "source_relative_path": "iScience/codex_improv/Stage_C_protocol_v1/prepare.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "ca1f4405e9fc6838bcbd5804b301e22d4e81f416540efb41508bed978102f35d",
+      "published_sha256": "ca1f4405e9fc6838bcbd5804b301e22d4e81f416540efb41508bed978102f35d",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_protocol_v1/protocol.json",
+      "source_relative_path": "iScience/codex_improv/Stage_C_protocol_v1/protocol.json",
+      "kind": "method_configuration",
+      "source_sha256": "8af68bd4d89864455d3c69041a91c86f5db4cb17c0d6191207802bfd65dac67b",
+      "published_sha256": "8af68bd4d89864455d3c69041a91c86f5db4cb17c0d6191207802bfd65dac67b",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_protocol_v1/seal.py",
+      "source_relative_path": "iScience/codex_improv/Stage_C_protocol_v1/seal.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "c9effcf7c05a26fbd5e36481e778042c2915a318e0d1d42b40f0567a010bed09",
+      "published_sha256": "c9effcf7c05a26fbd5e36481e778042c2915a318e0d1d42b40f0567a010bed09",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_protocol_v1/validate_synthetic.py",
+      "source_relative_path": "iScience/codex_improv/Stage_C_protocol_v1/validate_synthetic.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "8681005748316da39efc0c6df0171e08fed5519c3d691e1bca92aa06c1d527db",
+      "published_sha256": "8681005748316da39efc0c6df0171e08fed5519c3d691e1bca92aa06c1d527db",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_C_verified_results_v1/verify.py",
+      "source_relative_path": "iScience/codex_improv/Stage_C_verified_results_v1/verify.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "7e93de60e9dfdc08e18d8fae5b9b505feed98ee51ba0d6da3cdb4f2069bc5299",
+      "published_sha256": "7e93de60e9dfdc08e18d8fae5b9b505feed98ee51ba0d6da3cdb4f2069bc5299",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_J_diagnostics_v3/config/diagnostic_plan.json",
+      "source_relative_path": "iScience/codex_improv/Stage_J_diagnostics_v3/config/diagnostic_plan.json",
+      "kind": "method_configuration",
+      "source_sha256": "a189402080372a17dfdcd3b060644add184fbfc86bc155c49c01c1bd9f20c8a3",
+      "published_sha256": "a189402080372a17dfdcd3b060644add184fbfc86bc155c49c01c1bd9f20c8a3",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_J_diagnostics_v3/scripts/diagnostics.py",
+      "source_relative_path": "iScience/codex_improv/Stage_J_diagnostics_v3/scripts/diagnostics.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "000668307b5ad2fe85ad9636b4682a9cd9aa990d4fab55d9041abf06294ccc80",
+      "published_sha256": "000668307b5ad2fe85ad9636b4682a9cd9aa990d4fab55d9041abf06294ccc80",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/Stage_J_diagnostics_v3/scripts/verify.py",
+      "source_relative_path": "iScience/codex_improv/Stage_J_diagnostics_v3/scripts/verify.py",
+      "kind": "extension_analysis_script",
+      "source_sha256": "43678c6e94ae63ddda2fefd55ff6d6d2997a8b4f614202329775338695ef631a",
+      "published_sha256": "43678c6e94ae63ddda2fefd55ff6d6d2997a8b4f614202329775338695ef631a",
+      "changes": "None; byte-identical source."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/manuscript_figures/build_figure_S4.py",
+      "source_relative_path": "iScience/codex_improv/iScience_revision_v3/Author_review/build_heatmap.py",
+      "kind": "figure_script",
+      "source_sha256": "8bbc04db1293f7c75357d200e4428c7d2061305c817c3f4a42bfef2034db3241",
+      "published_sha256": "8bbc04db1293f7c75357d200e4428c7d2061305c817c3f4a42bfef2034db3241",
+      "changes": "None; byte-identical source. Reads aggregate CSVs only."
+    },
+    {
+      "path": "analysis/iscience_extensions_2026-11-15/manuscript_figures/build_figures.py",
+      "source_relative_path": "iScience/title_abstract_revision_2026-11-15/scripts/build_figures.py",
+      "kind": "figure_script",
+      "source_sha256": "64cf46ca95a9bb76ddcee45fcc94e4f6998c9e2edf362daad3c48ff60b4c9131",
+      "published_sha256": "64cf46ca95a9bb76ddcee45fcc94e4f6998c9e2edf362daad3c48ff60b4c9131",
+      "changes": "None; byte-identical source. Reads aggregate CSVs only."
+    },
+    {
       "path": "analysis/lcc_nominal_validation_2026-11-05/src/core.py",
       "source_relative_path": "current_verified_supplement/LCC_implementation/core.py",
       "kind": "frozen_external_validation_script",
@@ -691,28 +915,36 @@
       "changes": "None; byte-identical copy."
     },
     {
-      "path": "supplement/Supplementary_Appendix.docx",
-      "source_relative_path": "current_verified_supplement/Online_Resource_1.docx",
+      "path": "supplement/Document_S1.docx",
+      "source_relative_path": "current_verified_supplement/Document_S1.docx",
       "kind": "designated_aggregate_supplement",
-      "source_sha256": "118a8a84c0562d9cb12888a35b1e633ac0ffde37e9f156489ae62090e8eda0df",
-      "published_sha256": "d5a54159beedcbdf24d69939377412939458051198dd4a9f4797b99ac6868fe0",
-      "changes": "Current verified appendix; journal line removed, neutral heading/reference labels and document metadata. Table cells and embedded figures unchanged."
+      "source_sha256": "3c955d59e4e35fb2ff99b80d448074fa5ae3d0ff35e071be7826a3dd8a7526c9",
+      "published_sha256": "e50a543317a26a374cf926445c59a3adf01d8342149e29b466db8d67124cbd0c",
+      "changes": "Current supplement; journal subject removed from document metadata. Text, tables and figures unchanged."
     },
     {
-      "path": "supplement/Supplementary_Appendix.pdf",
-      "source_relative_path": "current_verified_supplement/Online_Resource_1.pdf",
+      "path": "supplement/Document_S1.pdf",
+      "source_relative_path": "current_verified_supplement/Document_S1.pdf",
       "kind": "designated_aggregate_supplement",
-      "source_sha256": "6d03f537e5fa1874c3401bc108ce17c63b6f200e03308c357e7f86378bdb9bdd",
-      "published_sha256": "3559fa37c4c4a152e60d072bc2a9166c49af8f876afe7eb4ca5db16dca01e3d9",
-      "changes": "Re-rendered from the journal-neutral current appendix; 14 pages visually checked."
+      "source_sha256": "3157f5596d914b3343384aa48977381353e00ae761c13263f3c8d4f23342d4e1",
+      "published_sha256": "66dcf38b90ec669abb45e66bbf3e08f28592745b2cb431955c200a5ca8e34879",
+      "changes": "Current supplement PDF; journal subject removed from metadata. Pages unchanged."
     },
     {
-      "path": "supplement/Supplementary_Appendix.txt",
-      "source_relative_path": "current_verified_supplement/Online_Resource_1.txt",
+      "path": "supplement/Document_S1.txt",
+      "source_relative_path": "current_verified_supplement/Document_S1.docx",
       "kind": "designated_aggregate_supplement",
-      "source_sha256": "f50035d9ea3854e4fdef3454914ec015ce56db88280e7a6b4422a81f089dc28a",
-      "published_sha256": "4813d51205756f6a4936795e66ca202ed8645fef4ce7aa8d1a6ba2c16222cd20",
-      "changes": "Regenerated paragraph and table text from the journal-neutral current appendix."
+      "source_sha256": "3c955d59e4e35fb2ff99b80d448074fa5ae3d0ff35e071be7826a3dd8a7526c9",
+      "published_sha256": "ab0b3165009fcac6c7623ed5b2dc0c19b1beb44cde79760024c25a2336a8b938",
+      "changes": "Paragraph and table text extracted from Document S1."
+    },
+    {
+      "path": "supplement/Figure_S4_source.csv",
+      "source_relative_path": "current_verified_supplement/Figure_S4_source.csv",
+      "kind": "designated_aggregate_supplement",
+      "source_sha256": "2ceb30486ad837b41b5527c491db8eee6cff28e5cd6e8d89e4027e4d118411c9",
+      "published_sha256": "2ceb30486ad837b41b5527c491db8eee6cff28e5cd6e8d89e4027e4d118411c9",
+      "changes": "None; byte-identical aggregate source for Figure S4."
     },
     {
       "path": "supplement/Table_S10_Tuning_Comparison.csv",
@@ -752,6 +984,62 @@
       "kind": "designated_aggregate_supplement",
       "source_sha256": "530f4b6458cde7e47f7b2b8f44456c8b441b7a27cd3d3da7b703d1e78bf8035f",
       "published_sha256": "530f4b6458cde7e47f7b2b8f44456c8b441b7a27cd3d3da7b703d1e78bf8035f",
+      "changes": "None; byte-identical current aggregate supplement."
+    },
+    {
+      "path": "supplement/Table_S15_Frozen_A_B.csv",
+      "source_relative_path": "current_verified_supplement/Table_S15_Frozen_A_B.csv",
+      "kind": "designated_aggregate_supplement",
+      "source_sha256": "3368948ed4b9d028a8739fc98010dc644b61d3800f696ed99d40acf5dbf04f83",
+      "published_sha256": "3368948ed4b9d028a8739fc98010dc644b61d3800f696ed99d40acf5dbf04f83",
+      "changes": "None; byte-identical current aggregate supplement."
+    },
+    {
+      "path": "supplement/Table_S16_Expanded_C.csv",
+      "source_relative_path": "current_verified_supplement/Table_S16_Expanded_C.csv",
+      "kind": "designated_aggregate_supplement",
+      "source_sha256": "7a6bc86f9659323ee2fec0e7f316e376968b09caf87aff11a19c80572062ee27",
+      "published_sha256": "7a6bc86f9659323ee2fec0e7f316e376968b09caf87aff11a19c80572062ee27",
+      "changes": "None; byte-identical current aggregate supplement."
+    },
+    {
+      "path": "supplement/Table_S17_Stage_comparison.csv",
+      "source_relative_path": "current_verified_supplement/Table_S17_Stage_comparison.csv",
+      "kind": "designated_aggregate_supplement",
+      "source_sha256": "824eec852a0123bcf71427cae17752578c3e1aff120418faeab8fb68081c9aa2",
+      "published_sha256": "824eec852a0123bcf71427cae17752578c3e1aff120418faeab8fb68081c9aa2",
+      "changes": "None; byte-identical current aggregate supplement."
+    },
+    {
+      "path": "supplement/Table_S18_Calibration.csv",
+      "source_relative_path": "current_verified_supplement/Table_S18_Calibration.csv",
+      "kind": "designated_aggregate_supplement",
+      "source_sha256": "f1abe4d6dfc775424e0ad3d0b8721329f31415eb5242e39e7d1661d7956e14c9",
+      "published_sha256": "f1abe4d6dfc775424e0ad3d0b8721329f31415eb5242e39e7d1661d7956e14c9",
+      "changes": "None; byte-identical current aggregate supplement."
+    },
+    {
+      "path": "supplement/Table_S19_Followup_stability.csv",
+      "source_relative_path": "current_verified_supplement/Table_S19_Followup_stability.csv",
+      "kind": "designated_aggregate_supplement",
+      "source_sha256": "972c0e96049c74aa69c9596f605b9bda99b10c4b15d9f239c01e9986dde922d3",
+      "published_sha256": "972c0e96049c74aa69c9596f605b9bda99b10c4b15d9f239c01e9986dde922d3",
+      "changes": "None; byte-identical current aggregate supplement."
+    },
+    {
+      "path": "supplement/Table_S20_Change_distribution.csv",
+      "source_relative_path": "current_verified_supplement/Table_S20_Change_distribution.csv",
+      "kind": "designated_aggregate_supplement",
+      "source_sha256": "113123017cdfa13bebe1fe062d5790a0f0f1b2bb4955a10c75731a3d7a54c6b6",
+      "published_sha256": "113123017cdfa13bebe1fe062d5790a0f0f1b2bb4955a10c75731a3d7a54c6b6",
+      "changes": "None; byte-identical current aggregate supplement."
+    },
+    {
+      "path": "supplement/Table_S21_Baseline_bands.csv",
+      "source_relative_path": "current_verified_supplement/Table_S21_Baseline_bands.csv",
+      "kind": "designated_aggregate_supplement",
+      "source_sha256": "876efc83531631fe8d331a477bd2c3a7ad09ea9d890093cba421e52b6102b91a",
+      "published_sha256": "876efc83531631fe8d331a477bd2c3a7ad09ea9d890093cba421e52b6102b91a",
       "changes": "None; byte-identical current aggregate supplement."
     },
     {
