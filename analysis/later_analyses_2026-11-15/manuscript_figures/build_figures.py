@@ -18,8 +18,8 @@ from matplotlib.patches import FancyArrowPatch, FancyBboxPatch, Polygon
 from PIL import Image
 
 HERE = Path(__file__).resolve().parent
-ISCI = HERE.parents[1]
-CODEX = ISCI / "codex_improv"
+BASE = HERE.parents[1]
+CODEX = BASE / "codex_improv"
 OUT = Path(sys.argv[1]).resolve()
 OUT.mkdir(parents=True, exist_ok=True)
 

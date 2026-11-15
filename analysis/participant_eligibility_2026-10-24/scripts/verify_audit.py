@@ -96,7 +96,7 @@ for r in resolved.itertuples(index=False):
 check('Resolved static sex independently agrees across all three sources',sx_errors==0)
 # Preserve parent artifacts and all previously protected frozen results.
 expected={str(P/r['path']):r['sha256'] for r in load(D/'evidence/Parent_Artifact_Manifest_Before.json')['files']}
-J=B/'biomarker_value_journal_neurology_clinical_v2_2026-10-24'
+J=B/'biomarker_value_clinical_v2_2026-10-24'
 for r in load(J/'qa/Preservation_Before.json'):expected[r['path']]=r['sha256']
 for r in load(J/'Artifact_Manifest.json')['files']:expected[str(J/r['path'])]=r['sha256']
 for manifest in [D/'evidence/Input_Manifest.json',D/'evidence/Additional_Input_Manifest.json',D/'evidence/Static_Sex_Input_Manifest.json',P/'evidence/Source_Manifest.json']:

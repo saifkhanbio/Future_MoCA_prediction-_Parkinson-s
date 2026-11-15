@@ -45,7 +45,7 @@ PPMI supplies development and temporal data, LCC supplies the external cohort, a
 
 ## Later analyses (15 November 2026)
 
-Each later analysis was locked before scoring. All are exploratory and reuse PPMI participants from earlier work. Code is in [`analysis/iscience_extensions_2026-11-15/`](analysis/iscience_extensions_2026-11-15).
+Each later analysis was locked before scoring. All are exploratory and reuse PPMI participants from earlier work. Code is in [`analysis/later_analyses_2026-11-15/`](analysis/later_analyses_2026-11-15).
 
 | Analysis | Package | What it does |
 | --- | --- | --- |

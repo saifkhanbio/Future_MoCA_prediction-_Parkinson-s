@@ -23,10 +23,10 @@ All package names below are children of `analysis/`. Keep this sibling layout: s
 | Frozen model comparison | `model_comparison_2026-10-31`, `model_comparison_v4_2026-11-01` | Comparison and independently implemented verification; require existing private predictions |
 | Independent LCC evaluation | `lcc_nominal_validation_2026-11-05` | Frozen `src/core.py`, `src/io_contract.py` and `src/launcher.py`; see [the LCC guide](LCC_VALIDATION.md) before use |
 | Later-calendar inference | `temporal_validation_readiness_2026-10-28` | `src/clinical_inference.py`, guarded launcher and numerical/pipeline checks; execution subfolder contains verification code only |
-| Expanded PPMI (Stage C) | `iscience_extensions_2026-11-15/Stage_C_*` | `audit.py` and `verify.py` (eligibility), `prepare.py`, `launcher.py`, `seal.py`, `paired_metrics.py`, synthetic validation, independent `verify.py` |
-| Temporal validation and PDBP (Stages A, B) | `iscience_extensions_2026-11-15/Stage_AB_*` | Eligibility `audit.py`/`verify.py`, `bind_inputs.py`, `evaluation.py`, `launch.py`, synthetic `fixtures.py`/`validate_synthetic.py`, independent `verify_results.py` |
-| Diagnostics (Stage J) | `iscience_extensions_2026-11-15/Stage_J_diagnostics_v3` | `scripts/diagnostics.py`, `scripts/verify.py` |
-| Manuscript figures | `iscience_extensions_2026-11-15/Stage_ABC_manuscript_comparison_v1`, `manuscript_figures` | `compare.py`, `build_figures.py`, `build_figure_S4.py`; read aggregate CSVs only |
+| Expanded PPMI (Stage C) | `later_analyses_2026-11-15/Stage_C_*` | `audit.py` and `verify.py` (eligibility), `prepare.py`, `launcher.py`, `seal.py`, `paired_metrics.py`, synthetic validation, independent `verify.py` |
+| Temporal validation and PDBP (Stages A, B) | `later_analyses_2026-11-15/Stage_AB_*` | Eligibility `audit.py`/`verify.py`, `bind_inputs.py`, `evaluation.py`, `launch.py`, synthetic `fixtures.py`/`validate_synthetic.py`, independent `verify_results.py` |
+| Diagnostics (Stage J) | `later_analyses_2026-11-15/Stage_J_diagnostics_v3` | `scripts/diagnostics.py`, `scripts/verify.py` |
+| Manuscript figures | `later_analyses_2026-11-15/Stage_ABC_manuscript_comparison_v1`, `manuscript_figures` | `compare.py`, `build_figures.py`, `build_figure_S4.py`; read aggregate CSVs only |
 
 The final v4 profile records 20 main and five confirmation seeds, population/offspring size 1,024, a 200,000-distinct-mask ceiling per restart, a 10,000-generation ceiling, minimum-search and plateau checks, and a global active-time safeguard. Ceilings do not imply every run evaluated every possible mask. The recorded profile uses 16 CPU workers plus one GPU worker, with 18 CPU-only fallback workers. Earlier hybrid profiles differ; use each version's own configuration. A new reproduction must size resources appropriately and disclose any changes, rather than silently claiming the frozen configuration.
 

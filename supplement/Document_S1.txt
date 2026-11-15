@@ -39,11 +39,11 @@ The 11 fixed Hallmark sets were apical junction, apoptosis, coagulation, complem
 Differences are augmented minus clinical-only MAE. Combined RNA with the enhanced comparator at 36 months was the original primary comparison. Off folds counts selections of the clinical-only option among five outer folds. The original seed-specific intervals are retained; they need not equal intervals recomputed under a later unified comparison seed. Full precision is retained in Table_S7_Original_RNA_Contrasts.csv.
 Reporting map and author declarations
 Data and participants
-STAR Methods and Tables 1 and 3; Tables S1 and S13. The internal PPMI, later PPMI and independent LCC populations have distinct eligibility and timing rules. PPMI development records have prior analysis exposure; LCC outcomes were audited for eligibility before predictive evaluation. Expanded PPMI and the separate PDBP evaluation are described in Table 1 and Tables S15–S21.
+Methods and Tables 1 and 3; Tables S1 and S13. The internal PPMI, later PPMI and independent LCC populations have distinct eligibility and timing rules. PPMI development records have prior analysis exposure; LCC outcomes were audited for eligibility before predictive evaluation. Expanded PPMI and the separate PDBP evaluation are described in Table 1 and Tables S15–S21.
 Outcome and predictors
-STAR Methods and supplemental Table S2. Outcome is continuous future MoCA; predictor selection is entirely baseline-bound.
+Methods and supplemental Table S2. Outcome is continuous future MoCA; predictor selection is entirely baseline-bound.
 Model development and evaluation
-STAR Methods and supplementary search, preprocessing and temporal sections. Fixed penalties, grouped folds, inner-only selection and separate temporal ensembles are described.
+Methods and supplementary search, preprocessing and temporal sections. Fixed penalties, grouped folds, inner-only selection and separate temporal ensembles are described.
 Results and uncertainty
 Main Tables 1–5 and Figs. 1–4; complete CSV Tables S3–S14. Internal and temporal intervals are conditional and unadjusted. External paired intervals additionally use Bonferroni-adjusted 98.33% levels for the three prespecified GDS15 contrasts. Figures 5–7 and Tables S15–S21 report the subsequent PPMI and PDBP analyses. The adjusted GDS15 comparisons apply only to LCC.
 Implementation and availability
