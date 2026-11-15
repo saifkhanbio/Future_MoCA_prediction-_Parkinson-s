@@ -7,6 +7,7 @@
 - Replace the supplementary appendix with Document S1 and add aggregate Tables S15–S21 and the Figure S4 source table. Tables S3–S14 are unchanged.
 - Fix character-encoding errors in the README and reproducibility guide, and refresh the checksum manifest.
 - Keep the release journal-neutral: later-analysis code lives in `analysis/later_analyses_2026-11-15/`; local folder names and labels that named a journal were replaced by neutral labels (path-only and report-text changes, recorded in the manifest).
+- Update Document S1 so its code-availability text and reference [S1] cite the journal-neutral release (commit d40c454) and `analysis/later_analyses_2026-11-15/`.
 
 The update does not retrain models, score participants or modify frozen study results. Source datasets, participant-level artifacts, eligibility ledgers, predictions, credentials and submission documents remain outside the public release.
 

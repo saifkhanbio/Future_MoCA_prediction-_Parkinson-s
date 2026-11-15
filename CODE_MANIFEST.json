@@ -918,24 +918,24 @@
       "path": "supplement/Document_S1.docx",
       "source_relative_path": "current_verified_supplement/Document_S1.docx",
       "kind": "designated_aggregate_supplement",
-      "source_sha256": "3c955d59e4e35fb2ff99b80d448074fa5ae3d0ff35e071be7826a3dd8a7526c9",
-      "published_sha256": "3a385cf4abdeebf4e2cd1f1a5e2784ffe887b62eda265969c92fa700e60683fd",
+      "source_sha256": "da7c74c984be7e82e802ecd136de53ee36465ddc3f6c3cbd4fbb2bf65293210e",
+      "published_sha256": "99b794bdd76bc529d4d57ee1bacaf5426838f3ac346e4238edd910827cee1fba",
       "changes": "Current supplement; journal subject removed from metadata and a journal-specific section label replaced by 'Methods'. Values, tables and figures unchanged."
     },
     {
       "path": "supplement/Document_S1.pdf",
       "source_relative_path": "current_verified_supplement/Document_S1.pdf",
       "kind": "designated_aggregate_supplement",
-      "source_sha256": "3157f5596d914b3343384aa48977381353e00ae761c13263f3c8d4f23342d4e1",
-      "published_sha256": "beef259b3b8994969849691044c3de7e52d9d1dbcb900e7a08b98f11e490dfbc",
+      "source_sha256": "90eb3dc940d9ea92bd42263d67e46707a2f9bc4725812780c32c19213fcd0592",
+      "published_sha256": "0d0ede8eb28a373061d491dfe65a84a1f97ecf0995aea51656da7a7b01f8b2cf",
       "changes": "Re-rendered from the journal-neutral Document S1; journal subject removed from metadata. Values, tables and figures unchanged."
     },
     {
       "path": "supplement/Document_S1.txt",
       "source_relative_path": "current_verified_supplement/Document_S1.docx",
       "kind": "designated_aggregate_supplement",
-      "source_sha256": "3c955d59e4e35fb2ff99b80d448074fa5ae3d0ff35e071be7826a3dd8a7526c9",
-      "published_sha256": "db0c6aa4dbf66eeb71ed4978ce5f4adf9fd8652d689522e224da67ae7653d661",
+      "source_sha256": "da7c74c984be7e82e802ecd136de53ee36465ddc3f6c3cbd4fbb2bf65293210e",
+      "published_sha256": "01ec2c4933ab128de0624c68bd2776742b6b7bf27be385207f8fc844121732ab",
       "changes": "Current supplement; journal subject removed from metadata and a journal-specific section label replaced by 'Methods'. Values, tables and figures unchanged."
     },
     {
