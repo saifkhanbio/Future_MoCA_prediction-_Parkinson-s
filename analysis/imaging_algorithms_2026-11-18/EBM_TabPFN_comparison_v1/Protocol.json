@@ -1,0 +1,267 @@
+{
+  "study": "Clinical_hallmark_EBM_TabPFN_v1",
+  "horizons": [
+    12,
+    24,
+    36
+  ],
+  "primary_horizon": 12,
+  "primary_contrast": "complete28 compact4: EBM minus ridge and TabPFN minus ridge raw MAE; two co-primary contrasts",
+  "panels": {
+    "compact4": {
+      "numeric": [
+        "baseline_moca",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed"
+      ],
+      "categories": {
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    },
+    "moca_only": {
+      "numeric": [
+        "baseline_moca"
+      ],
+      "categories": {}
+    },
+    "core": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ]
+      }
+    },
+    "enhanced": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ],
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    },
+    "full28": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed",
+        "Animal_fluency",
+        "LNS",
+        "JLO",
+        "HVLT_recognition_discrimination",
+        "RBDSQ_full",
+        "SCOPA_GI",
+        "SCOPA_urinary",
+        "SCOPA_cardiovascular",
+        "Systolic_BP_drop",
+        "Diastolic_BP_drop",
+        "STAI_trait",
+        "Apathy",
+        "Cognitive_complaint",
+        "APOE_e4_dosage",
+        "NLR"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ],
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ],
+        "jlo_form": [
+          "1",
+          "2",
+          "unknown"
+        ]
+      }
+    }
+  },
+  "views": {
+    "complete28": {
+      "n": [
+        560,
+        527,
+        494
+      ],
+      "panels": [
+        "compact4",
+        "enhanced",
+        "full28"
+      ]
+    },
+    "expanded": {
+      "n": [
+        777,
+        716,
+        651
+      ],
+      "panels": [
+        "compact4",
+        "enhanced"
+      ]
+    }
+  },
+  "penalties": [
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "ridge_objective": "mean squared error plus lambda times sum of squared coefficients; unpenalized intercept",
+  "inner_selection": "minimum pooled inner validation MAE; within 1e-12 prefer largest penalty",
+  "splits": "5 outer, 3 inner; single component master allocation stratified on clinical baseline year, reused across horizons and views",
+  "bootstrap": 5000,
+  "seed_base": 20261118,
+  "seed_rule": "base + 100 * view ordinal (1,2,3) + horizon",
+  "study_fits_planned": 2475,
+  "stage_A_reserved": 227,
+  "validation_scope": "grouped internal validation; no external or fresh temporal evaluation",
+  "algorithms": [
+    "ridge",
+    "EBM",
+    "TabPFN"
+  ],
+  "grids": {
+    "ridge": [
+      10,
+      1,
+      0.1,
+      0.01,
+      0.001
+    ],
+    "EBM": [
+      {
+        "interactions": 0,
+        "max_rounds": 500
+      },
+      {
+        "interactions": 0,
+        "max_rounds": 1500
+      },
+      {
+        "interactions": 2,
+        "max_rounds": 500
+      },
+      {
+        "interactions": 2,
+        "max_rounds": 1500
+      }
+    ],
+    "TabPFN": [
+      {
+        "n_estimators": 8
+      }
+    ]
+  },
+  "EBM_fixed": {
+    "outer_bags": 1,
+    "inner_bags": 0,
+    "validation_size": 0,
+    "early_stopping_rounds": 0,
+    "learning_rate": 0.02,
+    "max_bins": 32,
+    "max_interaction_bins": 8,
+    "min_samples_leaf": 20,
+    "max_leaves": 2,
+    "smoothing_rounds": 200,
+    "interaction_smoothing_rounds": 50,
+    "n_jobs": 4,
+    "objective": "rmse"
+  },
+  "TabPFN_fixed": {
+    "device": "cpu",
+    "n_jobs": 4,
+    "ignore_pretraining_limits": false,
+    "fit_mode": "low_memory",
+    "inference_precision": "auto"
+  },
+  "checkpoint": "models/tabpfn-v2-regressor.ckpt",
+  "selection": "pooled inner MAE; ties <=1e-12 use first candidate: strongest ridge, additive/short EBM; TabPFN fixed configuration with inner checks",
+  "uncertainty": "5000 paired participant bootstrap draws, 95% descriptive intervals; 97.5% Bonferroni intervals for two co-primary differences; conditional on fixed OOF predictions",
+  "execution": "CPU only frozen implementation; no automatic GPU fallback or algorithm substitution; study execution disabled in this preparation release",
+  "interpretation": "Exploratory reused source data; not new independent validation. No GA, imaging, external scoring or model-family winner selection on outer results."
+}

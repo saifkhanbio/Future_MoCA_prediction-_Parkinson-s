@@ -43,3 +43,19 @@ Training_Row_Bindings.csv
 Source_Bindings.json
 Execution_Authorization.json
 **/synthetic/outputs/
+
+# Additional private model/execution artifacts
+*.ckpt
+**/runtime/
+**/environment/
+**/cache/
+**/recruited_checkpoints/
+**/verification_handoff/
+**/study_results/
+**/study_verification/
+**/LOCK.json
+**/*_LOCK.json
+**/Source_SHA256.json
+**/source_hashes.json
+**/STUDY_EXECUTION_AUTHORIZATION.json
+**/STUDY_AUTHORIZATION.json

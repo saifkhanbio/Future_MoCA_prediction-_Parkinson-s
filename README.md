@@ -1,6 +1,6 @@
 # Future MoCA prediction in Parkinson's disease
 
-Analysis code, methods documentation and designated aggregate supplements for **A brief cognitive panel improves forecasts of future cognition in Parkinson disease: Development and temporal validation**. This repository is independent of any journal or submission destination.
+Analysis code and methods documentation for **Clinical_hallmark**, a study of cognitive forecasting in Parkinson disease, with previously designated aggregate supplements. This repository is independent of any journal or submission destination.
 
 This repository documents **Clinical_hallmark**: exploratory PPMI benchmarking of future Montreal Cognitive Assessment (MoCA) scores at **12, 24 and 36 months**, within-PPMI temporal evaluation, and a separately specified independent clinical-model evaluation in the **LRRK2 Cohort Consortium (LCC)**. The endpoint is the continuous education-adjusted future MoCA level, not a diagnosis of dementia or MCI and not necessarily within-person decline. This is a manuscript code release, not a clinical prediction service or a claim of peer-reviewed publication.
 
@@ -11,13 +11,14 @@ This repository documents **Clinical_hallmark**: exploratory PPMI benchmarking o
 - The current supplementary methods (Document S1) and **20 aggregate CSV tables** (Tables S3–S21), including the later analyses described below. CSV values are copied unchanged from the verified manuscript supplement.
 - Scripts, protocols and verification code for the later analyses: expanded PPMI, temporal validation of the four-score panel, PDBP and descriptive diagnostics, plus the scripts that draw the manuscript figures.
 - The frozen LCC numerical core and guarded I/O/launcher code, with an execution-scope guide.
-- Documentation and a small, data-free synthetic numerical check.
+- Subsequent clinical/GA DAT-SPECT and ridge/EBM/TabPFN method packages, including launchers, numerical kernels and independent-verification code; see [extension guide](docs/IMAGING_AND_ALGORITHM_EXTENSIONS.md).
+- Documentation and data-free synthetic numerical checks.
 
 **No raw or participant-level source data, individual predictions, participant/fold manifests, participant-bound fitted-model bundles, search databases, checkpoints, credentials, or results outside the designated supplement are included.** Access to PPMI data must be obtained independently through [PPMI](https://www.ppmi-info.org/access-data-specimens/download-data). LCC and AMP-PD access must likewise be obtained through their respective providers. Repository access does not grant access to controlled data or permit their redistribution. The aggregate equations in supplementary Table S14 are the explicit model-parameter exception; they contain no participant lists or training records.
 
 ## Study design
 
-The source frame is an RNA-linked PPMI population retained for matched comparisons. Clinical prediction and feature selection use five outer folds and three inner folds, grouped by known participant identity. The same master fold allocation is subsetted across horizons. Imputation, scaling, penalty tuning and feature selection are performed within the appropriate training partitions. Numeric missingness indicators and fixed categorical dictionaries are specified in the contracts.
+The original benchmark uses an RNA-linked PPMI population retained for matched comparisons. Later expanded clinical and algorithm comparisons use separately specified PPMI views without an RNA requirement; imaging comparisons use their own matched subsets. Clinical prediction and feature selection use five outer folds and three inner folds, grouped by known participant identity. The same master fold allocation is subsetted across horizons. Imputation, scaling, penalty tuning and feature selection are performed within the appropriate training partitions. Numeric missingness indicators and fixed categorical dictionaries are specified in the contracts.
 
 The manuscript compares:
 
@@ -57,6 +58,12 @@ Each later analysis was locked before scoring. All are exploratory and reuse PPM
 
 The expanded cohort excludes every participant used in temporal validation. These packages keep their original folder names so their relative references remain readable; they still need the private inputs described in [REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) and cannot run from a public clone.
 
+## Imaging and algorithm extensions (18 November 2026)
+
+Code is in [`analysis/imaging_algorithms_2026-11-18/`](analysis/imaging_algorithms_2026-11-18). The clinical DAT-SPECT protocol compares matched panels at 12–48 months; the GA28 protocol adds imaging to previously selected fold-specific panels at 12–36 months without a new GA search. A separate ridge/EBM/TabPFN comparison uses identical participants, encoded inputs and grouped folds across four-score, enhanced and full28 panels at 12, 24 and 36 months. These packages are separate from the original 18-recipe inventory.
+
+These are internal comparisons, not additional independent validation. PDBP/LCC validation concerns the separately specified clinical equations. No new performance tables, individual predictions, selected-mask outputs, model weights or run databases are added in this update. Existing designated supplements are retained at their earlier revision and do not contain these new extensions. Full reproduction requires approved private data and original integrity bindings.
+
 ## Repository map
 
 | Location | Contents |
@@ -70,22 +77,23 @@ The expanded cohort excludes every participant used in temporal validation. Thes
 
 ## Quick start: synthetic checks only
 
-The study used Python 3.9.23 in Linux/WSL (`agpu_env`), NumPy 1.26.4, pandas 2.3.1 and SciPy 1.13.1. The hybrid search used PyTorch 2.8.0+cu128. These are observed environment versions; no patient analysis is launched by the commands below.
+The original study used Python 3.9.23 in Linux/WSL (`agpu_env`), NumPy 1.26.4, pandas 2.3.1 and SciPy 1.13.1. The hybrid search used PyTorch 2.8.0+cu128. These are observed environment versions; no patient analysis is launched by the commands below. The later EBM/TabPFN run used a separate Python 3.10 runtime with different package versions, recorded in its `RuntimeVersions.json`; do not upgrade the original environment to reproduce it.
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
 python -m pip install -r requirements.txt
 python scripts/smoke_check.py
+python scripts/check_extension_kernels.py
 ```
 
-The smoke check fits only tiny synthetic ridge examples and writes no model or study output. PyTorch/GPU access is not needed for it. The guarded historical hybrid launchers require Linux/WSL, compatible PyTorch/CUDA, controlled inputs and private bindings; they are not a one-command public reproduction. Do not bypass their missing-input or integrity guards. Installing dependencies is optional if an appropriate environment already exists.
+The smoke checks fit only tiny synthetic ridge examples, exercise synthetic preprocessing and orchestration, and write no model or study output. The extension check does not load a TabPFN checkpoint or fit EBM/TabPFN. PyTorch/GPU access is not needed for it. The guarded historical hybrid launchers require Linux/WSL, compatible PyTorch/CUDA, controlled inputs and private bindings; they are not a one-command public reproduction. Do not bypass their missing-input or integrity guards. Installing dependencies is optional if an appropriate environment already exists.
 
 ## Interpretation and reproducibility limits
 
 This is an exploratory benchmarking study using participants/outcomes exposed during earlier analyses. Nested cross-validation controls fold-level tuning leakage; it does not erase that research history. The original primary analysis and subsequent exploratory comparisons retain their different status. The 12-month GA findings are exploratory, not an independently confirmed new primary endpoint.
 
-Paired bootstrap intervals condition on frozen predictions, are unadjusted for the many exploratory comparisons, and do not capture full refitting or research-selection uncertainty. Acquisition groups are a proxy for burden, not measured minutes or cost. Numerical superiority alone is not proof of clinical utility. The scripts do not establish a universally optimal feature set or generalizability beyond the evaluated population.
+Paired bootstrap intervals condition on frozen predictions and do not capture full refitting or research-selection uncertainty. Most exploratory comparisons use unadjusted 95% intervals. The later EBM/TabPFN protocol specifies adjusted 97.5% intervals for its two 12-month four-score co-primary contrasts; the LCC protocol retains its separately specified adjusted primary family. Acquisition groups are a proxy for burden, not measured minutes or cost. Numerical superiority alone is not proof of clinical utility. The scripts do not establish a universally optimal feature set or generalizability beyond the evaluated population.
 
 A public clone can inspect methods, verify the supplied file checksums and exercise synthetic numerical kernels. It **cannot reproduce participant-level results without separately authorized data and the exact private source, cohort, split and integrity bindings**. Selected source preprocessing code is included; the complete historical data-acquisition and audit workspace is not. Some historical readiness files say training was not yet authorized: these describe their creation stage and do not override later study execution records, which are not distributed.
 

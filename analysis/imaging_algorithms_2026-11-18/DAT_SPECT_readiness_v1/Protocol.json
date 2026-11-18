@@ -1,0 +1,244 @@
+{
+  "study_id": "Clinical_hallmark_DAT_SPECT_v1",
+  "status": "LOCKED_NO_TRAINING",
+  "horizons": [
+    12,
+    24,
+    36,
+    48
+  ],
+  "primary_horizon": 48,
+  "primary_contrast": "compact4_DAT minus compact4, raw MAE",
+  "key_secondary": "enhanced_DAT minus enhanced, 48 months",
+  "interpretation": "Exploratory internal incremental-value evaluation; no untouched or external validation claim",
+  "panels": {
+    "compact4": {
+      "numeric": [
+        "baseline_moca",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed"
+      ],
+      "categories": {
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    },
+    "enhanced": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ],
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    },
+    "moca_only": {
+      "numeric": [
+        "baseline_moca"
+      ],
+      "categories": {}
+    },
+    "compact4_DAT": {
+      "numeric": [
+        "baseline_moca",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed",
+        "CAUDATE_L_REF_CWM",
+        "CAUDATE_R_REF_CWM",
+        "PUTAMEN_L_REF_CWM",
+        "PUTAMEN_R_REF_CWM"
+      ],
+      "categories": {
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    },
+    "enhanced_DAT": {
+      "numeric": [
+        "age_index",
+        "sex_male",
+        "education",
+        "baseline_moca",
+        "diagnosis_duration_years",
+        "part2",
+        "part3",
+        "gds15",
+        "pd_medication",
+        "SDMT",
+        "HVLT_immediate",
+        "HVLT_delayed",
+        "CAUDATE_L_REF_CWM",
+        "CAUDATE_R_REF_CWM",
+        "PUTAMEN_L_REF_CWM",
+        "PUTAMEN_R_REF_CWM"
+      ],
+      "categories": {
+        "motor_state": [
+          "untreated",
+          "off",
+          "on",
+          "treated_unknown",
+          "unknown"
+        ],
+        "baseline_sdmt_form": [
+          "1",
+          "2",
+          "unknown"
+        ],
+        "baseline_hvlt_form": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "unknown"
+        ]
+      }
+    }
+  },
+  "views": {
+    "month_compatible": {
+      "n": [
+        483,
+        440,
+        428,
+        293
+      ],
+      "models": [
+        "persistence",
+        "moca_only",
+        "compact4",
+        "compact4_DAT",
+        "enhanced",
+        "enhanced_DAT"
+      ]
+    },
+    "strict_preindex": {
+      "n": [
+        374,
+        345,
+        335,
+        215
+      ],
+      "models": [
+        "persistence",
+        "moca_only",
+        "compact4",
+        "compact4_DAT",
+        "enhanced",
+        "enhanced_DAT"
+      ]
+    }
+  },
+  "DAT_fields": [
+    "CAUDATE_L_REF_CWM",
+    "CAUDATE_R_REF_CWM",
+    "PUTAMEN_L_REF_CWM",
+    "PUTAMEN_R_REF_CWM"
+  ],
+  "reference": "cerebral white matter (CWM)",
+  "feature_source": "single native Xing SBR export, no OCC or AMP duplicates",
+  "timing": "Latest acquisition-or-quantitative SC/BL month in index-3 through index; BL priority for same-month tie; selection before QC; no fallback",
+  "strict_timing": "Same selected scan; require scan_month < index_month, no reselection",
+  "same_month_scope": "Month-compatible baseline information; within-month ordering cannot be certified.",
+  "preprocessing": "Training-only numeric median (0 if all missing), mean/population-SD scaling (1 if <=1e-12), missing indicators and fixed categories; DAT observed for every participant",
+  "penalties": [
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "ridge_objective": "mean squared error plus lambda times sum of squared coefficients; unpenalized intercept",
+  "inner_selection": "minimum pooled inner validation MAE; within 1e-12 prefer largest penalty",
+  "splits": "Exact inherited Stage C identity master: five outer, three inner; subset only; same assignments for every arm/horizon/view",
+  "bootstrap": 5000,
+  "seed_base": 20261118,
+  "seed_rule": "base + 100 * view ordinal (1,2) + horizon",
+  "metrics": [
+    "MAE",
+    "RMSE",
+    "R2",
+    "bias",
+    "calibration_slope",
+    "calibration_intercept",
+    "outside_0_30"
+  ],
+  "paired_contrasts": [
+    [
+      "compact4_DAT",
+      "compact4"
+    ],
+    [
+      "enhanced_DAT",
+      "enhanced"
+    ]
+  ],
+  "uncertainty": "95% paired percentile participant intervals conditional on OOF predictions; no full-development resampling; exploratory, not confirmatory; secondary comparisons descriptive",
+  "planned_fits": 3200,
+  "training_authorized": false,
+  "launcher_validated": false,
+  "restrictions": [
+    "No GA, feature selection, clipping, tuning-grid expansion or outcome-informed QC",
+    "No imputation of missing DAT to inflate sample size",
+    "Do not interpret visual normality as image rejection",
+    "No paid queries; prior artifacts read-only"
+  ]
+}

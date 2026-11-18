@@ -1,0 +1,21 @@
+# EBM and TabPFN comparison against ridge
+
+Study ID: Clinical_hallmark_EBM_TabPFN_v1. Exploratory algorithm comparison; existing frozen analyses remain unchanged.
+
+## Cohorts and splits
+Primary matched complete28: 560/527/494 participants at 12/24/36 months. All nine algorithm-panel arms use identical people and original Stage C outer/inner folds. Supporting expanded cohort: 777/716/651, six arms (four-score and enhanced only). All 227 Stage A identities remain excluded. No external cohort is scored. Source timing, diagnosis, education-corrected MoCA, test forms and identity criteria are inherited without amendment from the byte-preserved Stage C snapshot. Outcomes and predictors are not reselected. Complete28 results are conditional on complete-panel availability.
+
+## Scientific priorities
+Two co-primary comparisons at 12 months on complete28: four-score EBM minus four-score ridge MAE, and four-score TabPFN minus four-score ridge MAE. Report both irrespective of results. Use 97.5% Bonferroni percentile intervals for this two-comparison family plus ordinary 95% intervals. All enhanced/full28, cross-panel, expanded and longer-horizon comparisons are supporting/descriptive. No universal clinical utility or external validation claim follows from these internal estimates.
+
+## Models
+Exact fields, fixed category levels and grids are in Protocol.json. Ridge uses the original mean-squared-error-plus-lambda objective and five penalties. EBM learns main effects with zero or two training-selected interactions; 500/1500 rounds, strong binning/leaf restrictions. One deterministic outer bag is used; bagging is not claimed. No early-stopping split is created: grouped inner folds select complexity. TabPFN is the published v2 regression family, pinned local checkpoint, eight ensemble estimators, no fine-tuning or feature search. Pin interpret-core 0.7.4 and tabpfn 2.2.1. No hosted inference is permitted. Downloading a public model checkpoint is not permission to upload study records.
+
+The identical source-only median imputation, population-SD scaling, missing indicators and fixed one-hot form/state controls feed every algorithm. Thus this is a comparison of algorithms on an identical encoded input representation, not a contest of each library's best possible preprocessing. Full28 denotes 28 substantive predictors; encoded columns are more numerous. Form/missing indicators are technical controls, not additional clinical tests. A fixed TabPFN configuration receives inner predictions for diagnostics; it is not tuned on outer outcomes.
+
+Five outer folds and three inner folds are inherited across horizons. Inner MAE selects a configuration separately for each arm; deterministic ties prefer stronger regularization. Raw predictions are neither clipped nor recalibrated. Persistence is an unfitted contextual benchmark in both views. No study model is trained during preparation. The full future schedule is 2475 fit calls (1200 ridge, 975 EBM, 300 TabPFN); TabPFN fit calls attach training context rather than retrain pretrained weights. These are algorithm-specific computational units, not comparable elementary tree/neural-training counts.
+
+Report MAE, RMSE, R2, bias, calibration slope/intercept and fraction outside 0–30, with paired participant bootstrap differences for all arms. Preserve undefined metrics when constant outcomes/predictions make them undefined. No threshold for clinically important benefit is invented. A future independent verification must reconstruct metrics from saved predictions, verify identity and held-out folds and audit selected hyperparameters. Already examined temporal/external samples cannot be relabelled untouched.
+
+## Authorization and readiness
+This preparation release exposes preflight and synthetic validation only. --mode run-study must fail before fitting. A later explicitly authorized execution amendment is required. Missing backend/checkpoint or failed synthetic checks blocks readiness; there is no silent surrogate. Synthetic tests may fit artificial data only. All model artefacts and caches reside under this new folder. CPU execution is chosen for reproducibility; a GPU change requires numerical validation and an execution amendment.

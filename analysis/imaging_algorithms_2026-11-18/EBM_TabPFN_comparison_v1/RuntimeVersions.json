@@ -1,0 +1,10 @@
+{
+  "interpret-core": "0.7.4",
+  "tabpfn": "2.2.1",
+  "tabpfn-common-utils": "0.2.23",
+  "torch": "2.8.0+cu128",
+  "numpy": "2.2.6",
+  "scipy": "1.15.3",
+  "scikit-learn": "1.6.1",
+  "pandas": "2.3.3"
+}

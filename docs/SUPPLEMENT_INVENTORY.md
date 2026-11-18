@@ -32,3 +32,7 @@ Document S1 integrates the original and expanded PPMI benchmarks, temporal valid
 The three frozen LCC implementation scripts are in `analysis/lcc_nominal_validation_2026-11-05/src/`, with [execution guidance](LCC_VALIDATION.md).
 
 These are designated aggregate supplementary results. They contain no participant records, identity mappings, individual predictions or fold-membership assignments. Fold numbers describe model evaluations. Approved source access is required separately.
+
+## Code update 18 November 2026
+
+The designated supplementary files listed above remain byte-identical to the prior release. The new DAT-SPECT and EBM/TabPFN extensions are a code/methods update only; their manuscript tables and figures are not included in this repository. See the extension guide for reproduction scope.

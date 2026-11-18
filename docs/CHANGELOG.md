@@ -1,4 +1,12 @@
-# Repository updates
+# Update 18 November 2026
+
+- Added methods and selected code for clinical DAT-SPECT, GA28 DAT-SPECT, and ridge/EBM/TabPFN comparisons.
+- Added independent-verification implementations and a public synthetic kernel check without study-data access.
+- Made new source-directory references journal-neutral; exposed the GA protocol as a template without fitted selections.
+- Updated README and reproduction guidance to distinguish original, expanded, imaging, algorithm and externally evaluated models.
+- Retained all previously designated aggregate supplements unchanged. No new results, participant records, predictions, weights, private bindings or run logs were uploaded.
+
+Repository updates
 
 ## 2026-11-15
 

@@ -1,0 +1,181 @@
+{
+  "study_id": "Clinical_hallmark_DAT_SPECT_GA28_v1",
+  "status": "LOCKED_NO_STUDY_TRAINING",
+  "horizons": [
+    12,
+    24,
+    36
+  ],
+  "primary_horizon": 36,
+  "primary_contrast": "GA_selected_DAT minus GA_selected, delta R2; higher favors DAT",
+  "key_secondary": "same contrast delta MAE; lower favors DAT",
+  "arms": [
+    "GA_selected",
+    "GA_selected_DAT",
+    "full28",
+    "full28_DAT"
+  ],
+  "views": {
+    "month_compatible": {
+      "n": [
+        167,
+        167,
+        167
+      ]
+    },
+    "strict_preindex": {
+      "n": [
+        108,
+        107,
+        109
+      ]
+    }
+  },
+  "selection": "Reuse the verified unrestricted28 GA-selected mask for the matching original horizon and outer fold. No global consensus mask, new GA search, selection using imaging or reuse across outer folds. Prior selection used broader original outer-training cohort, not only the imaging subset. Held-out identities were excluded from that original selection.",
+  "prior_selection_scope": "Frozen legacy fold-specific selections; inner validation in this extension tunes ridge strength conditional on that selected mask. Do not describe this as a de novo nested GA search confined to the imaging subset.",
+  "frozen_fold_panels": {},
+  "full28_panel": {
+    "numeric": [
+      "age_index",
+      "sex_male",
+      "education",
+      "baseline_moca",
+      "diagnosis_duration_years",
+      "part2",
+      "part3",
+      "gds15",
+      "pd_medication",
+      "SDMT",
+      "HVLT_immediate",
+      "HVLT_delayed",
+      "Animal_fluency",
+      "LNS",
+      "JLO",
+      "HVLT_recognition_discrimination",
+      "RBDSQ_full",
+      "SCOPA_GI",
+      "SCOPA_urinary",
+      "SCOPA_cardiovascular",
+      "Systolic_BP_drop",
+      "Diastolic_BP_drop",
+      "STAI_trait",
+      "Apathy",
+      "Cognitive_complaint",
+      "APOE_e4_dosage",
+      "NLR"
+    ],
+    "categories": {
+      "motor_state": [
+        "untreated",
+        "off",
+        "on",
+        "treated_unknown",
+        "unknown"
+      ],
+      "baseline_sdmt_form": [
+        "1",
+        "2",
+        "unknown"
+      ],
+      "baseline_hvlt_form": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "unknown"
+      ],
+      "jlo_form": [
+        "1",
+        "2",
+        "unknown"
+      ]
+    }
+  },
+  "feature_universe": [
+    "age_index",
+    "sex_male",
+    "education",
+    "baseline_moca",
+    "diagnosis_duration_years",
+    "part2",
+    "part3",
+    "gds15",
+    "pd_medication",
+    "motor_state",
+    "SDMT",
+    "HVLT_immediate",
+    "HVLT_delayed",
+    "Animal_fluency",
+    "LNS",
+    "JLO",
+    "HVLT_recognition_discrimination",
+    "RBDSQ_full",
+    "SCOPA_GI",
+    "SCOPA_urinary",
+    "SCOPA_cardiovascular",
+    "Systolic_BP_drop",
+    "Diastolic_BP_drop",
+    "STAI_trait",
+    "Apathy",
+    "Cognitive_complaint",
+    "APOE_e4_dosage",
+    "NLR"
+  ],
+  "DAT_fields": [
+    "CAUDATE_L_REF_CWM",
+    "CAUDATE_R_REF_CWM",
+    "PUTAMEN_L_REF_CWM",
+    "PUTAMEN_R_REF_CWM"
+  ],
+  "penalties": [
+    0.001,
+    0.01,
+    0.1,
+    1.0,
+    10.0
+  ],
+  "penalty_selection": "minimum pooled inner MSE, tie within 1e-12 favors largest penalty; separately for each arm using identical matched rows and folds",
+  "ridge_objective": "mean squared training error + lambda*sum(coefficients squared); intercept unpenalized",
+  "preprocessing": {
+    "numeric": "Training median imputation, all-missing training column ->0. Training mean and population-SD scaling of imputed values; SD<=1e-12 ->1. Fixed missing indicator for every numeric column, unscaled.",
+    "categorical": "Fixed complete one-hot dictionaries, no dropped level; blank/invalid raw values become unknown during binding. No outcome-derived vocabulary.",
+    "intercept": "Unpenalized; all design columns centred within solver training rows."
+  },
+  "splits": "Original GA identity grouped master, five outer and three inner; unchanged subsets across arms/horizons/views. NOT the later Stage C folds.",
+  "cohort": "Original GA RNA-landmarked population, with imaging eligibility reaudited at original RNA_index_month; RNA is not a predictor.",
+  "scan_rules": "Exact audited native Xing SC/BL selection and QC from DAT_SPECT_readiness_v1, re-evaluated at original GA landmark; same four CWM SBRs, no fallback or imaging imputation.",
+  "strict_timing": "Same chosen scan; require earlier calendar month; no reselection.",
+  "endpoint": "Exact original GA education-adjusted MoCA rows; elapsed months within horizon +/-3. No endpoint updates.",
+  "bootstrap": 5000,
+  "seed_base": 20261119,
+  "seed_rule": "base + 100*view ordinal (1,2) + horizon",
+  "metrics": [
+    "MAE",
+    "RMSE",
+    "R2",
+    "bias",
+    "calibration_slope",
+    "calibration_intercept",
+    "outside_0_30"
+  ],
+  "paired_contrasts": [
+    [
+      "GA_selected_DAT",
+      "GA_selected"
+    ],
+    [
+      "full28_DAT",
+      "full28"
+    ]
+  ],
+  "planned_fits": 1920,
+  "fit_budget": "3 horizons x 2 timing views x 4 fitted arms x 5 outer folds x (3 inner folds x 5 penalties + 1 outer refit)",
+  "uncertainty": "95% paired percentile intervals conditional on fixed OOF predictions; PCG64, linear quantiles; require >=95% finite draws; secondary exploratory without multiplicity-adjusted significance claims.",
+  "scope": "Exploratory internal incremental-value evaluation of previously exposed PPMI participants. Not external validation or untouched data. Four-score and enhanced imaging findings already observed; this is a new post-results hypothesis, locked before its own fitting.",
+  "horizon_48": "Not included: no frozen 48-month GA selection exists. Reusing 36-month selections or launching a new 48-month search requires a separate contract.",
+  "training_authorized": false,
+  "paid_queries": false,
+  "public_template_note": "Fold-specific fitted selection outputs are intentionally omitted. Restore the privately authorized original selections and integrity bindings before reproduction; never fabricate a consensus mask."
+}

@@ -1,6 +1,6 @@
 {
-  "release_date": "2026-11-15",
-  "scope": "Frozen PPMI, temporal-validation, PDBP and LCC clinical-model code, method configurations, figure scripts and designated aggregate supplements; journal-neutral presentation. No participant-level inputs or outputs.",
+  "release_date": "2026-11-18",
+  "scope": "Journal-neutral clinical prediction code and methods, including DAT-SPECT and EBM/TabPFN extensions; previously designated aggregate supplements retained unchanged. No newly added study results or participant-level inputs/outputs.",
   "files": [
     {
       "path": "analysis/feature_only_readiness_2026-10-31/config/Analysis_Contract.json",
@@ -1105,6 +1105,287 @@
       "source_sha256": "9cf841c88880410ebe51dfd6bcf5f6c2425323034b649574e74a825689f87562",
       "published_sha256": "9cf841c88880410ebe51dfd6bcf5f6c2425323034b649574e74a825689f87562",
       "changes": "None; byte-identical current aggregate supplement."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_readiness_v1/audit_and_bind.py",
+      "source_relative_path": "DAT_SPECT_readiness_v1/audit_and_bind.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "8af57d632f2c78d9b0d7d98bc421eb0a67fe735cfbd6b71a951304ea62c0b4ba",
+      "published_sha256": "0985cff17d2f542fb718a5c5d105f1d67ae229ed6a7bafba2944d7ea11e1ef5e",
+      "changes": "Journal-named private directory replaced by neutral clinical_extensions; numerical code unchanged."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_readiness_v1/verify_bindings.py",
+      "source_relative_path": "DAT_SPECT_readiness_v1/verify_bindings.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "e064ad6721cbc403b065a784662571daa4daf61387e43852739d0bfe5030e245",
+      "published_sha256": "162265d5128889ec81b10e98a09c56fc8f7b1de5c28f0febafc12c00cf452135",
+      "changes": "Journal-named private directory replaced by neutral clinical_extensions; numerical code unchanged."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_readiness_v1/Protocol.json",
+      "source_relative_path": "DAT_SPECT_readiness_v1/Protocol.json",
+      "kind": "method_configuration",
+      "source_sha256": "354c10c9ff1415ee04fc2a31e0b4b4bfb5af2b2cfc958beb5fd678d8164cfbbe",
+      "published_sha256": "354c10c9ff1415ee04fc2a31e0b4b4bfb5af2b2cfc958beb5fd678d8164cfbbe",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_launcher_v1/launcher.py",
+      "source_relative_path": "DAT_SPECT_launcher_v1/launcher.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "048631a545708d685cc12cd502b6592e7aae5afd7e669a80541778c55a078619",
+      "published_sha256": "048631a545708d685cc12cd502b6592e7aae5afd7e669a80541778c55a078619",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_launcher_v1/numerical_core.py",
+      "source_relative_path": "DAT_SPECT_launcher_v1/numerical_core.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "9704e3b2dfac566b81d5f15a9181dbf55eb0c86cdf3a4ee61b57a91f90f62f97",
+      "published_sha256": "9704e3b2dfac566b81d5f15a9181dbf55eb0c86cdf3a4ee61b57a91f90f62f97",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_launcher_v1/paired_metrics.py",
+      "source_relative_path": "DAT_SPECT_launcher_v1/paired_metrics.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "b4a8ef842f0466420b2669f5e5eb7d3548f79932eb744ebf856ec2379a372973",
+      "published_sha256": "b4a8ef842f0466420b2669f5e5eb7d3548f79932eb744ebf856ec2379a372973",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_launcher_v1/validate_synthetic.py",
+      "source_relative_path": "DAT_SPECT_launcher_v1/validate_synthetic.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "7bbf8840a1d000e1e6837d3dcbe019db7ea46cd55d0c7422e821498e46b03210",
+      "published_sha256": "7bbf8840a1d000e1e6837d3dcbe019db7ea46cd55d0c7422e821498e46b03210",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_launcher_v1/verify_final.py",
+      "source_relative_path": "DAT_SPECT_launcher_v1/verify_final.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "85faf207e268dc53880dffe5561be62a7308f4754e35ceb22c2a4262e66d9e86",
+      "published_sha256": "85faf207e268dc53880dffe5561be62a7308f4754e35ceb22c2a4262e66d9e86",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_launcher_v1/study_execution/independent_verify_study.py",
+      "source_relative_path": "DAT_SPECT_launcher_v1/study_execution/independent_verify_study.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "ed601d81c5b1c29db07adc1370f10744667e030f301f80b61a83c3f4c5feb3e2",
+      "published_sha256": "ed601d81c5b1c29db07adc1370f10744667e030f301f80b61a83c3f4c5feb3e2",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/launcher.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/launcher.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "8363e6203d099ecb6ba9b7977980c183ea3b11399cb49783119ab14616b35667",
+      "published_sha256": "8363e6203d099ecb6ba9b7977980c183ea3b11399cb49783119ab14616b35667",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/numerical_core.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/numerical_core.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "f6954c035a96797d68db8f715f4f3b1158a35a2fefb808883e440ba4b83f1d61",
+      "published_sha256": "f6954c035a96797d68db8f715f4f3b1158a35a2fefb808883e440ba4b83f1d61",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/paired_metrics.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/paired_metrics.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "b4a8ef842f0466420b2669f5e5eb7d3548f79932eb744ebf856ec2379a372973",
+      "published_sha256": "b4a8ef842f0466420b2669f5e5eb7d3548f79932eb744ebf856ec2379a372973",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/scan_qc.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/scan_qc.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "d29ef8bf45baaa5535d409b6a268c234d42d98170a6b96ba45f234522641f579",
+      "published_sha256": "d29ef8bf45baaa5535d409b6a268c234d42d98170a6b96ba45f234522641f579",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/prepare_contract.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/prepare_contract.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "b043db11641dafe31cf2c5ebd937aacf934ff860c32b129a5f9f5409a403ab10",
+      "published_sha256": "b043db11641dafe31cf2c5ebd937aacf934ff860c32b129a5f9f5409a403ab10",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/verify_bindings.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/verify_bindings.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "0545df577a851f7b1aedd9555e4bb5c62c282cf7dd6f95de38af38124f6c0326",
+      "published_sha256": "0545df577a851f7b1aedd9555e4bb5c62c282cf7dd6f95de38af38124f6c0326",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/validate_synthetic.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/validate_synthetic.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "833c57a363111730022fe3257e4aa1bb34a7552e28f73f4d3b50ffc1397552e9",
+      "published_sha256": "833c57a363111730022fe3257e4aa1bb34a7552e28f73f4d3b50ffc1397552e9",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/Protocol.template.json",
+      "source_relative_path": "DAT_SPECT_GA28_v1/Protocol.json",
+      "kind": "method_configuration",
+      "source_sha256": "648f37704d738b07abb19ab869a265104d8709b4feae4f2772db108010c40d2f",
+      "published_sha256": "578697573cad844e84b131ec804e7a36ca7e17b6ef6604dffcfcc7f9d6ecd6e5",
+      "changes": "Published as template; fitted fold-specific masks, selected features and historical penalties omitted. Other scientific settings retained."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/hybrid_execution_v1/hybrid_runner.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/hybrid_execution_v1/hybrid_runner.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "dab6fa2d04bafa5069c162b3695dccf540dea8dd5181291445e1cf0f8e68e59d",
+      "published_sha256": "dab6fa2d04bafa5069c162b3695dccf540dea8dd5181291445e1cf0f8e68e59d",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/DAT_SPECT_GA28_v1/hybrid_execution_v1/verify_results.py",
+      "source_relative_path": "DAT_SPECT_GA28_v1/hybrid_execution_v1/verify_results.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "c8627139f748bf6d223a2bfee66aa1da0bc0470fde65c316a35a5542345ff847",
+      "published_sha256": "c8627139f748bf6d223a2bfee66aa1da0bc0470fde65c316a35a5542345ff847",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/launcher.py",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/launcher.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "30c82cb144c7d34a4e1770e1b0274f48cd5ba361ffd9764ce8a36960a8751bfa",
+      "published_sha256": "30c82cb144c7d34a4e1770e1b0274f48cd5ba361ffd9764ce8a36960a8751bfa",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/Protocol.json",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/Protocol.json",
+      "kind": "method_configuration",
+      "source_sha256": "dae9c3ebe18cbc6d82ce28a2fa77e16afe0157d70b8a2557129bca040590add2",
+      "published_sha256": "dae9c3ebe18cbc6d82ce28a2fa77e16afe0157d70b8a2557129bca040590add2",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/Protocol.md",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/Protocol.md",
+      "kind": "methods_documentation",
+      "source_sha256": "008b493de322649ee2dca56c6f397237d68328025ede9ca3d19ecbd6638ba26e",
+      "published_sha256": "008b493de322649ee2dca56c6f397237d68328025ede9ca3d19ecbd6638ba26e",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/RuntimeVersions.json",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/RuntimeVersions.json",
+      "kind": "method_configuration",
+      "source_sha256": "71980c400b915793350d692e7aa1e364c6f3d2b41f61074b8d1aa3bb4001a1aa",
+      "published_sha256": "71980c400b915793350d692e7aa1e364c6f3d2b41f61074b8d1aa3bb4001a1aa",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/Checkpoint_Provenance.json",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/Checkpoint_Provenance.json",
+      "kind": "method_configuration",
+      "source_sha256": "d88b4a0d171f35f69b384f751b7d5c7e3aaa8ec8a452042a46a7e32f576244a2",
+      "published_sha256": "d88b4a0d171f35f69b384f751b7d5c7e3aaa8ec8a452042a46a7e32f576244a2",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/validate_synthetic.py",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/validate_synthetic.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "5377039861514b58f534750fe1fd201752f1a1c72a7010c1e154875fb314d6cf",
+      "published_sha256": "5377039861514b58f534750fe1fd201752f1a1c72a7010c1e154875fb314d6cf",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/source_snapshot/launcher.py",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/source_snapshot/launcher.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "f8773141b4242cb78fd940772579703480c1198a5b6aac38355b31e5617b7827",
+      "published_sha256": "f8773141b4242cb78fd940772579703480c1198a5b6aac38355b31e5617b7827",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/source_snapshot/paired_metrics.py",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/source_snapshot/paired_metrics.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "b4a8ef842f0466420b2669f5e5eb7d3548f79932eb744ebf856ec2379a372973",
+      "published_sha256": "b4a8ef842f0466420b2669f5e5eb7d3548f79932eb744ebf856ec2379a372973",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/source_snapshot/protocol.json",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/source_snapshot/protocol.json",
+      "kind": "method_configuration",
+      "source_sha256": "8af68bd4d89864455d3c69041a91c86f5db4cb17c0d6191207802bfd65dac67b",
+      "published_sha256": "8af68bd4d89864455d3c69041a91c86f5db4cb17c0d6191207802bfd65dac67b",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/execution_v1/execution.py",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/execution_v1/execution.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "cd37bde50b500c743c314249f90ae5cadc18fa5cdd7c3807feff8e0997f3fa80",
+      "published_sha256": "cd37bde50b500c743c314249f90ae5cadc18fa5cdd7c3807feff8e0997f3fa80",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/execution_v1/execution_parallel.py",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/execution_v1/execution_parallel.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "071fc521633901d2629658a9df322d84dec464480ff2b9ca4036a8ab37e6a220",
+      "published_sha256": "071fc521633901d2629658a9df322d84dec464480ff2b9ca4036a8ab37e6a220",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/execution_v1/verify_results.py",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/execution_v1/verify_results.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "cc8ec61b5d3152c0bdb97906df3502ec6ad6ec35ec63865cb0d966ffce473731",
+      "published_sha256": "cc8ec61b5d3152c0bdb97906df3502ec6ad6ec35ec63865cb0d966ffce473731",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/EBM_TabPFN_comparison_v1/execution_v1/verify_stream_v3.py",
+      "source_relative_path": "EBM_TabPFN_comparison_v1/execution_v1/verify_stream_v3.py",
+      "kind": "historical_analysis_script",
+      "source_sha256": "dc1fe19f6cd7fdb6320618f1b9e116a45e39eafe40dc53bcc1f1f3e0ede0507f",
+      "published_sha256": "dc1fe19f6cd7fdb6320618f1b9e116a45e39eafe40dc53bcc1f1f3e0ede0507f",
+      "changes": "None; byte-identical copy."
+    },
+    {
+      "path": "docs/IMAGING_AND_ALGORITHM_EXTENSIONS.md",
+      "source_relative_path": "public_release/docs/IMAGING_AND_ALGORITHM_EXTENSIONS.md",
+      "kind": "public_release_documentation",
+      "source_sha256": "69c13ec1baa771b7d345071a6bbab7b5d1a0825b996355de7b4ef4705608acbd",
+      "published_sha256": "69c13ec1baa771b7d345071a6bbab7b5d1a0825b996355de7b4ef4705608acbd",
+      "changes": "New data-free release file."
+    },
+    {
+      "path": "scripts/check_extension_kernels.py",
+      "source_relative_path": "public_release/scripts/check_extension_kernels.py",
+      "kind": "synthetic_release_check",
+      "source_sha256": "b9a0ab3d4c27e0c4efbe629550e893e9dd87f9948fbb7cd87f5a8888bab5b6bd",
+      "published_sha256": "b98048286b72f5c13a8dd4944791057a8b60529565368abaa431e6a630f24fea",
+      "changes": "New data-free release file. Documentation synchronized for the journal-neutral extension code release.",
+      "previous_published_sha256": "b9a0ab3d4c27e0c4efbe629550e893e9dd87f9948fbb7cd87f5a8888bab5b6bd"
+    },
+    {
+      "path": "analysis/imaging_algorithms_2026-11-18/README.md",
+      "source_relative_path": "public_release/analysis/imaging_algorithms_2026-11-18/README.md",
+      "kind": "public_release_documentation",
+      "source_sha256": "02aaf2e05d5fde5e7f1bd9cbc3c6b4f53c9fcec62797e4a6b18b2d8f22371805",
+      "published_sha256": "02aaf2e05d5fde5e7f1bd9cbc3c6b4f53c9fcec62797e4a6b18b2d8f22371805",
+      "changes": "New data-free release file."
     }
   ],
   "source_locator_note": "Source labels are logical artifact labels, not author-machine paths. Source hashes preserve provenance; the local audit retains resolved paths."
